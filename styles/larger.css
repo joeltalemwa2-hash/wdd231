@@ -1,0 +1,16 @@
+@media (min-width: 600px) {
+
+  nav {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #menu {
+    display: none;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 1rem;
+  }
+}

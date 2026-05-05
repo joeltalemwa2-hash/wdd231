@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="WDD231 Course Home Page">
+  <meta name="author" content="Joel Talemwa">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WDD231 Home</title>
+
+  <link rel="stylesheet" href="styles/small.css">
+  <link rel="stylesheet" href="styles/larger.css">
+
+  <script src="scripts/navigation.js" defer></script>
+  <script src="scripts/date.js" defer></script>
+  <script src="scripts/course.js" defer></script>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🌐</div>
+  <span>Joel Talemwa</span>
+  <button id="menu">☰</button>
+
+  <nav id="nav">
+    <a href="index.html" class="active">Home</a>
+    <a href="#">Chamber</a>
+    <a href="#">Final</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Home</h1>
+
+  <section>
+    <h2>About Me</h2>
+    <p>Welcome to my course home page.</p>
+  </section>
+
+  <section>
+    <h2>Courses</h2>
+
+    <div class="buttons">
+      <button id="all">All</button>
+      <button id="wdd">WDD</button>
+      <button id="cse">CSE</button>
+    </div>
+
+    <div id="courses"></div>
+    <p>Total Credits: <span id="credits"></span></p>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+    <p>Coming soon...</p>
+  </section>
+</main>
+
+<footer>
+  <div class="social">
+    <a href="#">GitHub</a>
+    <a href="#">LinkedIn</a>
+  </div>
+
+  <p>
+    © <span id="year"></span> Joel Talemwa, Uganda
+  </p>
+
+  <p id="lastModified"></p>
+</footer>
+
+</body>
+</html>
