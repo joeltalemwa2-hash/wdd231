@@ -1,73 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="WDD231 Course Home Page">
-  <meta name="author" content="Joel Talemwa">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>WDD231 Home</title>
+    <!-- SEO -->
+    <meta name="description" content="Joel Talemwa's WDD231 course home page featuring responsive web design, course certificates, and web development projects.">
 
-  <link rel="stylesheet" href="styles/small.css">
-  <link rel="stylesheet" href="styles/larger.css">
+    <meta name="author" content="Joel Talemwa">
 
-  <script src="scripts/navigation.js" defer></script>
-  <script src="scripts/date.js" defer></script>
-  <script src="scripts/course.js" defer></script>
+    <title>WDD231 | Home</title>
+
+    <!-- Google Fonts API -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/small.css">
+    <link rel="stylesheet" href="styles/larger.css">
+
+    <!-- JS -->
+    <script src="scripts/navigation.js" defer></script>
+    <script src="scripts/date.js" defer></script>
+    <script src="scripts/course.js" defer></script>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">🌐</div>
-  <span>Joel Talemwa</span>
-  <button id="menu">☰</button>
+    <div class="logo-area">
+        <img src="images/logo.svg" alt="Site Logo" width="60" height="60">
+        <span>Site Name</span>
+    </div>
 
-  <nav id="nav">
-    <a href="index.html" class="active">Home</a>
-    <a href="#">Chamber</a>
-    <a href="#">Final</a>
-  </nav>
+    <button id="menu"></button>
+
+    <nav id="nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="#">Chamber Project</a>
+        <a href="#">Final Project</a>
+    </nav>
 </header>
 
 <main>
-  <h1>Home</h1>
 
-  <section>
-    <h2>About Me</h2>
-    <p>Welcome to my course home page.</p>
-  </section>
+    <h1>Home</h1>
 
-  <section>
-    <h2>Courses</h2>
+    <div class="top-sections">
 
-    <div class="buttons">
-      <button id="all">All</button>
-      <button id="wdd">WDD</button>
-      <button id="cse">CSE</button>
+        <section class="card about">
+            <h2>About Me</h2>
+
+            <p>
+              My name is Joel Talemwa and I live in Uganda. I am currently studying Software Development and learning web technologies like HTML, CSS and JavaScript. I enjoy technology, programming and building digital solutions that help people.
+            </p>
+        </section>
+
+        <section class="card photo">
+            <h2>Student Photo</h2>
+
+            <img src="images/profile.webp"
+                 alt="Student Photo"
+                 width="250"
+                 height="300">
+        </section>
+
     </div>
 
-    <div id="courses"></div>
-    <p>Total Credits: <span id="credits"></span></p>
-  </section>
+    <section class="card certificate">
+        <h2>Web Certificate Courses</h2>
 
-  <section>
-    <h2>Projects</h2>
-    <p>Coming soon...</p>
-  </section>
+        <div class="filter-buttons">
+            <button id="all">All</button>
+            <button id="cse">CSE</button>
+            <button id="wdd">WDD</button>
+        </div>
+
+        <div id="courses"></div>
+
+        <p class="credits">
+            The total credits for course listed above is
+            <span id="credits"></span>
+        </p>
+    </section>
+
 </main>
 
 <footer>
-  <div class="social">
-    <a href="#">GitHub</a>
-    <a href="#">LinkedIn</a>
-  </div>
 
-  <p>
-    © <span id="year"></span> Joel Talemwa, Uganda
-  </p>
+    <div class="social">
+        <a href="https://linkedin.com" target="_blank">
+            <img src="images/linkedin.svg" alt="LinkedIn Icon" width="50" height="50">
+        </a>
 
-  <p id="lastModified"></p>
+        <a href="https://github.com" target="_blank">
+            <img src="images/github.svg" alt="GitHub Icon" width="50" height="50">
+        </a>
+
+        <a href="https://x.com" target="_blank">
+            <img src="images/x.svg" alt="X Social Icon" width="50" height="50">
+        </a>
+    </div>
+
+    <p>
+        © <span id="currentyear"></span> • Joel Talemwa • Uganda
+    </p>
+
+    <p id="lastModified"></p>
+
 </footer>
 
 </body>

@@ -1,16 +1,25 @@
-@media (min-width: 600px) {
+@media screen and (min-width: 768px) {
 
-  nav {
-    display: flex;
-    flex-direction: row;
-  }
+    #menu {
+        display: none;
+    }
 
-  #menu {
-    display: none;
-  }
+    nav {
+        display: flex;
+        flex-direction: row;
+    }
 
-  .buttons {
-    display: flex;
-    gap: 1rem;
-  }
+    nav a {
+        border: none;
+    }
+
+    .top-sections {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 1rem;
+    }
+
+    #courses {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
