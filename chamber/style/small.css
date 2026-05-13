@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #1e293b;
+    --secondary: #f1f5f9;
+    --accent: #0f172a;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: white;
+    color: #111;
+    line-height: 1.5;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* HEADER */
+
+header {
+    background: var(--primary);
+    color: white;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+#menu {
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#menu::before {
+    content: "☰";
+}
+
+#menu.open::before {
+    content: "✖";
+}
+
+nav {
+    display: none;
+    flex-direction: column;
+}
+
+nav.open {
+    display: flex;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+    border-top: 1px solid #334155;
+}
+
+nav a:hover,
+.active {
+    background: var(--accent);
+}
+
+/* MAIN */
+
+main {
+    padding: 1rem;
+}
+
+main h2 {
+    margin-bottom: 1rem;
+}
+
+.view-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.view-buttons button {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* MEMBERS */
+
+#members.grid-view {
+    display: grid;
+    gap: 1rem;
+}
+
+.member-card {
+    background: var(--secondary);
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.member-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.member-card h3 {
+    margin-bottom: 0.5rem;
+}
+
+.member-card a {
+    color: #0f172a;
+    word-break: break-word;
+}
+
+/* LIST VIEW */
+
+#members.list-view {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-view .member-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: left;
+}
+
+.list-view .member-card img {
+    display: none;
+}
+
+/* FOOTER */
+
+footer {
+    background: var(--primary);
+    color: white;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}

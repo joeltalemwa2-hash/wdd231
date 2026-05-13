@@ -1,0 +1,71 @@
+[
+  {
+    "name": "Kampala Tech Solutions",
+    "address": "Kampala Road, Uganda",
+    "phone": "+256700111111",
+    "website": "https://kampalatech.com",
+    "image": "business1.webp",
+    "membership": 3,
+    "description": "Technology and software services."
+  },
+
+  {
+    "name": "Lake View Hotel",
+    "address": "Entebbe, Uganda",
+    "phone": "+256700222222",
+    "website": "https://lakeviewhotel.com",
+    "image": "business2.webp",
+    "membership": 2,
+    "description": "Luxury accommodation services."
+  },
+
+  {
+    "name": "Green Farm Market",
+    "address": "Mukono, Uganda",
+    "phone": "+256700333333",
+    "website": "https://greenfarm.com",
+    "image": "business3.webp",
+    "membership": 1,
+    "description": "Organic farm produce."
+  },
+
+  {
+    "name": "City Transport Ltd",
+    "address": "Kampala, Uganda",
+    "phone": "+256700444444",
+    "website": "https://citytransport.com",
+    "image": "business4.webp",
+    "membership": 2,
+    "description": "Public transportation company."
+  },
+
+  {
+    "name": "Pearl Media Group",
+    "address": "Ntinda, Uganda",
+    "phone": "+256700555555",
+    "website": "https://pearlmedia.com",
+    "image": "business5.webp",
+    "membership": 3,
+    "description": "Advertising and media services."
+  },
+
+  {
+    "name": "Fresh Bakery",
+    "address": "Kampala Central",
+    "phone": "+256700666666",
+    "website": "https://freshbakery.com",
+    "image": "business6.webp",
+    "membership": 1,
+    "description": "Bakery and pastry business."
+  },
+
+  {
+    "name": "Sunrise Medical Center",
+    "address": "Kololo, Uganda",
+    "phone": "+256700777777",
+    "website": "https://sunrisemedical.com",
+    "image": "business7.webp",
+    "membership": 3,
+    "description": "Healthcare services."
+  }
+]
