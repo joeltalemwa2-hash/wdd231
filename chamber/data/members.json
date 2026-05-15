@@ -10,8 +10,8 @@
   },
 
   {
-    "name": "Speke REsort Munyonyo",
-    "address": "Makindye,Kampala Uganda",
+    "name": "Speke Resort Munyonyo",
+    "address": "Makindye, Kampala Uganda",
     "phone": "041 4227111",
     "website": "https://https://www.spekeresort.com/",
     "image": "business2.webp",
@@ -32,7 +32,7 @@
   {
     "name": "EBB Airport Transfers",
     "address": "Entebbe, Uganda",
-    "phone": "+256700444444",
+    "phone": "+256752 641092",
     "website": "https://www.airporttransfers.co.ug",
     "image": "business4.webp",
     "membership": 2,
@@ -40,31 +40,31 @@
   },
 
   {
-    "name": "Pearl Media Group",
-    "address": "Ntinda, Uganda",
-    "phone": "+256700555555",
-    "website": "https://pearlmedia.com",
-    "image": "business5.webp",
+    "name": "Vision Group Uganda",
+    "address": "Plot 19, Plot 19/21 First Street, Industrial Area, 21 First St, Kampala, Uganda",
+    "phone": "+256(0)414 337 000",
+    "website": "https://www.visiongroup.co.ug/",
+    "image": "business5.jpg",
     "membership": 3,
     "description": "Advertising and media services."
   },
 
   {
-    "name": "Fresh Bakery",
-    "address": "Kampala Central",
-    "phone": "+256700666666",
-    "website": "https://freshbakery.com",
-    "image": "business6.webp",
+    "name": "Ntake Group",
+    "address": "Nalukolongo, Kampala-Uganda",
+    "phone": "+256200912404",
+    "website": "https://www.ntakegroup.co",
+    "image": "business6.avif",
     "membership": 1,
     "description": "Bakery and pastry business."
   },
 
   {
-    "name": "Sunrise Medical Center",
-    "address": "Kololo, Uganda",
-    "phone": "+256700777777",
-    "website": "https://sunrisemedical.com",
-    "image": "business7.webp",
+    "name": "Mulago National Specialised Hospital",
+    "address": "Mulago-Kampala, Uganda",
+    "phone": "+256772433809",
+    "website": "https://mulagohospital.go.ug/",
+    "image": "business7.jpg",
     "membership": 3,
     "description": "Healthcare services."
   }
