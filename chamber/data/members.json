@@ -1,32 +1,32 @@
 [
   {
-    "name": "Kampala Tech Solutions",
-    "address": "Kampala Road, Uganda",
-    "phone": "+256700111111",
-    "website": "https://kampalatech.com",
+    "name": "Jambo Tech Solutions",
+    "address": "Mirage Plaza Portbell Rd, Kampala Uganda",
+    "phone": "+256 393 256 078",
+    "website": "https://www.jambosphere.com",
     "image": "business1.webp",
     "membership": 3,
     "description": "Technology and software services."
   },
 
   {
-    "name": "Lake View Hotel",
-    "address": "Entebbe, Uganda",
-    "phone": "+256700222222",
-    "website": "https://lakeviewhotel.com",
+    "name": "Speke REsort Munyonyo",
+    "address": "Makindye,Kampala Uganda",
+    "phone": "041 4227111",
+    "website": "https://https://www.spekeresort.com/",
     "image": "business2.webp",
     "membership": 2,
     "description": "Luxury accommodation services."
   },
 
   {
-    "name": "Green Farm Market",
-    "address": "Mukono, Uganda",
-    "phone": "+256700333333",
-    "website": "https://greenfarm.com",
-    "image": "business3.webp",
+    "name": "Bukoola Chemicals",
+    "address": "Kampala, Uganda",
+    "phone": "+256787 256875",
+    "website": "https://www.bukoolachemicals.com",
+    "image": "business3.jpg",
     "membership": 1,
-    "description": "Organic farm produce."
+    "description": "Agrochemicals"
   },
 
   {
