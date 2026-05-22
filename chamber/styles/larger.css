@@ -21,4 +21,12 @@
         display: flex;
         justify-content: space-between;
     }
+    
+    .home-grid {
+    grid-template-columns: 1fr 1fr 1fr;}
+
+footer {
+    display: flex;
+    justify-content: space-between;}
+    
 }

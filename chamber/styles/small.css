@@ -159,3 +159,82 @@ footer {
 footer p {
     margin-bottom: 0.5rem;
 }
+
+/* HERO */
+
+.hero {
+    position: relative;
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cta-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: #0f172a;
+    color: white;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.cta-button:hover {
+    background: #1e293b;
+}
+
+/* HOME GRID */
+
+.home-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.card {
+    background: #f1f5f9;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.card h2 {
+    margin-bottom: 1rem;
+}
+
+/* FORECAST */
+
+#forecast {
+    margin-top: 1rem;
+}
+
+.forecast-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* SPOTLIGHTS */
+
+#spotlights {
+    display: grid;
+    gap: 1rem;
+}
+
+.spotlight-card {
+    background: white;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.spotlight-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
