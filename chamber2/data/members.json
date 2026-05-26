@@ -1,0 +1,71 @@
+[
+  {
+    "name": "Jambo Tech Solutions",
+    "address": "Mirage Plaza Portbell Rd, Kampala Uganda",
+    "phone": "+256 393 256 078",
+    "website": "https://www.jambosphere.com",
+    "image": "business1.webp",
+    "membership": 3,
+    "description": "Technology and software services."
+  },
+
+  {
+    "name": "Speke Resort Munyonyo",
+    "address": "Makindye, Kampala Uganda",
+    "phone": "041 4227111",
+    "website": "https://https://www.spekeresort.com/",
+    "image": "business2.webp",
+    "membership": 2,
+    "description": "Luxury accommodation services."
+  },
+
+  {
+    "name": "Bukoola Chemicals",
+    "address": "Kampala, Uganda",
+    "phone": "+256787 256875",
+    "website": "https://www.bukoolachemicals.com",
+    "image": "business3.jpg",
+    "membership": 1,
+    "description": "Agrochemicals"
+  },
+
+  {
+    "name": "EBB Airport Transfers",
+    "address": "Entebbe, Uganda",
+    "phone": "+256752 641092",
+    "website": "https://www.airporttransfers.co.ug",
+    "image": "business4.webp",
+    "membership": 2,
+    "description": "Public transportation company."
+  },
+
+  {
+    "name": "Vision Group Uganda",
+    "address": "Plot 19, Plot 19/21 First Street, Industrial Area, 21 First St, Kampala, Uganda",
+    "phone": "+256(0)414 337 000",
+    "website": "https://www.visiongroup.co.ug/",
+    "image": "business5.jpg",
+    "membership": 3,
+    "description": "Advertising and media services."
+  },
+
+  {
+    "name": "Ntake Group",
+    "address": "Nalukolongo, Kampala-Uganda",
+    "phone": "+256200912404",
+    "website": "https://www.ntakegroup.co",
+    "image": "business6.avif",
+    "membership": 1,
+    "description": "Bakery and pastry business."
+  },
+
+  {
+    "name": "Mulago National Specialised Hospital",
+    "address": "Mulago-Kampala, Uganda",
+    "phone": "+256772433809",
+    "website": "https://mulagohospital.go.ug/",
+    "image": "business7.jpg",
+    "membership": 3,
+    "description": "Healthcare services."
+  }
+]

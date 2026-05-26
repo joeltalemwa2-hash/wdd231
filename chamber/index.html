@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Kampala Chamber of Commerce</title>
+
+<meta name="description"
+      content="Kampala Chamber of Commerce official website promoting local businesses, networking, and community development.">
+
+<meta name="author"
+      content="Joel Talemwa">
+
+<!-- OPEN GRAPH -->
+
+<meta property="og:title"
+      content="Kampala Chamber of Commerce">
+
+<meta property="og:description"
+      content="Business networking and community growth in Kampala.">
+
+<meta property="og:image"
+      content="https://yourusername.github.io/wdd231/chamber/images/hero.webp">
+
+<meta property="og:url"
+      content="https://yourusername.github.io/wdd231/chamber/index.html">
+
+<meta property="og:type"
+      content="website">
+
+<!-- FAVICON -->
+
+<link rel="icon"
+      href="images/favicon.ico">
+
+<!-- GOOGLE FONTS -->
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet">
+
+<!-- CSS -->
+
+<link rel="stylesheet"
+      href="styles/normalize.css">
+
+<link rel="stylesheet"
+      href="styles/small.css">
+
+<link rel="stylesheet"
+      href="styles/larger.css">
+
+<!-- JS -->
+
+<script src="scripts/navigation.js" defer></script>
+<script src="scripts/weather.js" defer></script>
+<script src="scripts/spotlight.js" defer></script>
+<script src="scripts/date.js" defer></script>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="top-header">
+
+<div class="logo-box">
+
+<img src="images/logo.jpg"
+     alt="Kampala Chamber Logo"
+     width="60"
+     height="60">
+
+<div>
+<h1>Kampala Chamber</h1>
+<p>Chamber of Commerce</p>
+</div>
+
+</div>
+
+<button id="menu"></button>
+
+</div>
+
+<nav id="nav">
+
+<a href="index.html" class="active">Home</a>
+
+<a href="directory.html">Directory</a>
+
+<a href="#">Join</a>
+
+<a href="#">Discover</a>
+
+</nav>
+
+</header>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<img src="images/Kampala_city.webp"
+     alt="Kampala City"
+     width="1200"
+     height="500">
+
+<a href="#"
+   class="cta-button">
+   Keynote Tickets
+</a>
+
+</section>
+
+<h2>Home</h2>
+
+<!-- MAIN GRID -->
+
+<div class="home-grid">
+
+<!-- EVENTS -->
+
+<section class="card events">
+
+<h3>Events</h3>
+
+<div class="card-content">
+
+<p>
+Annual Kampala Business Summit this Saturday at Serena Hotel.
+Meet investors, innovators, and entrepreneurs from across Uganda.
+</p>
+
+</div>
+
+</section>
+
+<!-- WEATHER -->
+
+<section class="card weather">
+
+<h3>Current Weather</h3>
+
+<div class="weather-layout">
+      <img src="images/weather.svg" alt="weather icon" width="90" height="90">
+      <div>
+
+<p>
+<span id="current-temp"></span>°F
+</p>
+
+<p id="weather-desc"></p>
+
+<p id="humidity"></p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FORECAST -->
+
+<section class="card forecast">
+
+<h3>Weather Forecast</h3>
+
+<div id="forecast"></div>
+
+</section>
+
+</div>
+
+<!-- SPOTLIGHTS -->
+
+<section class="spotlights">
+
+<div id="spotlight-container"></div>
+
+</section>
+
+</main>
+
+<footer>
+
+<div class="footer-contact">
+
+<p><strong>Kampala Chamber of Commerce</strong></p>
+
+<p>Kampala, Uganda</p>
+
+<p>info@kampalachamber.org</p>
+
+<p>+256 700 000000</p>
+
+</div>
+
+<div class="socials">
+
+   <a href="https://linkedin.com" target="_blank">
+            <img src="images/linkedin.webp" alt="LinkedIn Icon" width="50" height="50">
+        </a>
+
+      <a href="https://github.com" target="_blank">
+            <img src="images/github2.png" alt="GitHub Icon" width="50" height="50">
+        </a>
+
+      <a href="https://x.com" target="_blank">
+            <img src="images/xicon.png" alt="X Social Icon" width="50" height="50">
+        </a>
+
+</div>
+
+<div class="footer-dev">
+
+<p>WDD231 Class Project</p>
+
+<p>Joel Talemwa</p>
+
+<p>
+© <span id="currentyear"></span>
+Kampala Chamber of Commerce
+</p>
+
+<p id="lastModified"></p>
+
+</div>
+
+</footer>
+
+</body>
+</html>

@@ -55,7 +55,6 @@ header {
 nav {
     display: none;
     flex-direction: column;
-    background: var(--primary);
 }
 
 nav.open {
@@ -81,9 +80,7 @@ main {
 }
 
 main h2 {
-    margin: 1rem 0;
     margin-bottom: 1rem;
-    font-size: 2rem;
 }
 
 .view-buttons {
@@ -102,21 +99,6 @@ main h2 {
     border-radius: 5px;
 }
 
-.home-grid {
-    display: grid;
-    gap: 1rem;
-}
-
-.card {
-    background: #ddd;
-}
-
-.card h3 {
-    background: var(--primary);
-    color: white;
-    text-align: center;
-    padding: .5rem;
-}
 /* MEMBERS */
 
 #members.grid-view {
@@ -165,10 +147,17 @@ main h2 {
     display: none;
 }
 
-.logo-box {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+/* FOOTER */
+
+footer {
+    background: var(--primary);
+    color: white;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
 }
 
 /* HERO */
@@ -179,85 +168,73 @@ main h2 {
 
 .hero img {
     width: 100%;
+    height: auto;
     display: block;
 }
 
 .cta-button {
     position: absolute;
-    right: 20px;
     bottom: 20px;
-    background: #777;
+    right: 20px;
+    background: #0f172a;
     color: white;
+    padding: 1rem 1.5rem;
     text-decoration: none;
-    padding: .8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.cta-button:hover {
+    background: #1e293b;
+}
+
+/* HOME GRID */
+
+.home-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.card {
+    background: #f1f5f9;
+    padding: 1rem;
     border-radius: 10px;
 }
 
-.card-content,
-.weather-layout,
-.forecast {
-    padding: 1rem;
-    min-height: 180px;
-}
-
-.weather-layout {
-    display: flex;
-    gap: 1rem;
-}
-
-#forecast p {
+.card h2 {
     margin-bottom: 1rem;
-    font-size: 1.2rem;
+}
+
+/* FORECAST */
+
+#forecast {
+    margin-top: 1rem;
+}
+
+.forecast-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
 }
 
 /* SPOTLIGHTS */
 
-#spotlight-container {
+#spotlights {
     display: grid;
     gap: 1rem;
-    margin-top: 2rem;
 }
 
 .spotlight-card {
-    background: #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.spotlight-card h3 {
-    text-align: center;
-    padding-top: 1rem;
-}
-
-.spotlight-info {
-    display: flex;
-    gap: 1rem;
+    background: white;
     padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
 }
 
-.spotlight-info img {
+.spotlight-card img {
     width: 100px;
     height: 100px;
     object-fit: cover;
+    margin-bottom: 1rem;
 }
-
-/* FOOTER */
-
-footer {
-    background: var(--primary);
-    color: white;
-    padding: 2rem 1rem;
-    margin-top: 2rem;
-}
-
-.socials {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2rem 0;
-}
-
-footer p {
-    margin-bottom: 0.5rem;
-}
-
