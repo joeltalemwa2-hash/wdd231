@@ -182,6 +182,28 @@ main h2 {
     display: block;
 }
 
+.hero-text {
+  position: relative;
+  z-index: 2;
+  padding: 2rem 1.25rem;
+  color: var(--clr-white);
+}
+
+.hero-text h2 {
+  font-family: var(--ff-display);
+  font-size: clamp(1.5rem, 6vw, 2.8rem);
+  line-height: 1.15;
+  margin-bottom: .65rem;
+}
+
+.hero-text p {
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 1.4rem;
+  max-width: 480px;
+}
+
 .cta-button {
     position: absolute;
     right: 20px;
@@ -191,6 +213,36 @@ main h2 {
     text-decoration: none;
     padding: .8rem 1.5rem;
     border-radius: 10px;
+}
+/*Events section*/
+.events {
+  background: var(--clr-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin: 1rem 1.25rem;
+}
+
+.events ul {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.events ul li {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  font-size: .9rem;
+  color: var(--clr-text-muted);
+  padding: .7rem .9rem;
+  background: var(--clr-cream);
+  border-left: 3px solid var(--clr-teal);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.events ul li strong {
+  color: var(--clr-text);
+  font-weight: 700;
 }
 
 .card-content,
@@ -205,9 +257,39 @@ main h2 {
     gap: 1rem;
 }
 
+.weather-icon {
+  font-size: 3rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.weather-temp {
+  font-family: var(--ff-display);
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--clr-white);
+}
+
+.weather-desc {
+  font-size: .95rem;
+  color: var(--clr-teal-lt);
+  text-transform: capitalize;
+  margin: .2rem 0;
+}
+
+.weather-meta {
+  font-size: .78rem;
+  color: rgba(255,255,255,.55);
+}
+
+
 #forecast p {
     margin-bottom: 1rem;
     font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
 }
 
 /* SPOTLIGHTS */
@@ -260,85 +342,3 @@ footer {
 footer p {
     margin-bottom: 0.5rem;
 }
-
-<<<<<<< HEAD
-=======
-/* HERO */
-
-.hero {
-    position: relative;
-}
-
-.hero img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.cta-button {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background: #0f172a;
-    color: white;
-    padding: 1rem 1.5rem;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 700;
-}
-
-.cta-button:hover {
-    background: #1e293b;
-}
-
-/* HOME GRID */
-
-.home-grid {
-    display: grid;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.card {
-    background: #f1f5f9;
-    padding: 1rem;
-    border-radius: 10px;
-}
-
-.card h2 {
-    margin-bottom: 1rem;
-}
-
-/* FORECAST */
-
-#forecast {
-    margin-top: 1rem;
-}
-
-.forecast-item {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #ddd;
-}
-
-/* SPOTLIGHTS */
-
-#spotlights {
-    display: grid;
-    gap: 1rem;
-}
-
-.spotlight-card {
-    background: white;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.spotlight-card img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-bottom: 1rem;
-}
->>>>>>> 9814f035b781fe729519086e1ac09306a338dbc3

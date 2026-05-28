@@ -4,61 +4,45 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Kampala Chamber of Commerce</title>
 
-<meta name="description"
-      content="Kampala Chamber of Commerce official website promoting local businesses, networking, and community development.">
+<meta name="description" content="Kampala Chamber of Commerce official website promoting local businesses, networking, and community development.">
 
-<meta name="author"
-      content="Joel Talemwa">
+<meta name="author" content="Joel Talemwa">
 
 <!-- OPEN GRAPH -->
 
-<meta property="og:title"
-      content="Kampala Chamber of Commerce">
+<meta property="og:title" content="Kampala Chamber of Commerce">
 
-<meta property="og:description"
-      content="Business networking and community growth in Kampala.">
+<meta property="og:description" content="Business networking and community growth in Kampala.">
 
-<meta property="og:image"
-      content="https://yourusername.github.io/wdd231/chamber/images/hero.webp">
+<meta property="og:image"   content="https://joeltalemwa2-hash.github.io/wdd231/chamber/images/hero.webp">
 
-<meta property="og:url"
-      content="https://yourusername.github.io/wdd231/chamber/index.html">
+<meta property="og:url" content="https://joeltalemwa2-hash.github.io/wdd231/chamber/index.html">
 
-<meta property="og:type"
-      content="website">
+<meta property="og:type content="website">
 
 <!-- FAVICON -->
 
-<link rel="icon"
-      href="images/favicon.ico">
+<link rel="icon" href="images/favicon.ico">
 
 <!-- GOOGLE FONTS -->
 
-<link rel="preconnect"
-      href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
 <!-- CSS -->
 
-<link rel="stylesheet"
-      href="styles/normalize.css">
+<link rel="stylesheet" href="styles/normalize.css">
 
-<link rel="stylesheet"
-      href="styles/small.css">
+<link rel="stylesheet" href="styles/small.css">
 
-<link rel="stylesheet"
-      href="styles/larger.css">
+<link rel="stylesheet" href="styles/larger.css">
 
 <!-- JS -->
 
@@ -77,10 +61,7 @@
 
 <div class="logo-box">
 
-<img src="images/logo.jpg"
-     alt="Kampala Chamber Logo"
-     width="60"
-     height="60">
+<img src="images/logo.jpg" alt="Kampala Chamber Logo" width="60" height="60">
 
 <div>
 <h1>Kampala Chamber</h1>
@@ -113,15 +94,12 @@
 
 <section class="hero">
 
-<img src="images/Kampala_city.webp"
-     alt="Kampala City"
-     width="1200"
-     height="500">
-
-<a href="#"
-   class="cta-button">
-   Join the Chamber
-</a>
+<img src="images/Kampala_city.webp" alt="Kampala City" width="1200" height="500">
+ <div class="hero-text">
+        <h2 id="hero-heading">Welcome to the Kampala City Chamber</h2>
+        <p>Connecting businesses, fostering growth, and building community.</p>
+</div>
+<a href="#" class="cta-button"> Join the Chamber</a>
 
 </section>
 
@@ -133,19 +111,32 @@
 
 <!-- EVENTS -->
 
-<section class="card events">
+<section class="card events" aria-labelledby="events-heading>
 
-<h3>Current Events</h3>
+<h3 id="events-heading">Current Events</h3>
 
 <div class="card-content">
-
+<marquee>
 <p>
 Business Expo 2026 begins this Friday at Kampala Serena Hotel.
 Join local entrepreneurs and investors for networking opportunities.
 </p>
-
+</marquee>
 </div>
-
+<ul role="list">
+          <li>
+            <strong>Business Networking Breakfast</strong>
+            – 5 June 2026
+          </li>
+          <li>
+            <strong>Community Market Day</strong>
+            – 12 June 2026
+          </li>
+          <li>
+            <strong>Small Business Workshop</strong>
+            – 20 June 2026
+          </li>
+        </ul>
 </section>
 
 <!-- WEATHER -->
@@ -161,7 +152,7 @@ Join local entrepreneurs and investors for networking opportunities.
 <p>
 <span id="current-temp">75</span>°F
 </p>
-<p>Partially cloudy</p>
+<p>Partly cloudy</p>
 <p>High:<span id="current-temp">85</span>°</p>
 <p>Low:<span id="current-temp">35</span>°</p>
 <p>Humidity:<span id="current-humidity">55</span>%</p>
@@ -183,7 +174,7 @@ Join local entrepreneurs and investors for networking opportunities.
 
 <h3>Weather Forecast</h3>
 
-<div id="forecast"></div>
+<div id="forecast"><p class="weather-meta">Loading future conditions…</p></div>
 
 </section>
 
@@ -250,123 +241,3 @@ Kampala Chamber of Commerce
 
 </html>
 
-
-<body>
-
-<header>
-
-<div class="top-header">
-
-<h1>Kampala Chamber</h1>
-
-<button id="menu"></button>
-
-</div>
-
-<nav id="nav">
-<a href="directory.html">Directory</a>
-
-<a href="index.html" class="active">Home</a>
-
-<a href="#">Discover</a>
-
-<a href="#">Join</a>
-
-</nav>
-
-</header>
-
-<main>
-
-<!-- HERO -->
-
-<section class="hero">
-
-<img src="images/hero.webp"
-     alt="Kampala City"
-     loading="eager"
-     width="1200"
-     height="600">
-
-<a href="#"
-   class="cta-button">
-   Join the Chamber
-</a>
-
-</section>
-
-<!-- HOME GRID -->
-
-<div class="home-grid">
-
-<!-- EVENTS -->
-
-<section class="card">
-
-<h2>Current Events</h2>
-
-
-
-</section>
-
-<!-- WEATHER -->
-
-<section class="card weather-card">
-
-<h2>Weather</h2>
-
-<p>
-Current Temperature:
-<span id="current-temp"></span>°F
-</p>
-
-<p id="weather-desc"></p>
-
-<div id="forecast"></div>
-
-</section>
-
-<!-- SPOTLIGHTS -->
-
-<section class="card spotlight-section">
-
-<h2>Company Spotlights</h2>
-
-<div id="spotlights"></div>
-
-</section>
-
-</div>
-
-</main>
-
-<footer>
-
-<div>
-
-<p>Kampala Chamber of Commerce</p>
-
-<p>Kampala, Uganda</p>
-
-<p>info@kampalachamber.org</p>
-
-<p>+256 700 000000</p>
-
-</div>
-
-<div>
-
-<p>
-© <span id="currentyear"></span>
-Joel Talemwa | WDD 231
-</p>
-
-<p id="lastModified"></p>
-
-</div>
-
-</footer>
-
-</body>
-
-</html>
