@@ -7,8 +7,8 @@
     nav {
         display: flex;
         flex-direction: row;
-         justify-content: center;
-    background: white;
+        justify-content: center;
+        background: white;
     }
 
     nav a {
@@ -20,26 +20,19 @@
         grid-template-columns: repeat(3, 1fr);
     }
 
-    footer {
-        display: flex;
-        justify-content: space-between;
-    }
-
-
-.home-grid {
+    .home-grid {
     grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: auto;
-}
+    grid-template-rows: auto;}
 
-#spotlight-container {
+    #spotlight-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
-}
+    }
 
-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
