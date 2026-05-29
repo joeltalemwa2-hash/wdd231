@@ -112,7 +112,7 @@ nav a {
 
 nav a:hover,
 .active {
-    background: var(--accent);
+    background: var(--clr-gold);
 }
 
 /* MAIN */
@@ -170,6 +170,7 @@ main h2 {
   font-size: clamp(1.5rem, 6vw, 2.8rem);
   line-height: 1.15;
   margin-bottom: .65rem;
+  color: red;
 }
 
 .hero-text p {
@@ -386,7 +387,7 @@ section h2 {
 
 .weather-meta {
   font-size: .78rem;
-  color: rgba(255,255,255,.55);
+  color: blue;
 }
 
 
