@@ -170,7 +170,7 @@ main h2 {
   font-size: clamp(1.5rem, 6vw, 2.8rem);
   line-height: 1.15;
   margin-bottom: .65rem;
-  color: red;
+  color: rgb(240 204 136);
 }
 
 .hero-text p {
@@ -338,7 +338,7 @@ section h2 {
 
 .card-content {
   background: white;
-  color: rgb(226, 18, 18);
+  color:  rgb(226 18 18)
 }
 .weather-layout,
 .weather {
