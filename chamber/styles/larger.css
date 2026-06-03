@@ -35,4 +35,12 @@
         justify-content: space-between;
         align-items: center;
     }
+
+    .join-page {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+        display: grid;
+        gap: 2rem;
+    }
 }
+

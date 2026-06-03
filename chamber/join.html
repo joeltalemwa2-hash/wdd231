@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kampala Chamber of Commerce</title>
+
+<meta name="description" content="Kampala Chamber of Commerce official website promoting local businesses, networking, and community development.">
+
+<meta name="author" content="Joel Talemwa">
+
+<!-- OPEN GRAPH -->
+
+<meta property="og:title" content="Kampala Chamber of Commerce">
+
+<meta property="og:description" content="Business networking and community growth in Kampala.">
+
+<meta property="og:image"   content="https://joeltalemwa2-hash.github.io/wdd231/chamber/images/hero.webp">
+
+<meta property="og:url" content="https://joeltalemwa2-hash.github.io/wdd231/chamber/index.html">
+
+<meta property="og:type" content="website">
+
+<!-- FAVICON -->
+
+<link rel="icon" href="images/favicon.ico">
+
+<!-- GOOGLE FONTS -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- CSS -->
+
+<link rel="stylesheet" href="styles/normalize.css">
+
+<link rel="stylesheet" href="styles/small.css">
+
+<link rel="stylesheet" href="styles/larger.css">
+
+<!-- JS -->
+
+<script src="scripts/navigation.js" defer></script>
+<script src="scripts/date.js" defer></script>
+<script src="scripts/join.js" defer></script>
+
+</head>
+
+<body>
+
+<header>
+
+
+<div class="top-header">
+
+<div class="logo-box">
+
+<img src="images/logo.jpg" alt="Kampala Chamber Logo" width="60" height="60">
+
+
+<div>
+<p class="site-name">Kampala Chamber</p>
+</div>
+
+</div>
+
+<button id="menu"></button>
+
+</div>
+
+<nav id="nav">
+
+<a href="index.html">Home</a>
+
+<a href="directory.html">Directory</a>
+
+<a href="join.html" class="active">Join</a>
+
+<a href="#">Discover</a>
+
+</nav>
+
+</header>
+
+<main class="join-page">
+
+    <section class="application-form">
+
+        <h1>Membership Application Form</h1>
+
+        <form method="get" action="thankyou.html">
+
+            <label>
+                First Name
+                <input
+                    type="text"
+                    name="fname"
+                    title="First Name"
+                    autocomplete="given-name"
+                    required>
+            </label>
+
+            <label>
+                Last Name
+                <input
+                    type="text"
+                    name="lname"
+                    title="Last Name"
+                    autocomplete="family-name"
+                    required>
+            </label>
+
+            <label>
+                Organization Title
+                <input
+                    type="text"
+                    name="orgtitle"
+                    title="Organization Title"
+                    autocomplete="organization-title"
+                    pattern="[A-Za-z\s\-]{7,}"
+                >
+            </label>
+
+            <label>
+                Email
+                <input
+                    type="email"
+                    name="email"
+                    title="Email Address"
+                    autocomplete="email"
+                    placeholder="example@email.com"
+                    required>
+            </label>
+
+            <label>
+                Mobile Phone
+                <input
+                    type="tel"
+                    name="phone"
+                    title="Phone Number"
+                    autocomplete="tel"
+                    required>
+            </label>
+
+            <label>
+                Organization Name
+                <input
+                    type="text"
+                    name="organization"
+                    title="Organization Name"
+                    autocomplete="organization"
+                    required>
+            </label>
+
+            <label>
+                Membership Level
+
+                <select name="membership">
+
+                    <option value="np">
+                        NP Membership
+                    </option>
+
+                    <option value="bronze">
+                        Bronze Membership
+                    </option>
+
+                    <option value="silver">
+                        Silver Membership
+                    </option>
+
+                    <option value="gold">
+                        Gold Membership
+                    </option>
+
+                </select>
+
+            </label>
+
+            <label>
+                Organization Description
+
+                <textarea
+                    name="description"
+                    title="Organization Description">
+                </textarea>
+
+            </label>
+
+            <input
+                type="hidden"
+                id="timestamp"
+                name="timestamp">
+
+            <input
+                type="submit"
+                value="Apply for Membership">
+
+        </form>
+
+    </section>
+
+    <section class="membership-levels">
+
+        <!-- NP CARD -->
+        <div class="membership-card">
+            <h2>Non Profit Membership Level</h2>
+
+            <button id="npBtn">
+                Learn More
+            </button>
+        </div>
+
+        <!-- BRONZE -->
+        <div class="membership-card">
+            <h2>Bronze Membership Level</h2>
+
+            <button id="bronzeBtn">
+                Learn More
+            </button>
+        </div>
+
+        <!-- SILVER -->
+        <div class="membership-card">
+            <h2>Silver Membership Level</h2>
+
+            <button id="silverBtn">
+                Learn More
+            </button>
+        </div>
+
+        <!-- GOLD -->
+        <div class="membership-card">
+            <h2>Gold Membership Level</h2>
+
+            <button id="goldBtn">
+                Learn More
+            </button>
+        </div>
+
+    </section>
+
+</main>
+
+<dialog id="npModal">
+
+    <h2>NP Membership</h2>
+
+    <p>
+        Free membership for nonprofit organizations.
+    </p>
+
+    <ul>
+        <li>Directory Listing</li>
+        <li>Networking Events</li>
+    </ul>
+
+    <button class="closeBtn">
+        Close
+    </button>
+
+</dialog>
+
+<footer>
+
+<div class="footer-contact">
+
+<p><strong>Kampala Chamber of Commerce</strong></p>
+
+<p>Kampala, Uganda</p>
+
+<p>info@kampalachamber.org</p>
+
+<p>+256 700 000000</p>
+
+</div>
+
+<div class="socials">
+
+   <a href="https://linkedin.com" target="_blank">
+            <img src="images/linkedin.webp" alt="LinkedIn Icon" width="50" height="50">
+        </a>
+
+      <a href="https://github.com" target="_blank">
+            <img src="images/github2.png" alt="GitHub Icon" width="50" height="50">
+        </a>
+
+      <a href="https://x.com" target="_blank">
+            <img src="images/xicon.png" alt="X Social Icon" width="50" height="50">
+        </a>
+
+</div>
+
+<div class="footer-dev">
+
+<p>WDD231 Class Project</p>
+
+<p>Joel Talemwa</p>
+
+<p>
+© <span id="currentyear"></span>
+Kampala Chamber of Commerce
+</p>
+
+<p id="lastModified"></p>
+
+</div>
+
+</footer>
+
+</body>
+</html>
