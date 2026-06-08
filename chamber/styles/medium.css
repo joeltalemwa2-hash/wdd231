@@ -1,0 +1,29 @@
+@media (min-width:641px){
+
+    article img {
+
+transition: transform .4s ease,
+filter .4s ease;
+}
+
+article img:hover {
+
+transform: scale(1.05);
+
+filter: brightness(110%);
+}
+
+#discover-grid article {
+
+display:grid;
+
+grid-template-areas:
+"title title"
+"image description"
+"image address"
+"button button";
+
+align-items:center;
+}
+
+}

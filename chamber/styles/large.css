@@ -1,0 +1,23 @@
+@media (min-width:1025px){
+
+#discover-grid {
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:1rem;
+}
+
+#discover-grid article {
+
+display:grid;
+
+grid-template-areas:
+"title title"
+"image description"
+"image address"
+"button button";
+}
+}

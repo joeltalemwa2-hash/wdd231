@@ -1,0 +1,39 @@
+#discover-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+#discover-grid article {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 10px;
+
+    display: grid;
+
+    grid-template-areas:
+        "title"
+        "image"
+        "description"
+        "address"
+        "button";
+}
+
+article h2 {
+    grid-area: title;
+}
+
+article figure {
+    grid-area: image;
+}
+
+article p {
+    grid-area: description;
+}
+
+article address {
+    grid-area: address;
+}
+
+article button {
+    grid-area: button;
+}
