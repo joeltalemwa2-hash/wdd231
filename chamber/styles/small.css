@@ -275,10 +275,7 @@ section h2 {
     color: #0f172a;
     word-break: break-word;
 }
-.member-card a {
-    color: #0f172a;
-    word-break: break-word;
-}
+
 
 /* LIST VIEW */
 
@@ -586,9 +583,6 @@ margin-bottom: 1rem;
     margin-bottom: 1rem;
 
     text-align: center;
-}
-
-.membership-card {
 
     opacity: 0;
 
