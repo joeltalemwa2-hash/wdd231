@@ -272,7 +272,7 @@ section h2 {
 
 .member-card a {
     color: #0f172a;
-    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 
