@@ -1,11 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Kampala Chamber of Commerce business directory page featuring local businesses and organizations.">
+
+    <meta name="author" content="Joel Talemwa">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Kampala Chamber Discovery">
+
+    <meta property="og:description" content="Explore businesses in Kampala Chamber of Commerce.">
+
+    <meta property="og:image" content="https://joeltalemwa2-hash.github.io/wdd231/chamber/images/business1.webp">
+
+    <meta property="og:url" content="https://joeltalemwa2-hash.github.io/wdd231/chamber/discovery.html">
+
+    <meta property="og:type" content="website">
+    <title>Discover | Kampala Chamber Directory</title>
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/medium.css">
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/small.css">
+    <link rel="stylesheet" href="styles/large.css">
+    <link rel="stylesheet" href="styles/larger.css">
+    <!-- JavaScript -->
+    <script src="scripts/navigation.js" defer></script>
+    <script src="scripts/date.js" defer></script>
+    <script type="module" src="scripts/discover.js" defer></script>
+
+
+</head>
+
+<body>
 <main>
+<header>
+
+    <div class="top-header">
+
+        <h1>Kampala Chamber</h1>
+
+        <button id="menu"></button>
+
+    </div>
+
+    <nav id="nav">
+
+        <a href="index.html">Home</a>
+
+        <a href="directory.html">Directory</a>
+
+        <a href="join.html">Join</a>
+
+        <a href="discover.html" class="active">Discover</a>
+
+    </nav>
+
+</header>
+
 
 <h1>Discover Kampala</h1>
 
 <div id="visit-message"></div>
 
 <section id="discover-grid"></section>
-
+<script type="module" src="scripts/discover.js" defer></script>
 </main>
+ 
+<footer>
 
-<script type="module" src="js/discover.js"></script>
+<div class="footer-contact">
+
+<p><strong>Kampala Chamber of Commerce</strong></p>
+
+<p>Kampala, Uganda</p>
+
+<p>info@kampalachamber.org</p>
+
+<p>+256 748 915656</p>
+
+</div>
+
+<div class="socials">
+
+   <a href="https://linkedin.com" target="_blank">
+            <img src="images/linkedin.webp" alt="LinkedIn Icon" width="50" height="50">
+        </a>
+
+      <a href="https://github.com" target="_blank">
+            <img src="images/github2.png" alt="GitHub Icon" width="50" height="50">
+        </a>
+
+      <a href="https://x.com" target="_blank">
+            <img src="images/xicon.png" alt="X Social Icon" width="50" height="50">
+        </a>
+
+</div>
+
+<div class="footer-dev">
+
+<p>WDD231 Class Project</p>
+
+<p>Joel Talemwa</p>
+
+<p>
+© <span id="currentyear"></span>
+Kampala Chamber of Commerce
+</p>
+
+<p id="lastModified"></p>
+
+</div>
+
+</footer>
+
+</body>
+
+</html>
