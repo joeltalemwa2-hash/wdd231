@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Beginner Fitness",
+    "level": "Beginner",
+    "duration": "4 Weeks",
+    "price": "UGX 150,000",
+    "description": "Ideal for new gym members."
+  },
+  {
+    "id": 2,
+    "name": "Weight Loss Program",
+    "level": "Intermediate",
+    "duration": "8 Weeks",
+    "price": "UGX 250,000",
+    "description": "Burn fat effectively."
+  },
+  {
+    "id": 3,
+    "name": "Strength Builder",
+    "level": "Advanced",
+    "duration": "12 Weeks",
+    "price": "UGX 350,000",
+    "description": "Build muscle and strength."
+  },
+  {
+    "id": 4,
+    "name": "Yoga Flow",
+    "level": "Beginner",
+    "duration": "6 Weeks",
+    "price": "UGX 180,000",
+    "description": "Improve flexibility."
+  },
+  {
+    "id": 5,
+    "name": "Cardio Blast",
+    "level": "Intermediate",
+    "duration": "6 Weeks",
+    "price": "UGX 220,000",
+    "description": "Boost heart health."
+  },
+  {
+    "id": 6,
+    "name": "HIIT Challenge",
+    "level": "Advanced",
+    "duration": "8 Weeks",
+    "price": "UGX 300,000",
+    "description": "High intensity training."
+  },
+  {
+    "id": 7,
+    "name": "Core Strength",
+    "level": "Beginner",
+    "duration": "4 Weeks",
+    "price": "UGX 160,000",
+    "description": "Build a strong core."
+  },
+  {
+    "id": 8,
+    "name": "Marathon Prep",
+    "level": "Advanced",
+    "duration": "16 Weeks",
+    "price": "UGX 400,000",
+    "description": "Running endurance."
+  },
+  {
+    "id": 9,
+    "name": "Body Transformation",
+    "level": "Intermediate",
+    "duration": "10 Weeks",
+    "price": "UGX 320,000",
+    "description": "Total fitness package."
+  },
+  {
+    "id": 10,
+    "name": "Senior Fitness",
+    "level": "Beginner",
+    "duration": "8 Weeks",
+    "price": "UGX 180,000",
+    "description": "Fitness for seniors."
+  },
+  {
+    "id": 11,
+    "name": "Athletic Performance",
+    "level": "Advanced",
+    "duration": "12 Weeks",
+    "price": "UGX 450,000",
+    "description": "Improve sports performance."
+  },
+  {
+    "id": 12,
+    "name": "Cycling Fitness",
+    "level": "Intermediate",
+    "duration": "8 Weeks",
+    "price": "UGX 260,000",
+    "description": "Increase cycling endurance."
+  },
+  {
+    "id": 13,
+    "name": "Bootcamp",
+    "level": "Advanced",
+    "duration": "6 Weeks",
+    "price": "UGX 280,000",
+    "description": "Outdoor group training."
+  },
+  {
+    "id": 14,
+    "name": "Flexibility Focus",
+    "level": "Beginner",
+    "duration": "5 Weeks",
+    "price": "UGX 150,000",
+    "description": "Stretching and recovery."
+  },
+  {
+    "id": 15,
+    "name": "Nutrition & Fitness",
+    "level": "All Levels",
+    "duration": "4 Weeks",
+    "price": "UGX 200,000",
+    "description": "Fitness and healthy eating."
+  }
+]

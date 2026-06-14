@@ -1,0 +1,17 @@
+@media (min-width: 641px){
+
+.navigation{
+display:flex;
+flex-direction:row;
+}
+
+#menu{
+display:none;
+}
+
+.grid-home{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+}
+
+}

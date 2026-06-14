@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Sarah Nansubuga",
+    "specialty": "Weight Loss",
+    "experience": "6 Years",
+    "certification": "ACE Certified",
+    "bio": "Helps clients achieve sustainable weight loss."
+  },
+  {
+    "name": "David Kato",
+    "specialty": "Strength Training",
+    "experience": "8 Years",
+    "certification": "NASM Certified",
+    "bio": "Specializes in muscle building."
+  },
+  {
+    "name": "Grace Nakato",
+    "specialty": "Yoga",
+    "experience": "5 Years",
+    "certification": "RYT 200",
+    "bio": "Focuses on flexibility and wellness."
+  }
+]

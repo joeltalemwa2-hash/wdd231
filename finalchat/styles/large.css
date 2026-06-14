@@ -1,0 +1,15 @@
+@media (min-width:1025px){
+
+main{
+max-width:1200px;
+margin:auto;
+}
+
+#programs-container,
+#trainers-container{
+display:grid;
+grid-template-columns:
+repeat(3,1fr);
+}
+
+}
