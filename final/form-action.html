@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enquiry Received | Kampala Fitness Hub</title>
+  <meta name="description" content="Thank you for contacting Kampala Fitness Hub. We have received your enquiry and will respond within 24 hours." />
+  <meta name="author" content="Joel Talemwa" />
+  <meta name="robots" content="noindex" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Enquiry Received | Kampala Fitness Hub" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230F4C81'/><text y='.9em' font-size='70' x='15'>💪</text></svg>" />
+
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo" aria-label="Kampala Fitness Hub Home">
+        <div class="logo-icon" aria-hidden="true">💪</div>
+        <div class="logo-text">
+          Kampala Fitness Hub
+          <span class="logo-sub">Strength · Health · Community</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="nav-menu" role="list" style="display:flex;flex-direction:row;position:static;background:none;padding:0;gap:.25rem;box-shadow:none">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="trainers.html">Trainers</a></li>
+        <li><a href="index.html#contact">Join Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <div class="form-action-wrap">
+      <div class="confirmation-card">
+        <div class="confirmation-icon" aria-hidden="true">✅</div>
+        <h1 style="color:var(--primary);margin-bottom:.5rem">Enquiry Received!</h1>
+        <p style="color:var(--text-muted);margin-bottom:1.5rem">Thank you for reaching out to Kampala Fitness Hub. Our team will contact you within 24 hours to discuss your fitness journey.</p>
+
+        <h2 style="font-size:1rem;color:var(--primary);margin-bottom:.5rem;text-align:left">Your Submitted Information</h2>
+        <table class="data-table" id="submitted-data" aria-label="Your submitted form data">
+          <caption style="display:none">Form submission data</caption>
+          <tbody id="data-rows">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+
+        <div style="margin-top:1.5rem;padding:1rem;background:rgba(46,204,113,0.1);border-radius:var(--radius);border-left:4px solid var(--secondary)">
+          <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:0">
+            📧 A confirmation email will be sent to the address you provided. Check your spam folder if you don't see it within a few minutes.
+          </p>
+        </div>
+
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.75rem">
+          <a href="index.html" class="btn btn-primary">Back to Home</a>
+          <a href="programs.html" class="btn btn-outline">Browse Programs</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="max-width:1200px;margin:0 auto">
+      <span>© 2026 Kampala Fitness Hub · Joel Talemwa</span>
+      <a href="attributions.html">Attributions</a>
+      <a href="https://www.youtube.com" target="_blank" rel="noopener">🎥 Video Demo</a>
+    </div>
+  </footer>
+
+  <script>
+    // Display form data from URL search params
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const tbody = document.getElementById('data-rows');
+      if (!tbody) return;
+
+      const labels = {
+        fname: 'First Name',
+        lname: 'Last Name',
+        email: 'Email Address',
+        phone: 'Phone Number',
+        membership: 'Membership Interest',
+        goals: 'Fitness Goals'
+      };
+
+      let hasData = false;
+      for (const [key, label] of Object.entries(labels)) {
+        const val = params.get(key);
+        if (val && val.trim() !== '') {
+          hasData = true;
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <th scope="row">${label}</th>
+            <td>${val.trim()}</td>
+          `;
+          tbody.appendChild(row);
+        }
+      }
+
+      if (!hasData) {
+        tbody.innerHTML = `<tr><td colspan="2" style="color:var(--text-muted);font-style:italic;padding:.65rem .85rem">No form data found. Please return to the home page and submit the enquiry form.</td></tr>`;
+      }
+    })();
+  </script>
+</body>
+</html>

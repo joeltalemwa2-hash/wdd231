@@ -1,87 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kampala Fitness Hub | Elite Health & Wellness</title>
-    <meta name="description" content="Empowering Kampala residents to transform their lifestyles through tailored fitness programs, expert trainers, nutrition advice, and local community events.">
-    <meta name="author" content="Joel Talemwa">
-    <meta property="og:title" content="Kampala Fitness Hub | Home">
-    <meta property="og:description" content="Discover premium workout plans, certified trainers, and community fitness marathons happening right here in Kampala.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://joeltalemwa2-hash.github.io/wdd231/final/index.html">
-    <link rel="icon" href="images/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/medium.css">
-    <link rel="stylesheet" href="styles/large.css">
-    <script src="scripts/main.js" defer></script>
-    <script src="scripts/data-fetch.js" defer></script>
-    <script src="scripts/navigation.js" defer></script>
-    <script src="scripts/storage-modal.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kampala Fitness Hub — Home | Fitness, Wellness & Community</title>
+  <meta name="description" content="Kampala Fitness Hub is Kampala's premier fitness and wellness destination. Discover workout programs, certified trainers, nutrition advice, and community events to transform your health." />
+  <meta name="author" content="Joel Talemwa" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Kampala Fitness Hub — Fitness, Wellness & Community" />
+  <meta property="og:description" content="Uganda's hub for fitness programs, certified trainers, nutrition advice, and community wellness events in Kampala." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80" />
+  <meta property="og:url" content="https://joeltalemwa2-hash.github.io/wdd231/final/" />
+  <meta property="og:site_name" content="Kampala Fitness Hub" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kampala Fitness Hub" />
+  <meta name="twitter:description" content="Your fitness journey starts in Kampala." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230F4C81'/><text y='.9em' font-size='70' x='15'>💪</text></svg>" />
+
+  <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body>
-    <header>
-        <div class="top-header">
+  <!-- Skip Navigation -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-            <div class="logo-box">
-                <img src="images/logo.jpg" alt="Kampala Chamber Logo" width="60" height="60">
-            </div><div>
-            <p class="site-name">Kampala Fitness Hub</p>
+  <!-- Header -->
+  <header class="site-header">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo" aria-label="Kampala Fitness Hub Home">
+        <div class="logo-icon" aria-hidden="true">💪</div>
+        <div class="logo-text">
+          Kampala Fitness Hub
+          <span class="logo-sub">Strength · Health · Community</span>
         </div>
-        <button id="menu"></button>
+      </a>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <button class="theme-toggle" aria-label="Toggle dark mode">🌙 Dark</button>
+        <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <ul class="nav-menu" id="nav-menu" role="list" aria-hidden="true">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="trainers.html">Trainers</a></li>
+        <li><a href="#contact">Join Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-inner container">
+        <div class="hero-content">
+          <span class="hero-eyebrow">Kampala · Uganda</span>
+          <h1 id="hero-heading">
+            Build Your<br />
+            <span>Strongest Self</span><br />
+            in Kampala
+          </h1>
+          <p>Join Kampala's most dynamic fitness community. Expert trainers, structured programs, and a welcoming environment that meets you exactly where you are.</p>
+          <div class="hero-actions">
+            <a href="#membership" class="btn btn-primary">Start Your Journey</a>
+            <a href="programs.html" class="btn btn-white">Explore Programs</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-num">6+</div>
+              <div class="stat-label">Expert Trainers</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">12</div>
+              <div class="stat-label">Programs</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">500+</div>
+              <div class="stat-label">Members</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">4.9⭐</div>
+              <div class="stat-label">Avg Rating</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-image">
+            <img
+              src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+              alt="People working out at Kampala Fitness Hub"
+              loading="eager"
+              width="800"
+              height="600"
+            />
+          </div>
+          <div id="trainer-spotlight" style="margin-top:1rem">
+            <div class="loading-state"><div class="spinner"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- User Preference -->
+    <section class="section" style="padding:2rem 0 0" aria-label="Personalise your experience">
+      <div class="container">
+        <div class="preference-bar">
+          <label for="interest-select">🎯 Personalise your experience — I'm interested in:</label>
+          <select id="interest-select" name="interest" style="max-width:220px">
+            <option value="">Select focus area…</option>
+            <option value="weight-loss">Weight Loss</option>
+            <option value="strength">Strength Training</option>
+            <option value="cardio">Cardio & Endurance</option>
+            <option value="yoga">Yoga & Wellness</option>
+            <option value="performance">Sports Performance</option>
+          </select>
+          <span id="pref-msg" style="font-size:.82rem;font-style:italic"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Programs -->
+    <section class="section" id="programs" aria-labelledby="programs-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">What We Offer</span>
+          <h2 id="programs-heading">Featured Programs</h2>
+          <p>Structured fitness programs designed for every level — from your very first gym visit to competitive performance training.</p>
+        </div>
+        <div class="programs-grid" id="featured-programs">
+          <div class="loading-state"><div class="spinner"></div><p>Loading programmes…</p></div>
+        </div>
+        <div class="flex-center" style="margin-top:2rem">
+          <a href="programs.html" class="btn btn-outline">View All Programs</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="section" style="background:var(--bg-dark)" aria-labelledby="events-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">What's On</span>
+          <h2 id="events-heading">Upcoming Events</h2>
+          <p>Community runs, workshops, bootcamps, and competitions happening across Kampala this month.</p>
+        </div>
+        <div class="events-grid" id="upcoming-events">
+          <div class="loading-state"><div class="spinner"></div><p>Loading events…</p></div>
+        </div>
+        <div class="flex-center" style="margin-top:2rem">
+          <a href="trainers.html#events" class="btn btn-outline">See All Events</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nutrition Tips -->
+    <section class="section nutrition-bg" aria-labelledby="nutrition-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow" style="color:var(--secondary-light)">Fuel Your Body</span>
+          <h2 id="nutrition-heading" style="color:var(--white)">Nutrition Tips</h2>
+          <p style="color:rgba(255,255,255,.72)">Simple, practical nutrition guidance designed for the Ugandan lifestyle and climate.</p>
+        </div>
+        <div class="nutrition-tips-grid" id="nutrition-tips">
+          <div class="loading-state" style="color:rgba(255,255,255,.7)"><div class="spinner"></div><p>Loading tips…</p></div>
+        </div>
+        <div class="flex-center" style="margin-top:2rem">
+          <a href="programs.html#resources" class="btn btn-white">Wellness Resources</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Membership -->
+    <section class="section" id="membership" aria-labelledby="membership-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Join the Hub</span>
+          <h2 id="membership-heading">Membership Plans</h2>
+          <p>Choose the plan that fits your goals and budget. All memberships include access to our main facility and community.</p>
+        </div>
+        <div class="membership-grid" id="memberships-grid">
+          <div class="loading-state"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" style="background:var(--bg-dark)" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Get In Touch</span>
+          <h2 id="contact-heading">Start Your Journey Today</h2>
+          <p>Fill in the form below and our team will be in touch within 24 hours to discuss the best plan for your goals.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Find Us</h3>
+            <p>We're located in the heart of Kampala and welcome visits any time during operating hours.</p>
+            <div class="contact-detail">
+              <div class="contact-icon" aria-hidden="true">📍</div>
+              <div>Plot 14, Nakasero Road<br />Kampala, Uganda</div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-icon" aria-hidden="true">🕐</div>
+              <div>Mon–Fri: 6am–9pm<br />Sat–Sun: 7am–6pm</div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-icon" aria-hidden="true">📞</div>
+              <div>+256 700 123 456</div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-icon" aria-hidden="true">✉️</div>
+              <div>info@kampalafitnesshub.org</div>
+            </div>
+          </div>
+          <div class="form-card">
+            <form action="form-action.html" method="get" novalidate aria-label="Membership enquiry form">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="fname">First Name <span class="required" aria-label="required">*</span></label>
+                  <input type="text" id="fname" name="fname" required placeholder="e.g. Amara" autocomplete="given-name" />
+                </div>
+                <div class="form-group">
+                  <label for="lname">Last Name <span class="required" aria-label="required">*</span></label>
+                  <input type="text" id="lname" name="lname" required placeholder="e.g. Nakato" autocomplete="family-name" />
+                </div>
+                <div class="form-group full-width">
+                  <label for="email">Email Address <span class="required" aria-label="required">*</span></label>
+                  <input type="email" id="email" name="email" required placeholder="you@example.com" autocomplete="email" />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" placeholder="+256 700 000 000" autocomplete="tel" />
+                </div>
+                <div class="form-group">
+                  <label for="membership">Membership Interest</label>
+                  <select id="membership" name="membership">
+                    <option value="">Select plan…</option>
+                    <option value="Starter">Starter – UGX 80,000/mo</option>
+                    <option value="Pro">Pro – UGX 150,000/mo</option>
+                    <option value="Elite">Elite – UGX 280,000/mo</option>
+                  </select>
+                </div>
+                <div class="form-group full-width">
+                  <label for="goals">Your Fitness Goals</label>
+                  <textarea id="goals" name="goals" rows="3" placeholder="Tell us about your fitness goals and any experience you have…"></textarea>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%;margin-top:1rem">Send Enquiry</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-icon" aria-hidden="true">💪</div>
+        <p>Empowering Kampala's community through fitness, nutrition, and shared dedication to a healthier life.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="trainers.html">Trainers</a></li>
+          <li><a href="#contact">Join Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="attributions.html">Attributions</a></li>
+          <li><a href="https://www.youtube.com" target="_blank" rel="noopener">🎥 Video Demo</a></li>
+          <li><a href="https://joeltalemwa2-hash.github.io/wdd231/" target="_blank" rel="noopener">WDD231 Home</a></li>
+        </ul>
+      </div>
     </div>
-        <nav id="nav">
-            <a href="index.html">Home</a>
-            <a href="programs.html">Programs</a>
-            <a href="trainers.html">Our Trainers</a>
-        </nav>
-    </header>
+    <div class="footer-bottom">
+      <span>© 2026 Kampala Fitness Hub · Joel Talemwa</span>
+      <a href="attributions.html">Attributions</a>
+      <a href="https://www.youtube.com" target="_blank" rel="noopener">🎥 Video Demo</a>
+    </div>
+  </footer>
 
-    <main>
+  <!-- Back to Top -->
+  <button class="back-to-top" aria-label="Back to top">↑</button>
 
-        <h1>Support life through fitness</h1>
-
-        <section class="hero">
-
-        <img src="images/h.jpg" alt="Kampala City" width="1200" height="500">
-            <div class="hero-text">
-                <h2>Transform Your Lifestyle in the Heart of Kampala</h2>
-                <p>Access premium coaching, modern facilities, and an encouraging fitness community dedicated to your long-term success.</p>
-                <a href="programs.html" class="cta-btn-link">Join Now</a>
-            </div>
-        </section>
-
-        <section class="home-highlights">
-            <div class="highlight-block">
-                <h3>Featured Programs</h3>
-                <p>From absolute beginner workout configurations to intensive functional strength templates designed by top local experts.</p>
-            </div>
-            <div class="highlight-block">
-                <h3>Upcoming Community Events</h3>
-                <p>Prepare for the upcoming Kampala City Marathon and group trail runs scheduled across the metropolitan area this month.</p>
-            </div>
-        </section>
-
-        <section class="info-split-row">
-            <div class="info-card side-nutrition">
-                <h3>Nutrition &amp; Healthy Living</h3>
-                <p>Complement your sweat equity. Access expert-curated meal guides relying entirely on local, nutrient-dense whole ingredients.</p>
-            </div>
-            <div class="info-card side-spotlight">
-                <h3>Trainer Spotlight</h3>
-                <p>Meet coaches holding international certifications who specialize comprehensively in body re-composition and athletic endurance.</p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Kampala Fitness Hub | Designed by Joel Talemwa</p>
-        <p><a href="https://youtu.be/your-video-link" target="_blank" class="footer-link">Project Video Demonstration</a> | <a href="attributions.html" class="footer-link">Attributions</a></p>
-    </footer>
-
-    <script type="module" src="js/main.js"></script>
+  <script type="module" src="scripts/home.js"></script>
 </body>
 </html>

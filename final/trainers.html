@@ -1,101 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kampala Fitness Hub | Elite Health & Wellness</title>
-    <meta name="description" content="Empowering Kampala residents to transform their lifestyles through tailored fitness programs, expert trainers, nutrition advice, and local community events.">
-    <meta name="author" content="Joel Talemwa">
-    <meta property="og:title" content="Kampala Fitness Hub | Home">
-    <meta property="og:description" content="Discover premium workout plans, certified trainers, and community fitness marathons happening right here in Kampala.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://joeltalemwa2-hash.github.io/wdd231/final/index.html">
-    <link rel="icon" href="images/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/medium.css">
-    <link rel="stylesheet" href="styles/large.css">
-    <script src="scripts/main.js" defer></script>
-    <script src="scripts/data-fetch.js" defer></script>
-    <script src="scripts/navigation.js" defer></script>
-    <script src="scripts/storage-modal.js" defer></script>
-    <script src="scripts/trainers.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certified Trainers & Events | Kampala Fitness Hub</title>
+  <meta name="description" content="Meet Kampala Fitness Hub's certified personal trainers specialising in weight loss, strength, yoga, sports performance, and more. Book a session today." />
+  <meta name="author" content="Joel Talemwa" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Certified Trainers | Kampala Fitness Hub" />
+  <meta property="og:description" content="Find a certified personal trainer in Kampala who matches your fitness goals. Browse profiles, ratings, and specialties." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=1200&q=80" />
+  <meta property="og:url" content="https://joeltalemwa2-hash.github.io/wdd231/final/trainers.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230F4C81'/><text y='.9em' font-size='70' x='15'>💪</text></svg>" />
+
+  <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body>
-    <header>
-        <div class="top-header">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-            <div class="logo-box">
-                <img src="images/logo.jpg" alt="Kampala Chamber Logo" width="60" height="60">
-            </div><div>
-            <p class="site-name">Kampala Fitness Hub</p>
+  <header class="site-header">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo" aria-label="Kampala Fitness Hub Home">
+        <div class="logo-icon" aria-hidden="true">💪</div>
+        <div class="logo-text">
+          Kampala Fitness Hub
+          <span class="logo-sub">Strength · Health · Community</span>
         </div>
-        <button id="menu"></button>
+      </a>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <button class="theme-toggle" aria-label="Toggle dark mode">🌙 Dark</button>
+        <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <ul class="nav-menu" id="nav-menu" role="list" aria-hidden="true">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="trainers.html" aria-current="page">Trainers</a></li>
+        <li><a href="index.html#contact">Join Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- Page Hero -->
+    <section class="page-hero" aria-labelledby="page-title">
+      <h1 id="page-title">Our Trainers</h1>
+      <p>Kampala's most qualified and experienced personal trainers — ready to guide your transformation.</p>
+    </section>
+
+    <!-- Trainers Section -->
+    <section class="section" aria-labelledby="trainers-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Expert Team</span>
+          <h2 id="trainers-heading">Find Your Coach</h2>
+          <p>Click any trainer card to view their full profile and book a session.</p>
+        </div>
+
+        <!-- Search -->
+        <div style="max-width:440px;margin:0 auto 1.5rem;display:flex;flex-direction:column;gap:.5rem">
+          <label for="trainer-search" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Search trainers</label>
+          <input
+            type="search"
+            id="trainer-search"
+            name="trainer-search"
+            placeholder="🔍 Search by name, specialty, or certification…"
+            aria-label="Search trainers by name, specialty, or certification"
+            style="border-radius:50px;padding:.7rem 1.2rem"
+          />
+          <div id="trainer-count" style="font-family:var(--font-card);font-size:.82rem;color:var(--text-muted);text-align:center" aria-live="polite" aria-atomic="true"></div>
+        </div>
+
+        <div class="trainers-grid" id="trainers-grid">
+          <div class="loading-state"><div class="spinner"></div><p>Loading trainer profiles…</p></div>
+        </div>
+
+        <div style="margin-top:2rem;text-align:center;font-family:var(--font-card);font-size:.88rem;color:var(--text-muted);background:var(--bg-dark);border-radius:var(--radius);padding:1rem">
+          💡 <strong>Tip:</strong> Click on any trainer card to open their full profile and book a 1-on-1 session.
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="section" style="background:var(--bg-dark)" id="events" aria-labelledby="events-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Community Calendar</span>
+          <h2 id="events-heading">Upcoming Events</h2>
+          <p>All events are open to members and the wider Kampala fitness community.</p>
+        </div>
+
+        <!-- Event Filters -->
+        <div class="filter-bar" role="group" aria-label="Filter events by category">
+          <button class="event-filter-btn filter-btn active" data-cat="All">All</button>
+          <button class="event-filter-btn filter-btn" data-cat="Running">🏃 Running</button>
+          <button class="event-filter-btn filter-btn" data-cat="Group Fitness">💪 Group Fitness</button>
+          <button class="event-filter-btn filter-btn" data-cat="Workshop">📚 Workshop</button>
+          <button class="event-filter-btn filter-btn" data-cat="Yoga">🧘 Yoga</button>
+          <button class="event-filter-btn filter-btn" data-cat="Competition">🏆 Competition</button>
+        </div>
+
+        <div class="events-grid" id="events-grid">
+          <div class="loading-state"><div class="spinner"></div><p>Loading events…</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Train With Us -->
+    <section class="section" aria-labelledby="why-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Our Standards</span>
+          <h2 id="why-heading">Why Train at KFH?</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem">
+          <div style="text-align:center;padding:1.5rem">
+            <div style="font-size:2.5rem;margin-bottom:.75rem">🎓</div>
+            <h3 style="font-size:1rem;color:var(--primary);margin-bottom:.5rem">Internationally Certified</h3>
+            <p style="font-size:.88rem;color:var(--text-muted)">Every trainer holds active certification from globally recognised bodies like NASM, ACE, and CSCS.</p>
+          </div>
+          <div style="text-align:center;padding:1.5rem">
+            <div style="font-size:2.5rem;margin-bottom:.75rem">🤝</div>
+            <h3 style="font-size:1rem;color:var(--primary);margin-bottom:.5rem">Personalised Attention</h3>
+            <p style="font-size:.88rem;color:var(--text-muted)">Sessions are designed around your body, your schedule, and your specific goals — no generic plans.</p>
+          </div>
+          <div style="text-align:center;padding:1.5rem">
+            <div style="font-size:2.5rem;margin-bottom:.75rem">📊</div>
+            <h3 style="font-size:1rem;color:var(--primary);margin-bottom:.5rem">Progress Tracking</h3>
+            <p style="font-size:.88rem;color:var(--text-muted)">Regular assessments, body composition scans, and goal check-ins keep your progress measurable.</p>
+          </div>
+          <div style="text-align:center;padding:1.5rem">
+            <div style="font-size:2.5rem;margin-bottom:.75rem">🌍</div>
+            <h3 style="font-size:1rem;color:var(--primary);margin-bottom:.5rem">Local Understanding</h3>
+            <p style="font-size:.88rem;color:var(--text-muted)">Our trainers understand Kampala's lifestyle, climate, and food culture — advice that actually works here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section nutrition-bg" aria-labelledby="cta-heading" style="text-align:center">
+      <div class="container">
+        <h2 id="cta-heading" style="color:var(--white);margin-bottom:.75rem">Ready to Start?</h2>
+        <p style="color:rgba(255,255,255,.78);max-width:520px;margin:0 auto 1.75rem">Connect with a trainer today and take the first real step toward a stronger, healthier you.</p>
+        <a href="index.html#contact" class="btn btn-primary">Book a Free Consultation</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-icon" aria-hidden="true">💪</div>
+        <p>Empowering Kampala's community through fitness, nutrition, and shared dedication to a healthier life.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="trainers.html">Trainers</a></li>
+          <li><a href="index.html#contact">Join Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="attributions.html">Attributions</a></li>
+          <li><a href="https://www.youtube.com" target="_blank" rel="noopener">🎥 Video Demo</a></li>
+          <li><a href="https://joeltalemwa2-hash.github.io/wdd231/" target="_blank" rel="noopener">WDD231 Home</a></li>
+        </ul>
+      </div>
     </div>
-        <nav id="nav">
-            <a href="index.html">Home</a>
-            <a href="programs.html">Programs</a>
-            <a href="trainers.html">Our Trainers</a>
-        </nav>
-    </header>
+    <div class="footer-bottom">
+      <span>© 2026 Kampala Fitness Hub · Joel Talemwa</span>
+      <a href="attributions.html">Attributions</a>
+      <a href="https://www.youtube.com" target="_blank" rel="noopener">🎥 Video Demo</a>
+    </div>
+  </footer>
 
-    <main>
-<section class="page-hero">
-    <h1>Meet Our Certified Trainers</h1>
-    <p>
-        Work with experienced fitness professionals dedicated to helping
-        you achieve your health and wellness goals.
-    </p>
-</section>
-
-<section class="trainer-controls"></section>
-<section class="trainer-controls">
-    <input
-        type="search"
-        id="searchTrainer"
-        placeholder="Search trainers..."
-    >
-
-    <select id="specialtyFilter">
-        <option value="all">All Specialties</option>
-        <option value="Weight Loss">Weight Loss</option>
-        <option value="Strength Training">Strength Training</option>
-        <option value="Nutrition">Nutrition</option>
-        <option value="Cardio Fitness">Cardio Fitness</option>
-    </select>
-</section>
-
-<section>
-    <h2>Our Fitness Experts</h2>
-
-    <div id="trainersContainer" class="trainers-grid"></div>
-</section>
-
-<dialog id="trainerModal">
-    <button id="closeModal">✖</button>
-
-    <div id="modalContent"></div>
-</dialog>
-
-
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Kampala Fitness Hub | Designed by Joel Talemwa</p>
-        <p><a href="https://youtu.be/your-video-link" target="_blank" class="footer-link">Project Video Demonstration</a></p>
-    </footer>
-    <script type="module" src="js/main.js"></script>
+  <button class="back-to-top" aria-label="Back to top">↑</button>
+  <script type="module" src="scripts/trainers.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

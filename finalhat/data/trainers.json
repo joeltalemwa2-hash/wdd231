@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Sarah Nakato",
+    "specialty": "Weight Loss",
+    "experience": "6 Years",
+    "certification": "ACE Certified",
+    "image": "images/trainers/download.jpg",
+    "bio": "Helps clients achieve sustainable fat loss."
+  },
+  {
+    "id": 2,
+    "name": "Daniel Kato",
+    "specialty": "Strength Training",
+    "experience": "8 Years",
+    "certification": "NASM Certified",
+    "image": "images/trainers/daniel.webp",
+    "bio": "Focuses on muscle building and athletic performance."
+  }
+]

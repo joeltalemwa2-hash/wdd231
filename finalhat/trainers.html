@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kampala Fitness Hub | Elite Health & Wellness</title>
+    <meta name="description" content="Empowering Kampala residents to transform their lifestyles through tailored fitness programs, expert trainers, nutrition advice, and local community events.">
+    <meta name="author" content="Joel Talemwa">
+    <meta property="og:title" content="Kampala Fitness Hub | Home">
+    <meta property="og:description" content="Discover premium workout plans, certified trainers, and community fitness marathons happening right here in Kampala.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://joeltalemwa2-hash.github.io/wdd231/final/index.html">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/medium.css">
+    <link rel="stylesheet" href="styles/large.css">
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/data-fetch.js" defer></script>
+    <script src="scripts/navigation.js" defer></script>
+    <script src="scripts/storage-modal.js" defer></script>
+    <script src="scripts/trainers.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="top-header">
+
+            <div class="logo-box">
+                <img src="images/logo.jpg" alt="Kampala Chamber Logo" width="60" height="60">
+            </div><div>
+            <p class="site-name">Kampala Fitness Hub</p>
+        </div>
+        <button id="menu"></button>
+    </div>
+        <nav id="nav">
+            <a href="index.html">Home</a>
+            <a href="programs.html">Programs</a>
+            <a href="trainers.html">Our Trainers</a>
+        </nav>
+    </header>
+
+    <main>
+<section class="page-hero">
+    <h1>Meet Our Certified Trainers</h1>
+    <p>
+        Work with experienced fitness professionals dedicated to helping
+        you achieve your health and wellness goals.
+    </p>
+</section>
+
+<section class="trainer-controls"></section>
+<section class="trainer-controls">
+    <input
+        type="search"
+        id="searchTrainer"
+        placeholder="Search trainers..."
+    >
+
+    <select id="specialtyFilter">
+        <option value="all">All Specialties</option>
+        <option value="Weight Loss">Weight Loss</option>
+        <option value="Strength Training">Strength Training</option>
+        <option value="Nutrition">Nutrition</option>
+        <option value="Cardio Fitness">Cardio Fitness</option>
+    </select>
+</section>
+
+<section>
+    <h2>Our Fitness Experts</h2>
+
+    <div id="trainersContainer" class="trainers-grid"></div>
+</section>
+
+<dialog id="trainerModal">
+    <button id="closeModal">✖</button>
+
+    <div id="modalContent"></div>
+</dialog>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Kampala Fitness Hub | Designed by Joel Talemwa</p>
+        <p><a href="https://youtu.be/your-video-link" target="_blank" class="footer-link">Project Video Demonstration</a></p>
+    </footer>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

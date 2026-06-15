@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kampala Fitness Hub | Elite Health & Wellness</title>
+    <meta name="description" content="Empowering Kampala residents to transform their lifestyles through tailored fitness programs, expert trainers, nutrition advice, and local community events.">
+    <meta name="author" content="Joel Talemwa">
+    <meta property="og:title" content="Kampala Fitness Hub | Home">
+    <meta property="og:description" content="Discover premium workout plans, certified trainers, and community fitness marathons happening right here in Kampala.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://joeltalemwa2-hash.github.io/wdd231/final/index.html">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/medium.css">
+    <link rel="stylesheet" href="styles/large.css">
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/data-fetch.js" defer></script>
+    <script src="scripts/navigation.js" defer></script>
+    <script src="scripts/storage-modal.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="top-header">
+
+            <div class="logo-box">
+                <img src="images/logo.jpg" alt="Kampala Chamber Logo" width="60" height="60">
+            </div><div>
+            <p class="site-name">Kampala Fitness Hub</p>
+        </div>
+        <button id="menu"></button>
+    </div>
+        <nav id="nav">
+            <a href="index.html">Home</a>
+            <a href="programs.html">Programs</a>
+            <a href="trainers.html">Our Trainers</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="pricing-tier-grid">
+            <div class="tier-card">
+                <h3>Standard Access</h3>
+                <p class="price">UGX 150,000 / mo</p>
+                <ul>
+                    <p>Full gym floor access across Kampala hubs</p>
+                    <p>Locker room &amp; shower amenities</p>
+                    <p>2 Beginner group classes per week</p>
+                </ul>
+                <button>Choose Plan</button>
+            </div>
+
+            <div class ="tier-card">
+                <h3>Pro Access</h3>
+                <p class="price">UGX 220,000 / mo</p>
+                <ul>
+                    <p>Full gym floor access across Kampala hubs</p>
+                    <p>5 Intermediate group classes per week</p>
+                    <p>Monthly body composition scan</p>
+                </ul>
+                <button>Choose Plan</button>
+            </div>
+
+            <div class="tier-card premium-tier">
+                <h3>Elite Performance</h3>
+                <p class="price">UGX 300,000 / mo</p>
+                <ul>
+                    <p>Uncapped facility access 24/7</p>
+                    <p>Personalized trainer assignment slots</p>
+                    <p>All metabolic &amp; group marathon preparation tiers</p>
+                </ul>
+                <button>Choose Plan</button>
+            </div>
+        </section>
+
+        <section class="form-wrapper-box">
+            <h2>Enrollment &amp; Booking Form</h2>
+            <form action="thanks.html" method="get" class="hub-validated-form">
+                <label class="form-control-block">
+                    Full Name *
+                    <input type="text" name="applicantName" required placeholder="e.g., Kato Prince">
+                </label>
+
+                <label class="form-control-block">
+                    Email Address *
+                    <input type="email" name="applicantEmail" required placeholder="name@domain.com">
+                </label>
+
+                <label class="form-control-block">
+                    Target Fitness Goal
+                    <select name="selectedGoal">
+                        <option value="weightLoss">Weight Management &amp; Loss</option>
+                        <option value="strength">Strength &amp; Muscle Hypertrophy</option>
+                        <option value="marathon">Marathon &amp; Endurance Conditioning</option>
+                    </select>
+                </label>
+
+                <label class="form-control-block">
+                    Special Inquiries or Health Notes
+                    <textarea name="healthManifesto" placeholder="List any medical backgrounds or trainer specific preferences..."></textarea>
+                </label>
+
+                <button type="submit" class="submit-action-btn">Submit Hub Request Stack</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Kampala Fitness Hub | Designed by Joel Talemwa</p>
+        <p><a href="https://youtu.be/your-video-link" target="_blank" class="footer-link">Project Video Demonstration</a></p>
+    </footer>
+    
+</body>
+</html>
