@@ -1686,3 +1686,158 @@ body.dark .filter-btn { background: #1e2730; color: rgba(255,255,255,0.7); borde
 .mt-2 { margin-top: 1rem; }
 .mb-2 { margin-bottom: 1rem; }
 .flex-center { display: flex; justify-content: center; }
+
+/* ===== Inline style replacements ===== */
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.trainer-spotlight {
+  margin-top: 1rem;
+}
+
+.preference-section {
+  padding: 2rem 0 0;
+}
+
+.interest-select {
+  max-width: 220px;
+}
+
+.pref-msg {
+  font-size: 0.82rem;
+  font-style: italic;
+}
+
+.section-button-spacing {
+  margin-top: 2rem;
+}
+
+.bg-dark-section {
+  background: var(--bg-dark);
+}
+
+.nutrition-eyebrow {
+  color: var(--secondary-light);
+}
+
+.nutrition-heading {
+  color: var(--white);
+}
+
+.nutrition-text {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.nutrition-loading {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* ===== Programs Page Inline Style Replacements ===== */
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.level-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.level-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.level-badge {
+  display: none;
+  font-size: 0.8rem;
+  background: var(--secondary);
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+}
+
+.bg-dark-section {
+  background: var(--bg-dark);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.schedule-header-row {
+  background: var(--primary);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+}
+
+.schedule-th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.schedule-body {
+  font-family: var(--font-card);
+  font-size: 0.85rem;
+}
+
+.schedule-row {
+  border-bottom: 1px solid var(--bg-dark);
+}
+
+.schedule-row-alt {
+  border-bottom: 1px solid var(--bg-dark);
+  background: var(--bg);
+}
+
+.schedule-time {
+  padding: 0.65rem 1rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.schedule-cell {
+  padding: 0.65rem 1rem;
+}
+
+.nutrition-eyebrow {
+  color: var(--secondary-light);
+}
+
+.nutrition-heading {
+  color: var(--white);
+}
+
+.nutrition-text {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}

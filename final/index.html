@@ -44,7 +44,7 @@
           <span class="logo-sub">Strength · Health · Community</span>
         </div>
       </a>
-      <div style="display:flex;align-items:center;gap:.5rem">
+      <div class="nav-controls">
         <button class="theme-toggle" aria-label="Toggle dark mode">🌙 Dark</button>
         <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
           <span></span><span></span><span></span>
@@ -105,7 +105,7 @@
               height="600"
             >
           </div>
-          <div id="trainer-spotlight" style="margin-top:1rem">
+          <div id="trainer-spotlight" class="trainer-spotlight">
             <div class="loading-state"><div class="spinner"></div></div>
           </div>
         </div>
@@ -113,11 +113,11 @@
     </section>
 
     <!-- User Preference -->
-    <section class="section" style="padding:2rem 0 0" aria-label="Personalise your experience">
+    <section class="section preference-section" aria-label="Personalise your experience">
       <div class="container">
         <div class="preference-bar">
           <label for="interest-select">🎯 Personalise your experience — I'm interested in:</label>
-          <select id="interest-select" name="interest" style="max-width:220px">
+          <select id="interest-select" name="interest" class="interest-select">
             <option value="">Select focus area…</option>
             <option value="weight-loss">Weight Loss</option>
             <option value="strength">Strength Training</option>
@@ -125,7 +125,7 @@
             <option value="yoga">Yoga & Wellness</option>
             <option value="performance">Sports Performance</option>
           </select>
-          <span id="pref-msg" style="font-size:.82rem;font-style:italic"></span>
+          <span id="pref-msg" class="pref-msg"></span>
         </div>
       </div>
     </section>
@@ -141,14 +141,14 @@
         <div class="programs-grid" id="featured-programs">
           <div class="loading-state"><div class="spinner"></div><p>Loading programmes…</p></div>
         </div>
-        <div class="flex-center" style="margin-top:2rem">
+        <div class="flex-center section-button-spacing">
           <a href="programs.html" class="btn btn-outline">View All Programs</a>
         </div>
       </div>
     </section>
 
     <!-- Upcoming Events -->
-    <section class="section" style="background:var(--bg-dark)" aria-labelledby="events-heading">
+    <section class="section bg-dark-selection" aria-labelledby="events-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-eyebrow">What's On</span>
@@ -158,7 +158,7 @@
         <div class="events-grid" id="upcoming-events">
           <div class="loading-state"><div class="spinner"></div><p>Loading events…</p></div>
         </div>
-        <div class="flex-center" style="margin-top:2rem">
+        <div class="flex-center section-button-spacing">
           <a href="trainers.html#events" class="btn btn-outline">See All Events</a>
         </div>
       </div>
@@ -168,14 +168,14 @@
     <section class="section nutrition-bg" aria-labelledby="nutrition-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow" style="color:var(--secondary-light)">Fuel Your Body</span>
-          <h2 id="nutrition-heading" style="color:var(--white)">Nutrition Tips</h2>
-          <p style="color:rgba(255,255,255,.72)">Simple, practical nutrition guidance designed for the Ugandan lifestyle and climate.</p>
+          <span class="section-eyebrow nutrition-eyebrow">Fuel Your Body</span>
+          <h2 id="nutrition-heading" class="nutrition-heading">Nutrition Tips</h2>
+          <p class="nutrition-text">Simple, practical nutrition guidance designed for the Ugandan lifestyle and climate.</p>
         </div>
         <div class="nutrition-tips-grid" id="nutrition-tips">
-          <div class="loading-state" style="color:rgba(255,255,255,.7)"><div class="spinner"></div><p>Loading tips…</p></div>
+          <div class="loading-state nutrition-loading"><div class="spinner"></div><p>Loading tips…</p></div>
         </div>
-        <div class="flex-center" style="margin-top:2rem">
+        <div class="flex-center section-button-spacing">
           <a href="programs.html#resources" class="btn btn-white">Wellness Resources</a>
         </div>
       </div>
@@ -196,7 +196,7 @@
     </section>
 
     <!-- Contact -->
-    <section class="section" style="background:var(--bg-dark)" id="contact" aria-labelledby="contact-heading">
+    <section class="section bg-dark-section" id="contact" aria-labelledby="contact-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-eyebrow">Get In Touch</span>
@@ -257,7 +257,7 @@
                   <textarea id="goals" name="goals" rows="3" placeholder="Tell us about your fitness goals and any experience you have…"></textarea>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary" style="width:100%;margin-top:1rem">Send Enquiry</button>
+              <button type="submit" class="btn btn-primary submit-btn">Send Enquiry</button>
             </form>
           </div>
         </div>

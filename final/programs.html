@@ -34,7 +34,7 @@
           <span class="logo-sub">Strength · Health · Community</span>
         </div>
       </a>
-      <div style="display:flex;align-items:center;gap:.5rem">
+      <div class="nav-controls">
         <button class="theme-toggle" aria-label="Toggle dark mode">🌙 Dark</button>
         <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
           <span></span><span></span><span></span>
@@ -68,13 +68,13 @@
 
         <!-- Level Personalisation -->
         <div class="preference-bar" role="region" aria-label="Set your fitness level preference">
-          <span style="font-size:.85rem;color:var(--text-muted);font-weight:500">Set your level for personalised suggestions:</span>
-          <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <span class="level-label">Set your level for personalised suggestions:</span>
+          <div class="level-buttons">
             <button class="filter-btn level-select-btn" data-level="Beginner">🌱 Beginner</button>
             <button class="filter-btn level-select-btn" data-level="Intermediate">🔥 Intermediate</button>
             <button class="filter-btn level-select-btn" data-level="Advanced">⚡ Advanced</button>
           </div>
-          <span id="level-badge" style="display:none;font-size:.8rem;background:var(--secondary);color:#fff;padding:.25rem .75rem;border-radius:50px"></span>
+          <span id="level-badge" class="level-badge"></span>
         </div>
 
         <!-- Filter Buttons -->
@@ -93,7 +93,7 @@
     </section>
 
     <!-- Membership -->
-    <section class="section" style="background:var(--bg-dark)" id="membership" aria-labelledby="membership-heading">
+    <section class="section bg-dark-section" id="membership" aria-labelledby="membership-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-eyebrow">Flexible Pricing</span>
@@ -114,52 +114,52 @@
           <h2 id="schedule-heading">Training Schedule</h2>
           <p>Group classes run throughout the week. Join any session as a member.</p>
         </div>
-        <div style="overflow-x:auto">
-          <table style="width:100%;border-collapse:collapse;min-width:600px;background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)" aria-label="Weekly training schedule">
+        <div class="table-wrapper">
+          <table class="schedule-table" aria-label="Weekly training schedule">
             <thead>
-              <tr style="background:var(--primary);color:#fff;font-family:var(--font-heading);font-size:.82rem">
-                <th scope="col" style="padding:.75rem 1rem;text-align:left">Time</th>
-                <th scope="col" style="padding:.75rem 1rem;text-align:left">Monday</th>
-                <th scope="col" style="padding:.75rem 1rem;text-align:left">Wednesday</th>
-                <th scope="col" style="padding:.75rem 1rem;text-align:left">Friday</th>
-                <th scope="col" style="padding:.75rem 1rem;text-align:left">Saturday</th>
+              <tr class="scheduled-header-row">
+                <th scope="col" class="schedule-th">Time</th>
+                <th scope="col" class="schedule-th">Monday</th>
+                <th scope="col" class="schedule-th">Wednesday</th>
+                <th scope="col" class="schedule-th">Friday</th>
+                <th scope="col" class="schedule-th">Saturday</th>
               </tr>
             </thead>
-            <tbody style="font-family:var(--font-card);font-size:.85rem">
-              <tr style="border-bottom:1px solid var(--bg-dark)">
-                <td style="padding:.65rem 1rem;color:var(--text-muted);font-weight:600">6:00 AM</td>
-                <td style="padding:.65rem 1rem">HIIT Bootcamp</td>
-                <td style="padding:.65rem 1rem">Strength 101</td>
-                <td style="padding:.65rem 1rem">HIIT Bootcamp</td>
-                <td style="padding:.65rem 1rem">Outdoor Run</td>
+            <tbody class="schedule-body">
+              <tr class="schedule-row">
+                <td class="schedule-time">6:00 AM</td>
+                <td class="schedule-cell">HIIT Bootcamp</td>
+                <td class="schedule-cell">Strength 101</td>
+                <td class="schedule-cell">HIIT Bootcamp</td>
+                <td class="schedule-cell">Outdoor Run</td>
               </tr>
-              <tr style="border-bottom:1px solid var(--bg-dark);background:var(--bg)">
-                <td style="padding:.65rem 1rem;color:var(--text-muted);font-weight:600">8:00 AM</td>
-                <td style="padding:.65rem 1rem">Yoga Flow</td>
-                <td style="padding:.65rem 1rem">Yoga Flow</td>
-                <td style="padding:.65rem 1rem">Yoga Flow</td>
-                <td style="padding:.65rem 1rem">Full Body Circuit</td>
+              <tr class="schedule-row-alt">
+                <td class="schedule-time">8:00 AM</td>
+                <td class="schedule-cell">Yoga Flow</td>
+                <td class="schedule-cell">Yoga Flow</td>
+                <td class="schedule-cell">Yoga Flow</td>
+                <td class="schedule-cell">Full Body Circuit</td>
               </tr>
-              <tr style="border-bottom:1px solid var(--bg-dark)">
-                <td style="padding:.65rem 1rem;color:var(--text-muted);font-weight:600">12:00 PM</td>
-                <td style="padding:.65rem 1rem">Cardio Blast</td>
-                <td style="padding:.65rem 1rem">Core & Abs</td>
-                <td style="padding:.65rem 1rem">Cardio Blast</td>
-                <td style="padding:.65rem 1rem">—</td>
+              <tr class="schedule-row-alt">
+                <td class="schedule-time">12:00 PM</td>
+                <td class="schedule-cell">Cardio Blast</td>
+                <td class="schedule-cell">Core & Abs</td>
+                <td class="schedule-cell">Cardio Blast</td>
+                <td class="schedule-cell">—</td>
               </tr>
-              <tr style="border-bottom:1px solid var(--bg-dark);background:var(--bg)">
-                <td style="padding:.65rem 1rem;color:var(--text-muted);font-weight:600">5:30 PM</td>
-                <td style="padding:.65rem 1rem">Power Lifting</td>
-                <td style="padding:.65rem 1rem">Pilates</td>
-                <td style="padding:.65rem 1rem">Power Lifting</td>
-                <td style="padding:.65rem 1rem">—</td>
+              <tr class="schedule-row-alt">
+                <td class="schedule-time">5:30 PM</td>
+                <td class="schedule-cell">Power Lifting</td>
+                <td class="schedule-cell">Pilates</td>
+                <td class="schedule-cell">Power Lifting</td>
+                <td class="schedule-cell">—</td>
               </tr>
               <tr>
-                <td style="padding:.65rem 1rem;color:var(--text-muted);font-weight:600">7:00 PM</td>
-                <td style="padding:.65rem 1rem">Boxing Fitness</td>
-                <td style="padding:.65rem 1rem">Boxing Fitness</td>
-                <td style="padding:.65rem 1rem">Open Gym</td>
-                <td style="padding:.65rem 1rem">—</td>
+                <td class="schedule-time">7:00 PM</td>
+                <td class="schedule-cell">Boxing Fitness</td>
+                <td class="schedule-cell">Boxing Fitness</td>
+                <td class="schedule-cell">Open Gym</td>
+                <td class="schedule-cell">—</td>
               </tr>
             </tbody>
           </table>
@@ -171,11 +171,11 @@
     <section class="section nutrition-bg" id="resources" aria-labelledby="resources-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow" style="color:var(--secondary-light)">Wellness Library</span>
-          <h2 id="resources-heading" style="color:var(--white)">Fitness Resources</h2>
-          <p style="color:rgba(255,255,255,.72)">Free guides and tools to support your training journey.</p>
+          <span class="section-eyebrow nutrition-eyebrow">Wellness Library</span>
+          <h2 id="resources-heading" class="nutrition-heading">Fitness Resources</h2>
+          <p class="nutrition-text">Free guides and tools to support your training journey.</p>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem">
+        <div class="resources-grid">
           <div class="tip-card">
             <div class="tip-icon">📋</div>
             <span class="tip-category">Guide</span>
