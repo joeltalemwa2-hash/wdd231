@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Kampala Fitness Hub — large.css (Responsive Layouts & Multi-Column Modifiers)
+   ========================================================================== */
+
+/* --- Clean Up Small Tablet Layout Adjustments (min-width: 540px) --- */
+@media (min-width: 540px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* --- Mid-Sized Tablet Standard Layouts (min-width: 640px) --- */
+@media (min-width: 640px) {
+  .programs-grid,
+  .trainers-grid,
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+/* --- Large Tablet / Desktop Viewports (min-width: 768px) --- */
+@media (min-width: 768px) {
+  /* Navigation Refinements */
+  .hamburger {
+    display: none;
+  }
+
+  .nav-menu {
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+    background: none;
+    padding: 0;
+    gap: 0.25rem;
+    box-shadow: none;
+  }
+
+  .nav-menu a {
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--radius-sm);
+    color: rgba(255,255,255,0.85);
+    font-size: 0.9rem;
+  }
+
+  .nav-menu a:hover {
+    padding-left: 0.9rem;
+    background: rgba(255,255,255,0.12);
+    color: var(--white);
+  }
+
+  .nav-menu a[aria-current="page"] {
+    color: var(--secondary);
+    background: rgba(46, 204, 113, 0.12);
+    border-left: none;
+  }
+
+  /* Structural Components */
+  .hero {
+    padding: 6rem 1rem 5rem;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-stats {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+    gap: 2.5rem;
+  }
+
+  .membership-grid,
+  .nutrition-tips-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr 1.6fr;
+  }
+}
+
+/* --- Widescreen Monitors (min-width: 1024px) --- */
+@media (min-width: 1024px) {
+  .programs-grid,
+  .trainers-grid,
+  .events-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
