@@ -2,8 +2,6 @@
    Kampala Fitness Hub — main.css
    =========================== */
 
-/* --- Google Fonts Import --- */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap');
 
 /* --- CSS Custom Properties --- */
 :root {
@@ -138,7 +136,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 .btn-primary {
-  background: var(--secondary);
+  background: #1E8E4A;
   color: var(--white);
   border-color: var(--secondary);
 }
