@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Gallery — Homez Community Development Initiative</title>
+<meta name="description" content="Browse and upload photos from Homez Community Development Initiative's field projects in Masaka City, Uganda.">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .upload-zone{
+    border: 2px dashed var(--line);
+    background: var(--white);
+    padding: 56px 40px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .upload-zone.drag{ border-color: var(--blue); background: var(--bg-grey); }
+  .upload-zone svg{ margin: 0 auto 18px; display:block; }
+  .upload-zone h3{ font-family: var(--heading); font-weight:700; font-size:19px; color:var(--blue-deep); margin:0 0 8px; }
+  .upload-zone p{ color: var(--ink-soft); font-size:14px; margin:0 0 22px; }
+  #fileInput{ display:none; }
+
+  .field-form{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 28px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .field-form .full{ grid-column: 1 / -1; }
+  .field-form label{
+    display:block; font-size:12px; letter-spacing:0.04em; text-transform:uppercase;
+    color: var(--ink-soft); margin-bottom:7px; font-weight:700;
+  }
+  .field-form input, .field-form select, .field-form textarea{
+    width:100%; border:1px solid var(--line); background:var(--white);
+    padding:12px 14px; font-family: var(--body); font-size:14.5px; color:var(--ink);
+    border-radius: var(--radius);
+  }
+  .field-form input:focus, .field-form select:focus, .field-form textarea:focus{
+    outline:none; border-color: var(--blue);
+  }
+  .field-form textarea{ resize: vertical; min-height: 86px; }
+
+  .gallery-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  @media(max-width:980px){ .gallery-grid{ grid-template-columns: 1fr 1fr; } }
+  @media(max-width:560px){ .gallery-grid{ grid-template-columns: 1fr; } }
+
+  .proj-card{
+    border:1px solid var(--line);
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow:hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .proj-card:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px rgba(15,52,96,0.1); }
+  .proj-img{
+    width:100%; aspect-ratio: 4/3; object-fit: cover;
+    background: var(--bg-grey);
+    display:block;
+  }
+  .proj-body{ padding:22px 22px 24px; }
+  .proj-tag{
+    font-size:11px; letter-spacing:0.05em; text-transform:uppercase;
+    color: var(--gold-dark); font-weight:700; margin-bottom:9px; display:inline-block;
+    background: var(--bg-grey); padding: 4px 10px; border-radius: 100px;
+  }
+  .proj-title{ font-family: var(--heading); font-weight:700; font-size:17px; color:var(--blue-deep); margin:0 0 8px; line-height:1.35;}
+  .proj-desc{ font-size:13.5px; color: var(--ink-soft); margin:0 0 16px; line-height:1.6; }
+  .proj-meta{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:12.5px; color: var(--ink-soft); border-top:1px solid var(--line); padding-top:14px;
+  }
+  .proj-del{
+    background:none; border:none; color: #C0392B; cursor:pointer;
+    font-size:12.5px; font-weight:700; padding:0;
+  }
+  .proj-del:hover{ text-decoration: underline; }
+  .empty-state{
+    text-align:center; padding: 56px 24px; color: var(--ink-soft);
+    border: 1px solid var(--line); background: var(--bg-grey); border-radius: var(--radius);
+  }
+  .empty-state svg{ margin: 0 auto 18px; }
+  .toast{
+    position: fixed; bottom: 28px; left:50%; transform: translateX(-50%) translateY(120%);
+    background: var(--blue-deep); color: #fff; padding: 14px 26px; font-size:14px;
+    border-radius: var(--radius); z-index: 200; transition: transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  }
+  .toast.show{ transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="topbar-contact">
+      <span>📞 +256 700 000 000</span>
+      <span>✉️ info@homezcdi.org</span>
+    </div>
+    <div class="topbar-social">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Twitter">x</a>
+      <a href="#" aria-label="YouTube">▶</a>
+    </div>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="24" cy="24" r="23" fill="#1B4D89"/>
+        <path d="M24 12 L36 22 H32.5 V34 H15.5 V22 H12 Z" fill="#FFFFFF"/>
+        <rect x="21" y="26" width="6" height="8" fill="#1B4D89"/>
+      </svg>
+      <span class="brand-text">
+        <span class="brand-name">Homez Community<br>Development Initiative</span>
+        <span class="brand-loc">Masaka City, Uganda</span>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+    <nav class="nav-main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="programs.html">Our Work</a>
+      <a href="governance.html">Governance</a>
+      <a href="projects.html" class="active">Project Gallery</a>
+      <a href="about.html#contact" class="nav-cta">Partner With Us</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="page-header">
+    <div class="wrap page-header-inner">
+      <p class="breadcrumb"><a href="index.html">Home</a> / Project Gallery</p>
+      <h1>Field Records</h1>
+      <p class="sub">Photos and short write‑ups from completed work — school‑fees support, outreach visits, awareness sessions, and income‑generating projects. Add your own below.</p>
+    </div>
+  </div>
+
+  <!-- UPLOAD -->
+  <section class="section" id="upload">
+    <div class="wrap" style="max-width:760px;">
+      <p class="eyebrow">Add a Project</p>
+      <h2 style="font-family:var(--heading); font-weight:700; color:var(--blue-deep); font-size:26px; margin:0 0 24px;">Submit a completed project</h2>
+      <div class="upload-zone" id="dropZone" tabindex="0" role="button" aria-label="Click or drop an image to upload">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 16V4M12 4l-4 4M12 4l4 4" stroke="#1B4D89" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke="#1B4D89" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Drop a photo here, or click to choose one</h3>
+        <p>JPG, PNG, or WEBP. Stored on this device only.</p>
+        <span class="btn btn-line btn-sm">Choose Photo</span>
+        <input type="file" id="fileInput" accept="image/*">
+      </div>
+
+      <form class="field-form" id="projForm" style="display:none;">
+        <div class="full">
+          <div id="previewWrap" style="border:1px solid var(--line); border-radius:var(--radius); padding:8px; margin-bottom:4px; display:none;">
+            <img id="previewImg" style="width:100%; max-height:280px; object-fit:cover; border-radius:4px;" alt="Selected photo preview">
+          </div>
+        </div>
+        <div class="full">
+          <label for="pTitle">Project title</label>
+          <input type="text" id="pTitle" placeholder="e.g. Term 2 school fees — Nyendo families" required>
+        </div>
+        <div>
+          <label for="pCategory">Objective</label>
+          <select id="pCategory">
+            <option>5.1 — School Fees &amp; Materials</option>
+            <option>5.2 — HIV/AIDS Awareness</option>
+            <option>5.3 — Outreach &amp; Aid</option>
+            <option>5.4 — Income‑Generating Project</option>
+            <option>5.5 — Partnership</option>
+          </select>
+        </div>
+        <div>
+          <label for="pDate">Date</label>
+          <input type="date" id="pDate">
+        </div>
+        <div class="full">
+          <label for="pDesc">Short description</label>
+          <textarea id="pDesc" placeholder="What happened, who it reached, and what it achieved."></textarea>
+        </div>
+        <div class="full" style="display:flex; gap:12px; margin-top:4px;">
+          <button type="submit" class="btn btn-gold">Add to Gallery</button>
+          <button type="button" class="btn btn-line" id="cancelBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section bg-grey">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Field Documentation</p>
+        <h2>Completed Projects</h2>
+        <p id="countLabel" style="color:var(--ink-soft); font-size:14.5px;"></p>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="24" cy="24" r="23" fill="#D69A2D"/>
+            <path d="M24 12 L36 22 H32.5 V34 H15.5 V22 H12 Z" fill="#0F3460"/>
+            <rect x="21" y="26" width="6" height="8" fill="#D69A2D"/>
+          </svg>
+          <div>
+            <div class="footer-name">Homez Community<br>Development Initiative</div>
+            <div class="footer-tag">Building Hope, Changing Lives</div>
+          </div>
+        </div>
+        <p class="footer-about">A community‑driven organization empowering vulnerable families in Masaka City, Uganda through education, health, and economic opportunity.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="programs.html">Our Work</a></li>
+          <li><a href="governance.html">Governance</a></li>
+          <li><a href="projects.html">Project Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Constitution</h4>
+        <ul>
+          <li><a href="about.html#vision">Vision &amp; Mission</a></li>
+          <li><a href="programs.html#objectives">Our Objectives</a></li>
+          <li><a href="governance.html#committee">Executive Committee</a></li>
+          <li><a href="governance.html#finances">Finances</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <ul class="footer-contact">
+          <li>📍 Masaka City, Uganda</li>
+          <li>📞 +256 700 000 000</li>
+          <li>✉️ info@homezcdi.org</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Homez Community Development Initiative. All rights reserved.</span>
+      <span>Registered under the Organization's Constitution, Article 1</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Project added to gallery</div>
+
+<script src="js/main.js"></script>
+<script>
+(function(){
+  const STORAGE_KEY = 'homez_projects_v1';
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  const projForm = document.getElementById('projForm');
+  const previewWrap = document.getElementById('previewWrap');
+  const previewImg = document.getElementById('previewImg');
+  const galleryGrid = document.getElementById('galleryGrid');
+  const countLabel = document.getElementById('countLabel');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const toast = document.getElementById('toast');
+  let pendingImageData = null;
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2400);
+  }
+
+  function loadProjects(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : seedProjects();
+    }catch(e){
+      return seedProjects();
+    }
+  }
+
+  function seedProjects(){
+    return [
+      {
+        id: 's1',
+        title: 'Term 1 school fees — Nyendo families',
+        category: '5.1 — School Fees & Materials',
+        date: '2026-02-10',
+        desc: 'Covered term 1 school fees and scholastic materials for 14 children identified during household visits.',
+        image: null
+      },
+      {
+        id: 's2',
+        title: 'HIV/AIDS awareness session — Kimaanya',
+        category: '5.2 — HIV/AIDS Awareness',
+        date: '2026-03-22',
+        desc: 'Community counselling and prevention session held with affected families and local volunteers.',
+        image: null
+      },
+      {
+        id: 's3',
+        title: 'Tailoring co‑op — five mothers',
+        category: '5.4 — Income-Generating Project',
+        date: '2026-04-30',
+        desc: 'Start-up materials and training provided to a small tailoring group to build sustainable income.',
+        image: null
+      }
+    ];
+  }
+
+  function saveProjects(list){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+    catch(e){ showToast('Could not save — storage may be full.'); }
+  }
+
+  function placeholderSVG(category){
+    const colors = {
+      '5.1': ['#1B4D89','#0F3460'],
+      '5.2': ['#B57E1A','#D69A2D'],
+      '5.3': ['#D69A2D','#E8B65A'],
+      '5.4': ['#1B4D89','#D69A2D'],
+      '5.5': ['#0F3460','#B57E1A']
+    };
+    const key = (category||'').slice(0,3);
+    const [c1,c2] = colors[key] || ['#1B4D89','#0F3460'];
+    return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs><rect width="400" height="300" fill="url(#g)"/><path d="M200 110 L240 145 H228 V195 H172 V145 H160 Z" fill="#FFFFFF" opacity="0.92"/></svg>`)}`;
+  }
+
+  function fmtDate(d){
+    if(!d) return 'Undated';
+    const dt = new Date(d + 'T00:00:00');
+    if(isNaN(dt)) return d;
+    return dt.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+  }
+
+  function render(){
+    const projects = loadProjects();
+    countLabel.textContent = projects.length + (projects.length === 1 ? ' project' : ' projects') + ' recorded';
+    galleryGrid.innerHTML = '';
+
+    if(!projects.length){
+      galleryGrid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M12 16V4M12 4l-4 4M12 4l4 4" stroke="#5C636B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke="#5C636B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p>No projects yet. Add the first one above.</p>
+      </div>`;
+      return;
+    }
+
+    projects.slice().reverse().forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'proj-card';
+      const img = p.image || placeholderSVG(p.category);
+      card.innerHTML = `
+        <img class="proj-img" src="${img}" alt="${escapeHtml(p.title)}">
+        <div class="proj-body">
+          <span class="proj-tag">${escapeHtml(p.category)}</span>
+          <h3 class="proj-title">${escapeHtml(p.title)}</h3>
+          <p class="proj-desc">${escapeHtml(p.desc || 'No description provided.')}</p>
+          <div class="proj-meta">
+            <span>${fmtDate(p.date)}</span>
+            <button class="proj-del" data-id="${p.id}">Remove</button>
+          </div>
+        </div>`;
+      galleryGrid.appendChild(card);
+    });
+
+    galleryGrid.querySelectorAll('.proj-del').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const list = loadProjects().filter(p => p.id !== id);
+        saveProjects(list);
+        render();
+        showToast('Project removed');
+      });
+    });
+  }
+
+  function escapeHtml(str){
+    const d = document.createElement('div');
+    d.textContent = str || '';
+    return d.innerHTML;
+  }
+
+  function openForm(imageData){
+    pendingImageData = imageData || null;
+    if(pendingImageData){
+      previewImg.src = pendingImageData;
+      previewWrap.style.display = 'block';
+    } else {
+      previewWrap.style.display = 'none';
+    }
+    projForm.style.display = 'grid';
+    document.getElementById('pTitle').focus();
+  }
+
+  function closeForm(){
+    projForm.style.display = 'none';
+    projForm.reset();
+    previewWrap.style.display = 'none';
+    pendingImageData = null;
+  }
+
+  function handleFile(file){
+    if(!file || !file.type.startsWith('image/')) { showToast('Please choose an image file.'); return; }
+    const reader = new FileReader();
+    reader.onload = (e) => openForm(e.target.result);
+    reader.readAsDataURL(file);
+  }
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fileInput.click(); } });
+  fileInput.addEventListener('change', (e) => { if(e.target.files[0]) handleFile(e.target.files[0]); });
+
+  ['dragenter','dragover'].forEach(evt => dropZone.addEventListener(evt, (e) => {
+    e.preventDefault(); dropZone.classList.add('drag');
+  }));
+  ['dragleave','drop'].forEach(evt => dropZone.addEventListener(evt, (e) => {
+    e.preventDefault(); dropZone.classList.remove('drag');
+  }));
+  dropZone.addEventListener('drop', (e) => {
+    const file = e.dataTransfer.files[0];
+    if(file) handleFile(file);
+  });
+
+  cancelBtn.addEventListener('click', closeForm);
+
+  projForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('pTitle').value.trim();
+    if(!title){ showToast('Please add a title.'); return; }
+    const newProject = {
+      id: 'p_' + Date.now(),
+      title,
+      category: document.getElementById('pCategory').value,
+      date: document.getElementById('pDate').value,
+      desc: document.getElementById('pDesc').value.trim(),
+      image: pendingImageData
+    };
+    const list = loadProjects();
+    list.push(newProject);
+    saveProjects(list);
+    closeForm();
+    render();
+    showToast('Project added to gallery');
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
