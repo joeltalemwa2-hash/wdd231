@@ -71,8 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
     isOpen ? closeNav() : openNav();
   });
   scrim?.addEventListener('click', closeNav);
+  document.querySelector('.nav-close')?.addEventListener('click', closeNav);
   mainNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
+});
+
+document.querySelectorAll('.nav-more-toggle').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const wrap = btn.closest('.nav-more');
+    const isOpen = wrap.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+});
+document.addEventListener('click', () => {
+  document.querySelectorAll('.nav-more.open').forEach(el => el.classList.remove('open'));
 });
 
 /* ---------- Back to top ---------- */

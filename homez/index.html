@@ -18,7 +18,7 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <a href="index.html" class="brand-link">
-      <span class="brand-mark">HC</span>
+      <img src="images/homz.png" alt="Homez Logo "width="85" height="60">
       <span class="brand-text">Homez Community<br><small>Development Initiative</small></span>
     </a>
 
@@ -27,14 +27,22 @@
     </button>
 
     <nav class="main-nav" aria-label="Primary">
+        <button class="nav-close" aria-label="Close menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
       <a href="index.html" aria-current="page">Home</a>
       <a href="about.html">About</a>
       <a href="programs.html">Programs</a>
       <a href="governance.html">Governance</a>
       <a href="projects.html">Projects</a>
-      <a href="donate.html">Donate</a>
-      <a href="partner.html">Partner With Us</a>
-      <a href="chat.html">Member Chat</a>
+      <div class="nav-more">
+  <button class="nav-more-toggle" aria-expanded="false">More <span class="caret">▾</span></button>
+  <div class="nav-more-menu">
+    <a href="donate.html">Donate</a>
+    <a href="partner.html">Partner With Us</a>
+    <a href="chat.html">Member Chat</a>
+  </div>
+</div>
     </nav>
 
     <div class="header-actions">
