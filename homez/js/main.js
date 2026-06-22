@@ -5,7 +5,7 @@
 /* ---------- CONFIG: edit these by hand ---------- */
 const SITE_CONFIG = {
   whatsappGroupLink: "https://chat.whatsapp.com/REPLACE-WITH-YOUR-GROUP-INVITE-LINK",
-  whatsappContactNumber: "256700000000" // replace with your number, no + or spaces
+  whatsappContactNumber: "256785077322" // replace with your number, no + or spaces
 };
 
 /* ---------- Theme (dark / light) ---------- */
