@@ -850,7 +850,7 @@ footer {
     <div class="footer-logo">Taljoe</div>
     <div style="margin-top:4px">Helping students spend smarter.</div>
   </div>
-  <div>© 2026 Taljoe</div>
+  <div>© 2026 Taljoe Studios. All rights reserved.</div>
 </footer>
 
 <!-- TOAST -->
@@ -1205,7 +1205,7 @@ function downloadPDF() {
 
   // Footer
   doc.setFontSize(8); doc.setTextColor(148, 163, 184); doc.setFont('helvetica', 'normal');
-  doc.text('Taljoe · Smart money for students · ', 105, 287, { align: 'center' });
+  doc.text('© Taljoe · Smart plan for students · ', 105, 287, { align: 'center' });
 
   doc.save(`Taljoe-Budget-${date.replace(/ /g, '-')}.pdf`);
   showToast('✅ PDF downloaded successfully!');
