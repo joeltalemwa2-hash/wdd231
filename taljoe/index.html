@@ -440,6 +440,7 @@ footer {
     <li><a href="#" onclick="showPage('home')"   class="active" id="link-home">Home</a></li>
     <li><a href="#" onclick="showPage('tips')"            id="link-tips">Tips</a></li>
     <li><a href="#" onclick="showPage('budget')"          id="link-budget">Budget Planner</a></li>
+    <li><a href="#" onclick="showPage('about')"           id="link-about">About</a></li>
     <li><a href="#" onclick="showPage('contact')"         id="link-contact">Contact</a></li>
   </ul>
 
@@ -458,6 +459,7 @@ footer {
   <a href="#" onclick="showPage('home');closeMenu()"   id="mlink-home"   class="active">Home</a>
   <a href="#" onclick="showPage('tips');closeMenu()"   id="mlink-tips">Tips</a>
   <a href="#" onclick="showPage('budget');closeMenu()" id="mlink-budget">Budget Planner</a>
+  <a href="#" onclick="showPage('about');closeMenu()"   id="mlink-about">About</a>
   <a href="#" onclick="showPage('contact');closeMenu()" id="mlink-contact">Contact</a>
 </div>
 
@@ -558,7 +560,7 @@ footer {
         <div class="tip-num">01</div>
         <div class="tip-content">
           <h3>Write down every expense</h3>
-          <p>Track every UGX you spend for one week — transport, food, data, and snacks. You will be surprised where most of your money disappears. Awareness is the first step to control.</p>
+          <p>Track every PENNY you spend for one week — transport, food, data, and snacks. You will be surprised where most of your money disappears. Awareness is the first step to control.</p>
         </div>
       </div>
       <div class="tip-item">
@@ -572,7 +574,7 @@ footer {
         <div class="tip-num">03</div>
         <div class="tip-content">
           <h3>Cook more, eat out less</h3>
-          <p>Buying food at university restaurants daily costs 3–5× more than preparing simple meals. A gas cooker and basic groceries can save you tens of thousands per month.</p>
+          <p>Buying food at restaurants daily costs 3–5× more than preparing simple meals. A gas cooker and basic groceries can save you tens of thousands per month.</p>
         </div>
       </div>
       <div class="tip-item">
@@ -732,13 +734,123 @@ footer {
   </div>
 </div>
 
+<!-- ════════════ ABOUT PAGE ════════════ -->
+<div class="page" id="page-about">
+  <div class="section">
+
+    <!-- Hero -->
+    <div style="text-align:center; max-width:640px; margin:0 auto 64px">
+      <div class="section-label" style="justify-content:center; display:flex">Our story</div>
+      <h1 class="section-title" style="font-size:clamp(30px,4vw,46px)">
+        Built by a student,<br><span class="grad" style="background:linear-gradient(135deg,var(--brand-1),var(--brand-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">for students.</span>
+      </h1>
+      <p style="color:var(--text-2);font-size:16px;line-height:1.75;margin-top:12px">
+        Taljoe was born out of a real problem — managing money on a tight student budget with no practical tools designed for our reality.
+      </p>
+    </div>
+
+    <!-- Mission, Vision, Values -->
+    <div class="card-grid" style="margin-bottom:48px">
+      <div class="card">
+        <div class="card-icon" style="background:rgba(79,70,229,0.1)">🎯</div>
+        <h3>Our Mission</h3>
+        <p>To empower every Ugandan student with simple, practical financial tools that fit their real income, lifestyle, and goals — making money management a daily habit, not a struggle.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:rgba(6,182,212,0.1)">🔭</div>
+        <h3>Our Vision</h3>
+        <p>A generation of financially literate Ugandan graduates who enter the workforce debt-free, savings-first, and equipped to build lasting wealth.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:rgba(16,185,129,0.1)">💎</div>
+        <h3>Our Values</h3>
+        <p>Simplicity, honesty, and relevance. We build only what students actually need — no bloat, no jargon, no features that don't apply to life in Uganda.</p>
+      </div>
+    </div>
+
+    <!-- Creator section -->
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:40px;box-shadow:var(--shadow);display:flex;gap:32px;align-items:center;flex-wrap:wrap;margin-bottom:48px">
+      <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--brand-1),var(--brand-3));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:#fff;flex-shrink:0">JT</div>
+      <div style="flex:1;min-width:220px">
+        <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:4px">Joel Talemwa</div>
+        <div style="font-size:13px;color:var(--brand-1);font-weight:600;margin-bottom:12px">Founder & Developer · Masaka, Uganda</div>
+        <p style="font-size:14px;color:var(--text-2);line-height:1.7">A software development student passionate about building tools that solve real problems for real people. Taljoe is my attempt to give every Ugandan student the financial clarity I wished I had from day one on campus.</p>
+      </div>
+    </div>
+
+    <!-- What makes us different -->
+    <div style="margin-bottom:48px">
+      <div class="section-label">Why Taljoe</div>
+      <div class="section-title">What makes us different</div>
+      <div class="tips-list" style="margin-top:24px">
+        <div class="tip-item">
+          <div class="tip-num">01</div>
+          <div class="tip-content">
+            <h3>Uganda-first design</h3>
+            <p>Everything — the currency, the tips, the cost examples — is built around the Ugandan student experience. Not adapted from a Western app, built from scratch for our context.</p>
+          </div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-num">02</div>
+          <div class="tip-content">
+            <h3>No login, no data collection</h3>
+            <p>Your budget stays on your device. We don't collect, store, or sell any personal data. Taljoe is a tool, not a platform that profits from your information.</p>
+          </div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-num">03</div>
+          <div class="tip-content">
+            <h3>Free, always</h3>
+            <p>Taljoe will always be free to use. Financial literacy shouldn't be a subscription service. Every student deserves access regardless of their allowance size.</p>
+          </div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-num">04</div>
+          <div class="tip-content">
+            <h3>Works on any device</h3>
+            <p>Fully responsive — works on the cheapest Android phone, a tablet, or a laptop in the university computer lab. No app download required.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:48px">
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;box-shadow:var(--shadow)">
+        <div style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--brand-1),var(--brand-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">8</div>
+        <div style="font-size:13px;color:var(--text-2);margin-top:4px">Money tips</div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;box-shadow:var(--shadow)">
+        <div style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--brand-1),var(--brand-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">4</div>
+        <div style="font-size:13px;color:var(--text-2);margin-top:4px">Core features</div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;box-shadow:var(--shadow)">
+        <div style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--brand-1),var(--brand-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">UGX</div>
+        <div style="font-size:13px;color:var(--text-2);margin-top:4px">Uganda-native currency</div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;box-shadow:var(--shadow)">
+        <div style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--brand-1),var(--brand-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">∞</div>
+        <div style="font-size:13px;color:var(--text-2);margin-top:4px">Always free</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="background:linear-gradient(135deg,var(--brand-1),var(--brand-2));border-radius:var(--radius);padding:48px 40px;text-align:center;box-shadow:var(--shadow-lg)">
+      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;margin-bottom:12px">Ready to take control of your money?</h2>
+      <p style="color:rgba(255,255,255,0.8);font-size:15px;margin-bottom:28px">Start with your first budget — it takes less than 2 minutes.</p>
+      <a href="#" class="btn-primary" onclick="showPage('budget')" style="background:#fff;color:var(--brand-1);box-shadow:0 4px 14px rgba(0,0,0,0.15)">Start Budgeting →</a>
+    </div>
+
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div>
     <div class="footer-logo">Taljoe</div>
-    <div style="margin-top:4px">Helping Ugandan students spend smarter.</div>
+    <div style="margin-top:4px">Helping students spend smarter.</div>
   </div>
-  <div>© 2026 Taljoe, Uganda</div>
+  <div>© 2026 Taljoe</div>
 </footer>
 
 <!-- TOAST -->
@@ -746,7 +858,7 @@ footer {
 
 <script>
 // ─── PAGE ROUTER ─────────────────────────────────────────
-const pages = ['home','tips','budget','contact'];
+const pages = ['home','tips','budget','about','contact'];
 function showPage(name) {
   pages.forEach(p => {
     document.getElementById('page-'+p).classList.toggle('active', p===name);
@@ -876,7 +988,7 @@ function sendContact() {
   const text = `Hello Taljoe 👋%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Email:* ${encodeURIComponent(email)}%0A%0A*Message:*%0A${encodeURIComponent(msg)}`;
   
   window.open(`https://wa.me/256743975498?text=${text}`, '_blank');
-  
+
   document.getElementById('cName').value='';
   document.getElementById('cEmail').value='';
   document.getElementById('cMsg').value='';
