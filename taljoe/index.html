@@ -425,6 +425,7 @@ footer {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -642,6 +643,9 @@ footer {
 
         <button class="btn-primary" onclick="saveBudget()" style="width:100%; justify-content:center; margin-top:8px">
           Save Budget
+        </button>
+        <button class="btn-ghost" onclick="downloadPDF()" style="width:100%; justify-content:center; margin-top:10px">
+          ⬇ Download as PDF
         </button>
       </div>
 
@@ -984,6 +988,113 @@ function showToast(msg) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(()=>t.classList.remove('show'), 3000);
 }
+
+function downloadPDF() {
+  const income = parseFloat(document.getElementById('income').value) || 0;
+  if (!income) { showToast('⚠️ Enter your budget first before downloading.'); return; }
+
+  const names = [...document.querySelectorAll('.exp-name')].map(i => i.value);
+  const amts  = [...document.querySelectorAll('.exp-amt')].map(i => parseFloat(i.value) || 0);
+  const total = amts.reduce((a, b) => a + b, 0);
+  const rem   = income - total;
+  const date  = new Date().toLocaleDateString('en-UG', {day:'2-digit', month:'long', year:'numeric'});
+
+  const rows = names.map((n, i) => amts[i] > 0
+    ? `<tr><td style="padding:10px 14px;border-bottom:1px solid #eee">${n || 'Expense'}</td><td style="padding:10px 14px;border-bottom:1px solid #eee;text-align:right">UGX ${amts[i].toLocaleString()}</td></tr>`
+    : '').join('');
+
+  const html = `
+    <html><head><title>Taljoe Budget – ${date}</title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 40px; color: #0F172A; }
+      h1   { color: #4F46E5; font-size: 28px; margin-bottom: 4px; }
+      .sub { color: #94A3B8; font-size: 13px; margin-bottom: 32px; }
+      table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+      th    { background: #4F46E5; color: #fff; padding: 12px 14px; text-align: left; }
+      th:last-child { text-align: right; }
+      .total-row td { font-weight: bold; padding: 12px 14px; background: #F8F9FF; }
+      .rem { font-size: 20px; font-weight: bold; color: ${rem >= 0 ? '#10B981' : '#EF4444'}; }
+    </style></head>
+    <body>
+      <h1>Taljoe Budget Report</h1>
+      <div class="sub">Generated on ${date}</div>
+      <table>
+        <tr><th>Item</th><th>Amount</th></tr>
+        <tr><td style="padding:10px 14px;border-bottom:1px solid #eee;font-weight:600">Monthly Income</td>
+            <td style="padding:10px 14px;border-bottom:1px solid #eee;text-align:right;font-weight:600">UGX ${income.toLocaleString()}</td></tr>
+        ${rows}
+        <tr class="total-row">
+          <td>Total Expenses</td><td style="text-align:right">UGX ${total.toLocaleString()}</td>
+        </tr>
+      </table>
+      <p>Remaining: <span class="rem">${rem >= 0 ? '+' : '−'} UGX ${Math.abs(rem).toLocaleString()}</span></p>
+    </body></html>`;
+
+ const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  
+
+  // Header
+  doc.setFillColor(79, 70, 229);
+  doc.rect(0, 0, 210, 28, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(20); doc.setFont('helvetica', 'bold');
+  doc.text('Taljoe Budget Report', 14, 18);
+
+  // Date
+  doc.setFontSize(9); doc.setFont('helvetica', 'normal');
+  doc.text(`Generated: ${date}`, 14, 25);
+
+  // Income row
+  doc.setTextColor(15, 23, 42);
+  doc.setFontSize(11); doc.setFont('helvetica', 'bold');
+  doc.text('Monthly Income', 14, 44);
+  doc.text(`UGX ${income.toLocaleString()}`, 196, 44, { align: 'right' });
+
+  // Divider
+  doc.setDrawColor(229, 231, 235);
+  doc.line(14, 48, 196, 48);
+
+  // Expense rows
+  let y = 56;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.setTextColor(79, 70, 229);
+  doc.text('EXPENSES', 14, y);
+  y += 8;
+
+  names.forEach((n, i) => {
+    if (!amts[i]) return;
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(71, 85, 105);
+    doc.setFontSize(10);
+    doc.text(n || 'Expense', 14, y);
+    doc.text(`UGX ${amts[i].toLocaleString()}`, 196, y, { align: 'right' });
+    doc.setDrawColor(241, 245, 249);
+    doc.line(14, y + 3, 196, y + 3);
+    y += 10;
+  });
+
+  // Totals box
+  y += 6;
+  doc.setFillColor(248, 249, 255);
+  doc.roundedRect(14, y, 182, 28, 3, 3, 'F');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+  doc.setTextColor(15, 23, 42);
+  doc.text('Total Expenses', 20, y + 10);
+  doc.text(`UGX ${total.toLocaleString()}`, 190, y + 10, { align: 'right' });
+  doc.setFontSize(13);
+  doc.setTextColor(rem >= 0 ? 16 : 239, rem >= 0 ? 185 : 68, rem >= 0 ? 129 : 68);
+  doc.text(`Remaining: ${rem >= 0 ? '+' : '−'} UGX ${Math.abs(rem).toLocaleString()}`, 20, y + 22);
+
+  // Footer
+  doc.setFontSize(8); doc.setTextColor(148, 163, 184); doc.setFont('helvetica', 'normal');
+  doc.text('Taljoe · Smart money for Ugandan students · ', 105, 287, { align: 'center' });
+
+  doc.save(`Taljoe-Budget-${date.replace(/ /g, '-')}.pdf`);
+  showToast('✅ PDF downloaded successfully!');
+}
+
 </script>
 </body>
 </html>
