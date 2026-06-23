@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="author" content="Joel Talemwa"/>
+<meta name="description" content="Taljoe – Smart money management for students in Uganda."/>
+<title>Taljoe</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ── TOKENS ─────────────────────────────────────────── */
+:root {
+  --brand-1: #4F46E5;   /* indigo */
+  --brand-2: #7C3AED;   /* violet */
+  --brand-3: #06B6D4;   /* cyan accent */
+  --success: #10B981;
+  --warn:    #F59E0B;
+
+  --bg:        #F8F9FF;
+  --bg-card:   #FFFFFF;
+  --bg-nav:    rgba(248,249,255,0.85);
+  --border:    #E5E7EB;
+  --text-1:    #0F172A;
+  --text-2:    #475569;
+  --text-3:    #94A3B8;
+  --shadow:    0 1px 3px rgba(0,0,0,0.07), 0 8px 24px rgba(79,70,229,0.07);
+  --shadow-lg: 0 4px 6px rgba(0,0,0,0.05), 0 20px 40px rgba(79,70,229,0.12);
+  --radius:    14px;
+  --nav-h:     68px;
+}
+[data-theme="dark"] {
+  --bg:        #0D0F1A;
+  --bg-card:   #161827;
+  --bg-nav:    rgba(13,15,26,0.88);
+  --border:    #1E2235;
+  --text-1:    #F1F5F9;
+  --text-2:    #94A3B8;
+  --text-3:    #475569;
+  --shadow:    0 1px 3px rgba(0,0,0,0.3), 0 8px 24px rgba(79,70,229,0.15);
+  --shadow-lg: 0 4px 6px rgba(0,0,0,0.3), 0 20px 40px rgba(79,70,229,0.2);
+}
+
+/* ── RESET ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text-1);
+  transition: background .3s, color .3s;
+  min-height: 100vh;
+}
+
+/* ── NAV ─────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-h);
+  background: var(--bg-nav);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 max(20px, calc((100vw - 1160px)/2));
+  gap: 16px;
+  transition: background .3s;
+}
+
+/* Logo */
+.logo-wrap {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; flex-shrink: 0;
+}
+.logo-icon {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #06B6D4 100%);
+  display: flex; align-items: center; justify-content: center;
+  animation: logoSpin 6s ease-in-out infinite;
+  position: relative; overflow: hidden;
+  box-shadow: 0 4px 14px rgba(79,70,229,0.4);
+}
+.logo-icon::before {
+  content: '';
+  position: absolute; inset: -50%;
+  background: conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.3) 30%, transparent 60%);
+  animation: logoSheen 3s linear infinite;
+}
+.logo-icon span {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 15px; color: #fff;
+  position: relative; z-index: 1; letter-spacing: -0.5px;
+}
+@keyframes logoSpin {
+  0%,100% { transform: rotate(0deg) scale(1); }
+  25%      { transform: rotate(3deg) scale(1.03); }
+  75%      { transform: rotate(-3deg) scale(1.03); }
+}
+@keyframes logoSheen {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.logo-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 22px;
+  background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; letter-spacing: -0.5px;
+}
+
+/* Desktop nav links */
+.nav-links {
+  display: flex; gap: 4px; list-style: none; margin-left: auto;
+}
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--text-2);
+  text-decoration: none; padding: 7px 14px; border-radius: 8px;
+  transition: color .2s, background .2s;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--brand-1); background: rgba(79,70,229,0.09);
+}
+
+/* Theme toggle */
+.theme-btn {
+  margin-left: 8px;
+  width: 38px; height: 38px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--bg-card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 17px; transition: background .2s, border .2s;
+  flex-shrink: 0;
+}
+.theme-btn:hover { background: var(--border); }
+
+/* Mobile menu button – styled like screenshot */
+.menu-btn {
+  display: none;
+  margin-left: auto;
+  align-items: center; gap: 10px;
+  background: #111845;
+  color: #fff;
+  border: none; border-radius: 999px;
+  padding: 10px 20px 10px 16px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 15px;
+  cursor: pointer; transition: background .2s;
+  flex-shrink: 0;
+}
+.menu-btn:hover { background: #1a2460; }
+.menu-btn .burger {
+  display: flex; flex-direction: column; gap: 4px; width: 20px;
+}
+.menu-btn .burger span {
+  display: block; height: 2px; background: #fff; border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+}
+.menu-btn.open .burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.menu-btn.open .burger span:nth-child(2) { opacity: 0; }
+.menu-btn.open .burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Mobile drawer */
+.mobile-drawer {
+  display: none;
+  position: fixed; top: var(--nav-h); left: 0; right: 0;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px 20px;
+  z-index: 99; flex-direction: column; gap: 4px;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-10px); opacity: 0;
+  transition: transform .25s ease, opacity .25s ease;
+}
+.mobile-drawer.open {
+  display: flex; transform: translateY(0); opacity: 1;
+}
+.mobile-drawer a {
+  font-size: 16px; font-weight: 500; color: var(--text-1);
+  text-decoration: none; padding: 13px 16px; border-radius: 10px;
+  transition: background .2s, color .2s;
+}
+.mobile-drawer a:hover, .mobile-drawer a.active {
+  background: rgba(79,70,229,0.09); color: var(--brand-1);
+}
+
+/* ── PAGES ────────────────────────────────────────────── */
+.page { display: none; padding-top: var(--nav-h); min-height: 100vh; }
+.page.active { display: block; }
+
+/* ── HERO ────────────────────────────────────────────── */
+.hero {
+  padding: 80px max(20px, calc((100vw - 1160px)/2)) 64px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(79,70,229,0.1); border: 1px solid rgba(79,70,229,0.2);
+  color: var(--brand-1); border-radius: 999px;
+  padding: 6px 14px; font-size: 12px; font-weight: 600;
+  letter-spacing: .5px; text-transform: uppercase; margin-bottom: 20px;
+}
+.hero-badge::before { content: '●'; font-size: 8px; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 5vw, 58px); font-weight: 800;
+  line-height: 1.1; letter-spacing: -1.5px;
+  margin-bottom: 20px;
+}
+.hero h1 .grad {
+  background: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-3) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero p {
+  font-size: 17px; color: var(--text-2); line-height: 1.7;
+  max-width: 480px; margin-bottom: 32px;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+  color: #fff; border: none; border-radius: 12px;
+  padding: 14px 28px; font-size: 15px; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  box-shadow: 0 4px 14px rgba(79,70,229,0.35);
+  transition: transform .2s, box-shadow .2s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79,70,229,0.45); }
+.btn-ghost {
+  background: transparent; color: var(--text-1);
+  border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 28px; font-size: 15px; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  transition: background .2s, border .2s;
+}
+.btn-ghost:hover { background: var(--bg-card); }
+
+/* Hero illustration card */
+.hero-visual {
+  background: var(--bg-card); border-radius: 24px;
+  border: 1px solid var(--border);
+  padding: 32px; box-shadow: var(--shadow-lg);
+  position: relative; overflow: hidden;
+}
+.hero-visual::before {
+  content: ''; position: absolute; top: -40px; right: -40px;
+  width: 140px; height: 140px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(79,70,229,0.2), rgba(6,182,212,0.2));
+  filter: blur(40px);
+}
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.stat-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px;
+}
+.stat-card .label { font-size: 12px; color: var(--text-3); font-weight: 500; margin-bottom: 6px; }
+.stat-card .value {
+  font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
+  background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.stat-card .sub { font-size: 12px; color: var(--success); font-weight: 500; margin-top: 4px; }
+.prog-bar-wrap { margin-top: 24px; }
+.prog-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-2); margin-bottom: 8px; }
+.prog-bar { height: 8px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--brand-1), var(--brand-3)); animation: fillAnim 2s ease forwards; }
+@keyframes fillAnim { from { width: 0%; } }
+
+/* ── FEATURES / CARDS ─────────────────────────────────── */
+.section {
+  padding: 64px max(20px, calc((100vw - 1160px)/2));
+}
+.section-label {
+  font-size: 12px; font-weight: 600; color: var(--brand-1);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif; font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 800; letter-spacing: -0.8px; margin-bottom: 12px; line-height: 1.15;
+}
+.section-sub { font-size: 16px; color: var(--text-2); max-width: 540px; line-height: 1.7; margin-bottom: 40px; }
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+  box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.card-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 16px;
+}
+.card h3 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.card p  { font-size: 14px; color: var(--text-2); line-height: 1.65; }
+
+/* ── TIPS PAGE ────────────────────────────────────────── */
+.tips-list { display: flex; flex-direction: column; gap: 16px; }
+.tip-item {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px 28px;
+  display: flex; gap: 20px; align-items: flex-start;
+  box-shadow: var(--shadow); transition: transform .2s;
+}
+.tip-item:hover { transform: translateX(6px); }
+.tip-num {
+  font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
+  background: linear-gradient(135deg, var(--brand-1), var(--brand-3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  flex-shrink: 0; width: 36px;
+}
+.tip-content h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.tip-content p  { font-size: 14px; color: var(--text-2); line-height: 1.65; }
+
+/* ── BUDGET PLANNER ──────────────────────────────────── */
+.budget-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.budget-form {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow);
+}
+.budget-form h2 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 24px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-2); margin-bottom: 7px; }
+.form-group input, .form-group select {
+  width: 100%; padding: 12px 14px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 10px; font-size: 15px; color: var(--text-1);
+  outline: none; transition: border .2s, box-shadow .2s;
+  font-family: 'Inter', sans-serif;
+}
+.form-group input:focus, .form-group select:focus {
+  border-color: var(--brand-1);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+}
+.expense-rows { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+.expense-row { display: flex; gap: 10px; }
+.expense-row input { flex: 1; }
+.add-expense-btn {
+  background: transparent; border: 1px dashed var(--border);
+  color: var(--brand-1); border-radius: 10px;
+  padding: 10px; font-size: 14px; font-weight: 600;
+  cursor: pointer; width: 100%; transition: background .2s;
+}
+.add-expense-btn:hover { background: rgba(79,70,229,0.07); }
+
+/* Budget summary panel */
+.budget-summary {
+  display: flex; flex-direction: column; gap: 20px;
+}
+.summary-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow);
+}
+.summary-card h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+.summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.summary-row:last-child { border-bottom: none; }
+.summary-row .amt { font-weight: 600; }
+.summary-row.total .label-t { font-weight: 700; }
+.summary-row.total .amt { color: var(--success); font-family: 'Syne', sans-serif; font-size: 18px; }
+.summary-row.deficit .amt { color: #EF4444; }
+
+.saved-list { display: flex; flex-direction: column; gap: 12px; }
+.saved-item {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 18px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.saved-item .date { font-size: 12px; color: var(--text-3); }
+.saved-item .surplus { font-weight: 600; font-size: 15px; }
+.surplus.pos { color: var(--success); }
+.surplus.neg { color: #EF4444; }
+.empty-state {
+  text-align: center; color: var(--text-3); font-size: 14px;
+  padding: 32px; border: 1px dashed var(--border); border-radius: 12px;
+}
+
+/* ── CONTACT FORM ─────────────────────────────────────── */
+.contact-wrap { max-width: 560px; }
+.contact-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px; box-shadow: var(--shadow); }
+
+/* ── FOOTER ──────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px max(20px, calc((100vw - 1160px)/2));
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  font-size: 13px; color: var(--text-3);
+}
+.footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 16px; color: var(--brand-1); }
+
+/* ── TOAST ──────────────────────────────────────────── */
+.toast {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 24px; font-size: 14px; font-weight: 500;
+  box-shadow: var(--shadow-lg); z-index: 200; opacity: 0;
+  transition: transform .3s ease, opacity .3s ease;
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .menu-btn  { display: flex; }
+  .theme-btn { margin-left: 8px; }
+
+  .hero {
+    grid-template-columns: 1fr; padding: 40px 20px 48px;
+    gap: 36px;
+  }
+  .hero h1 { font-size: 32px; }
+  .hero p  { font-size: 15px; }
+  .hero-visual { order: -1; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+
+  .budget-wrap { grid-template-columns: 1fr; }
+  .section { padding: 48px 20px; }
+  footer { flex-direction: column; text-align: center; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero { gap: 36px; }
+  .hero h1 { font-size: 42px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="logo-wrap" href="#" onclick="showPage('home')">
+    <div class="logo-icon"><span>TJ</span></div>
+    <span class="logo-text">Taljoe</span>
+  </a>
+
+  <ul class="nav-links" id="desktopNav">
+    <li><a href="#" onclick="showPage('home')"   class="active" id="link-home">Home</a></li>
+    <li><a href="#" onclick="showPage('tips')"            id="link-tips">Tips</a></li>
+    <li><a href="#" onclick="showPage('budget')"          id="link-budget">Budget Planner</a></li>
+    <li><a href="#" onclick="showPage('contact')"         id="link-contact">Contact</a></li>
+  </ul>
+
+  <button class="theme-btn" id="themeBtn" title="Toggle dark/light mode">🌙</button>
+
+  <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+    <div class="burger">
+      <span></span><span></span><span></span>
+    </div>
+    Menu
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="#" onclick="showPage('home');closeMenu()"   id="mlink-home"   class="active">Home</a>
+  <a href="#" onclick="showPage('tips');closeMenu()"   id="mlink-tips">Tips</a>
+  <a href="#" onclick="showPage('budget');closeMenu()" id="mlink-budget">Budget Planner</a>
+  <a href="#" onclick="showPage('contact');closeMenu()" id="mlink-contact">Contact</a>
+</div>
+
+<!-- ════════════ HOME PAGE ════════════ -->
+<div class="page active" id="page-home">
+
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-badge">For Students in Uganda 🇺🇬</div>
+      <h1>Master your money,<br><span class="grad">master your future.</span></h1>
+      <p>Taljoe gives Ugandan students the tools, tips, and plans to spend smarter, save more, and stress less — every month.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn-primary" onclick="showPage('budget')">Start Budgeting →</a>
+        <a href="#" class="btn-ghost"   onclick="showPage('tips')">Read Tips</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- Live clock strip -->
+      <div id="liveStrip" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;font-size:12px;color:var(--text-3)">
+        <span id="liveClock" style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text-1)">--:--:--</span>
+        <span id="liveDate"></span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:var(--success);display:inline-block;animation:blink 1.5s infinite"></span>Live</span>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="label">Monthly savings</div>
+          <div class="value" id="statSavings">UGX 0</div>
+          <div class="sub" id="statSavingsSub">Add a budget to track</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Budget used</div>
+          <div class="value" id="statBudgetPct">—</div>
+          <div class="sub" id="statBudgetSub">No budget yet</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Budgets saved</div>
+          <div class="value" id="statBudgetCount">0</div>
+          <div class="sub" id="statBudgetCountSub">Start planning!</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Total tracked</div>
+          <div class="value" id="statTotal">UGX 0</div>
+          <div class="sub" id="statTotalSub">Across all budgets</div>
+        </div>
+      </div>
+      <div class="prog-bar-wrap">
+        <div class="prog-label"><span>Budget used</span><span id="heroBarPct1">0%</span></div>
+        <div class="prog-bar"><div class="prog-fill" id="heroBar1" style="width:0%;animation:none;transition:width .8s ease"></div></div>
+      </div>
+      <div class="prog-bar-wrap" style="margin-top:12px">
+        <div class="prog-label"><span>Savings rate</span><span id="heroBarPct2">0%</span></div>
+        <div class="prog-bar"><div class="prog-fill" id="heroBar2" style="width:0%;animation:none;transition:width .8s ease"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature cards -->
+  <div class="section" style="padding-top:0">
+    <div class="section-label">What Taljoe offers</div>
+    <div class="section-title">Everything you need to be financially smart</div>
+    <div class="section-sub">Built specifically around the Ugandan student experience — from campus life to tuition deadlines.</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon" style="background:rgba(79,70,229,0.1)">📊</div>
+        <h3>Budget Planner</h3>
+        <p>Enter your income and expenses each month. See exactly where your money goes and how much you're saving.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:rgba(6,182,212,0.1)">💡</div>
+        <h3>Money Tips</h3>
+        <p>Practical, Uganda-specific tips on cutting costs, earning extra income, and making every shilling count.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:rgba(16,185,129,0.1)">🎯</div>
+        <h3>Savings Goals</h3>
+        <p>Set a savings target and track your progress. Visualise what financial discipline can achieve over time.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="background:rgba(245,158,11,0.1)">🛡️</div>
+        <h3>Emergency Fund</h3>
+        <p>Learn to build a safety net for unexpected costs — medical, transport, or academic emergencies.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════ TIPS PAGE ════════════ -->
+<div class="page" id="page-tips">
+  <div class="section">
+    <div class="section-label">Money wisdom</div>
+    <div class="section-title">Top tips for student finances</div>
+    <div class="section-sub">Simple habits that make a big difference over a semester — and a lifetime.</div>
+    <div class="tips-list">
+      <div class="tip-item">
+        <div class="tip-num">01</div>
+        <div class="tip-content">
+          <h3>Write down every expense</h3>
+          <p>Track every UGX you spend for one week — transport, food, data, and snacks. You will be surprised where most of your money disappears. Awareness is the first step to control.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">02</div>
+        <div class="tip-content">
+          <h3>Use the 50/30/20 rule</h3>
+          <p>Allocate 50% of your allowance to needs (rent, food, transport), 30% to wants (outings, subscriptions), and save at least 20%. Adjust based on your situation.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">03</div>
+        <div class="tip-content">
+          <h3>Cook more, eat out less</h3>
+          <p>Buying food at university restaurants daily costs 3–5× more than preparing simple meals. A gas cooker and basic groceries can save you tens of thousands per month.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">04</div>
+        <div class="tip-content">
+          <h3>Share costs with coursemates</h3>
+          <p>Split Wi-Fi bills, textbooks, and transport with friends. Group buying cuts individual costs significantly and builds a supportive study community.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">05</div>
+        <div class="tip-content">
+          <h3>Avoid borrowing for non-essentials</h3>
+          <p>Only borrow money for necessities like tuition or medical needs. Borrowing for airtime, clothes, or entertainment creates a cycle of debt that's hard to escape on a student income.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">06</div>
+        <div class="tip-content">
+          <h3>Start saving early, even small amounts</h3>
+          <p>Saving UGX 5,000 per week adds up to over UGX 260,000 in a year. Start tiny. The habit matters more than the amount.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">07</div>
+        <div class="tip-content">
+          <h3>Explore small income opportunities</h3>
+          <p>Freelance graphic design, tutoring younger students, selling crafts, or helping with data entry online. A small side income creates a financial cushion and valuable experience.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">08</div>
+        <div class="tip-content">
+          <h3>Plan for tuition deadlines in advance</h3>
+          <p>Know when fees are due. Save a portion every month rather than scrambling at deadline. Missing deadlines due to financial unpreparedness delays your academic progress.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ BUDGET PAGE ════════════ -->
+<div class="page" id="page-budget">
+  <div class="section">
+    <div class="section-label">Financial planning</div>
+    <div class="section-title">Budget Planner</div>
+    <div class="section-sub">Enter your monthly income and expenses to see your financial picture clearly.</div>
+
+    <div class="budget-wrap">
+      <div class="budget-form">
+        <h2>📋 Your Monthly Budget</h2>
+
+        <div class="form-group">
+          <label>Monthly Income (UGX)</label>
+          <input type="number" id="income" placeholder="e.g. 300000" oninput="updateSummary()"/>
+        </div>
+
+        <div class="form-group">
+          <label>Expenses</label>
+          <div class="expense-rows" id="expenseRows">
+            <div class="expense-row">
+              <input type="text"   placeholder="Expense name (e.g. Rent)" class="exp-name" oninput="updateSummary()"/>
+              <input type="number" placeholder="Amount (UGX)" class="exp-amt" oninput="updateSummary()" style="max-width:140px"/>
+            </div>
+          </div>
+          <button class="add-expense-btn" onclick="addExpenseRow()">+ Add expense</button>
+        </div>
+
+        <button class="btn-primary" onclick="saveBudget()" style="width:100%; justify-content:center; margin-top:8px">
+          Save Budget
+        </button>
+      </div>
+
+      <div class="budget-summary">
+        <div class="summary-card">
+          <h3>Summary</h3>
+          <div class="summary-row">
+            <span>Total Income</span>
+            <span class="amt" id="sumIncome">UGX 0</span>
+          </div>
+          <div class="summary-row">
+            <span>Total Expenses</span>
+            <span class="amt" id="sumExpenses">UGX 0</span>
+          </div>
+          <div class="summary-row total" id="sumRow">
+            <span class="label-t">Remaining</span>
+            <span class="amt" id="sumRemaining">UGX 0</span>
+          </div>
+          <div style="margin-top:20px">
+            <div class="prog-label">
+              <span style="font-size:13px;color:var(--text-2)">Budget used</span>
+              <span style="font-size:13px;color:var(--text-2)" id="pctLabel">0%</span>
+            </div>
+            <div class="prog-bar" style="height:10px">
+              <div class="prog-fill" id="budgetBar" style="width:0%; animation:none; transition:width .5s ease"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <h3>💾 Saved Budgets</h3>
+          <div class="saved-list" id="savedList">
+            <div class="empty-state">No saved budgets yet. Create and save your first one!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ CONTACT PAGE ════════════ -->
+<div class="page" id="page-contact">
+  <div class="section">
+    <div class="section-label">Get in touch</div>
+    <div class="section-title">Contact us</div>
+    <div class="section-sub">Have a question, suggestion, or want to collaborate? We'd love to hear from you.</div>
+
+    <div class="contact-wrap">
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="cName" placeholder="e.g. Edwin Tusiime"/>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="cEmail" placeholder="you@gmail.com"/>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="cMsg" rows="5" placeholder="Your message here…"
+            style="width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;font-size:15px;color:var(--text-1);outline:none;font-family:'Inter',sans-serif;resize:vertical;transition:border .2s"
+            onfocus="this.style.borderColor='var(--brand-1)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+        </div>
+        <button class="btn-primary" onclick="sendContact()" style="width:100%">Send Message</button>
+      </div>
+
+      <div style="margin-top:32px; display:flex; flex-direction:column; gap:16px">
+        <div class="card" style="flex-direction:row; align-items:center; gap:16px; display:flex">
+          <div class="card-icon" style="background:rgba(79,70,229,0.1); margin:0; flex-shrink:0">📧</div>
+          <div>
+            <div style="font-size:13px;color:var(--text-3);margin-bottom:3px">Email</div>
+            <div style="font-weight:600; font-size:14px">taljoe@mail.org</div>
+          </div>
+        </div>
+        <div class="card" style="flex-direction:row; align-items:center; gap:16px; display:flex">
+          <div class="card-icon" style="background:rgba(6,182,212,0.1); margin:0; flex-shrink:0">🌍</div>
+          <div>
+            <div style="font-size:13px;color:var(--text-3);margin-bottom:3px">Location</div>
+            <div style="font-weight:600; font-size:14px">Masaka, Uganda</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Taljoe</div>
+    <div style="margin-top:4px">Helping Ugandan students spend smarter.</div>
+  </div>
+  <div>© 2026 Taljoe, Uganda</div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── PAGE ROUTER ─────────────────────────────────────────
+const pages = ['home','tips','budget','contact'];
+function showPage(name) {
+  pages.forEach(p => {
+    document.getElementById('page-'+p).classList.toggle('active', p===name);
+    const l  = document.getElementById('link-'+p);
+    const ml = document.getElementById('mlink-'+p);
+    if(l)  l.classList.toggle('active', p===name);
+    if(ml) ml.classList.toggle('active', p===name);
+  });
+  if (name === 'home') setTimeout(updateHeroStats, 100);
+  window.scrollTo({top:0, behavior:'smooth'});
+  return false;
+}
+// Initial stat render on load
+document.addEventListener('DOMContentLoaded', () => setTimeout(updateHeroStats, 200));
+
+// ─── DARK / LIGHT MODE ───────────────────────────────────
+const themeBtn = document.getElementById('themeBtn');
+let dark = window.matchMedia('(prefers-color-scheme:dark)').matches;
+applyTheme();
+themeBtn.addEventListener('click', () => { dark=!dark; applyTheme(); });
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  themeBtn.textContent = dark ? '☀️' : '🌙';
+}
+
+// ─── MOBILE MENU ─────────────────────────────────────────
+const menuBtn    = document.getElementById('menuBtn');
+const mobileDrawer = document.getElementById('mobileDrawer');
+let menuOpen = false;
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  menuBtn.classList.toggle('open', menuOpen);
+  if(menuOpen) {
+    mobileDrawer.classList.add('open');
+  } else {
+    mobileDrawer.classList.remove('open');
+  }
+}
+function closeMenu() {
+  menuOpen = false;
+  menuBtn.classList.remove('open');
+  mobileDrawer.classList.remove('open');
+}
+
+// ─── BUDGET PLANNER ──────────────────────────────────────
+function addExpenseRow() {
+  const row = document.createElement('div');
+  row.className = 'expense-row';
+  row.innerHTML = `
+    <input type="text" placeholder="Expense name" class="exp-name" oninput="updateSummary()"/>
+    <input type="number" placeholder="Amount (UGX)" class="exp-amt" oninput="updateSummary()" style="max-width:140px"/>
+    <button onclick="this.parentElement.remove();updateSummary()" style="border:none;background:transparent;color:#EF4444;font-size:18px;cursor:pointer;padding:0 4px" title="Remove">×</button>
+  `;
+  document.getElementById('expenseRows').appendChild(row);
+}
+
+function updateSummary() {
+  const income  = parseFloat(document.getElementById('income').value) || 0;
+  const amts    = [...document.querySelectorAll('.exp-amt')].map(i => parseFloat(i.value)||0);
+  const total   = amts.reduce((a,b)=>a+b, 0);
+  const rem     = income - total;
+  const pct     = income > 0 ? Math.min(100, Math.round((total/income)*100)) : 0;
+
+  document.getElementById('sumIncome').textContent   = fmt(income);
+  document.getElementById('sumExpenses').textContent = fmt(total);
+  document.getElementById('sumRemaining').textContent= fmt(rem);
+  document.getElementById('pctLabel').textContent    = pct + '%';
+  document.getElementById('budgetBar').style.width   = pct + '%';
+  document.getElementById('budgetBar').style.background =
+    pct > 90 ? 'linear-gradient(90deg,#EF4444,#F97316)' :
+    pct > 70 ? 'linear-gradient(90deg,#F59E0B,#FBBF24)' :
+               'linear-gradient(90deg,var(--brand-1),var(--brand-3))';
+
+  const remEl = document.getElementById('sumRemaining');
+  remEl.style.color = rem >= 0 ? 'var(--success)' : '#EF4444';
+}
+
+function fmt(n) {
+  return 'UGX ' + Math.abs(Math.round(n)).toLocaleString() + (n < 0 ? ' (over budget)' : '');
+}
+
+let savedBudgets = [];
+function saveBudget() {
+  const income = parseFloat(document.getElementById('income').value)||0;
+  const names  = [...document.querySelectorAll('.exp-name')].map(i=>i.value);
+  const amts   = [...document.querySelectorAll('.exp-amt')].map(i=>parseFloat(i.value)||0);
+  if(!income) { showToast('⚠️ Please enter your monthly income first.'); return; }
+
+  const total = amts.reduce((a,b)=>a+b,0);
+  const entry = {
+    date: new Date().toLocaleDateString('en-UG',{day:'2-digit',month:'short',year:'numeric'}),
+    income, total, rem: income - total,
+    items: names.map((n,i)=>({name:n||'Expense',amt:amts[i]})).filter(e=>e.amt>0)
+  };
+  savedBudgets.unshift(entry);
+  renderSaved();
+  updateHeroStats();
+  showToast('✅ Budget saved successfully!');
+}
+
+function renderSaved() {
+  const el = document.getElementById('savedList');
+  if(!savedBudgets.length) {
+    el.innerHTML = '<div class="empty-state">No saved budgets yet. Create and save your first one!</div>';
+    return;
+  }
+  el.innerHTML = savedBudgets.map((b,i) => `
+    <div class="saved-item">
+      <div>
+        <div style="font-weight:600;font-size:14px">Income: UGX ${b.income.toLocaleString()}</div>
+        <div class="date">${b.date} · ${b.items.length} expense${b.items.length!==1?'s':''}</div>
+      </div>
+      <div class="surplus ${b.rem>=0?'pos':'neg'}">
+        ${b.rem>=0?'+':'−'} UGX ${Math.abs(b.rem).toLocaleString()}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── CONTACT ─────────────────────────────────────────────
+function sendContact() {
+  const name  = document.getElementById('cName').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const msg   = document.getElementById('cMsg').value.trim();
+  if(!name||!email||!msg) { showToast('⚠️ Please fill in all fields.'); return; }
+  showToast('✅ Message sent! We\'ll be in touch soon.');
+  document.getElementById('cName').value='';
+  document.getElementById('cEmail').value='';
+  document.getElementById('cMsg').value='';
+}
+
+// ─── LIVE CLOCK ──────────────────────────────────────────
+function tickClock() {
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,'0');
+  const mm = String(now.getMinutes()).padStart(2,'0');
+  const ss = String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('liveClock').textContent = `${hh}:${mm}:${ss}`;
+  document.getElementById('liveDate').textContent  = now.toLocaleDateString('en-UG',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+}
+tickClock();
+setInterval(tickClock, 1000);
+
+// ─── ANIMATED COUNTER ────────────────────────────────────
+function animateCount(el, from, to, duration, formatter) {
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3); // ease-out cubic
+    const val = from + (to - from) * ease;
+    el.textContent = formatter(val);
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ─── HERO STATS AUTO-UPDATE ──────────────────────────────
+function updateHeroStats() {
+  const count = savedBudgets.length;
+
+  // Counters
+  const countEl = document.getElementById('statBudgetCount');
+  animateCount(countEl, 0, count, 600, v => Math.round(v).toString());
+  document.getElementById('statBudgetCountSub').textContent =
+    count === 0 ? 'Start planning!' : count === 1 ? '1 budget saved' : `${count} budgets saved`;
+
+  if (count === 0) {
+    document.getElementById('statSavings').textContent     = 'UGX 0';
+    document.getElementById('statSavingsSub').textContent  = 'Add a budget to track';
+    document.getElementById('statBudgetPct').textContent   = '—';
+    document.getElementById('statBudgetSub').textContent   = 'No budget yet';
+    document.getElementById('statTotal').textContent       = 'UGX 0';
+    document.getElementById('statTotalSub').textContent    = 'Across all budgets';
+    document.getElementById('heroBarPct1').textContent     = '0%';
+    document.getElementById('heroBar1').style.width        = '0%';
+    document.getElementById('heroBarPct2').textContent     = '0%';
+    document.getElementById('heroBar2').style.width        = '0%';
+    return;
+  }
+
+  // Latest budget
+  const latest   = savedBudgets[0];
+  const rem      = latest.rem;
+  const pctUsed  = latest.income > 0 ? Math.min(100, Math.round((latest.total / latest.income) * 100)) : 0;
+  const savRate  = latest.income > 0 ? Math.max(0, Math.round((rem / latest.income) * 100)) : 0;
+
+  // Total income tracked across all budgets
+  const totalIncome = savedBudgets.reduce((a,b) => a + b.income, 0);
+
+  // Savings stat
+  const savEl = document.getElementById('statSavings');
+  animateCount(savEl, 0, rem, 800, v => {
+    const abs = Math.abs(Math.round(v));
+    if (abs >= 1000000) return 'UGX ' + (abs/1000000).toFixed(1) + 'M';
+    if (abs >= 1000)    return 'UGX ' + (abs/1000).toFixed(0) + 'k';
+    return 'UGX ' + abs.toLocaleString();
+  });
+  savEl.style.color = rem >= 0 ? 'var(--success)' : '#EF4444';
+  document.getElementById('statSavingsSub').textContent =
+    rem >= 0 ? `↑ Saved this month` : '⚠ Over budget';
+
+  // Budget % stat
+  const pctEl = document.getElementById('statBudgetPct');
+  animateCount(pctEl, 0, pctUsed, 700, v => Math.round(v) + '%');
+  document.getElementById('statBudgetSub').textContent =
+    pctUsed > 90 ? '⚠ Nearly exceeded' : pctUsed > 70 ? '📌 Watch spending' : '✓ On track';
+
+  // Total tracked
+  const totEl = document.getElementById('statTotal');
+  animateCount(totEl, 0, totalIncome, 800, v => {
+    const abs = Math.round(v);
+    if (abs >= 1000000) return 'UGX ' + (abs/1000000).toFixed(1) + 'M';
+    if (abs >= 1000)    return 'UGX ' + (abs/1000).toFixed(0) + 'k';
+    return 'UGX ' + abs.toLocaleString();
+  });
+  document.getElementById('statTotalSub').textContent = `Across ${count} budget${count!==1?'s':''}`;
+
+  // Bars
+  const bar1 = document.getElementById('heroBar1');
+  bar1.style.width = pctUsed + '%';
+  bar1.style.background = pctUsed > 90
+    ? 'linear-gradient(90deg,#EF4444,#F97316)'
+    : pctUsed > 70
+    ? 'linear-gradient(90deg,#F59E0B,#FBBF24)'
+    : 'linear-gradient(90deg,var(--brand-1),var(--brand-3))';
+  document.getElementById('heroBarPct1').textContent = pctUsed + '%';
+
+  const bar2 = document.getElementById('heroBar2');
+  bar2.style.width = savRate + '%';
+  document.getElementById('heroBarPct2').textContent = savRate + '%';
+}
+
+// ─── TOAST ───────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
