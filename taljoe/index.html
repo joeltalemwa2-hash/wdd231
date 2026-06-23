@@ -872,7 +872,11 @@ function sendContact() {
   const email = document.getElementById('cEmail').value.trim();
   const msg   = document.getElementById('cMsg').value.trim();
   if(!name||!email||!msg) { showToast('⚠️ Please fill in all fields.'); return; }
-  showToast('✅ Message sent! We\'ll be in touch soon.');
+  
+  const text = `Hello Taljoe 👋%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Email:* ${encodeURIComponent(email)}%0A%0A*Message:*%0A${encodeURIComponent(msg)}`;
+  
+  window.open(`https://wa.me/256743975498?text=${text}`, '_blank');
+  
   document.getElementById('cName').value='';
   document.getElementById('cEmail').value='';
   document.getElementById('cMsg').value='';
@@ -1089,7 +1093,7 @@ function downloadPDF() {
 
   // Footer
   doc.setFontSize(8); doc.setTextColor(148, 163, 184); doc.setFont('helvetica', 'normal');
-  doc.text('Taljoe · Smart money for Ugandan students · ', 105, 287, { align: 'center' });
+  doc.text('Taljoe · Smart money for students · ', 105, 287, { align: 'center' });
 
   doc.save(`Taljoe-Budget-${date.replace(/ /g, '-')}.pdf`);
   showToast('✅ PDF downloaded successfully!');
