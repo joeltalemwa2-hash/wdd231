@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Taljoe Bank</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --brand-1: #4F46E5;
+  --brand-2: #7C3AED;
+  --brand-3: #06B6D4;
+  --success: #10B981;
+  --danger:  #EF4444;
+  --warn:    #F59E0B;
+  --bg:        #F8F9FF;
+  --bg-card:   #FFFFFF;
+  --bg-nav:    rgba(248,249,255,0.9);
+  --border:    #E5E7EB;
+  --text-1:    #0F172A;
+  --text-2:    #475569;
+  --text-3:    #94A3B8;
+  --shadow:    0 1px 3px rgba(0,0,0,0.07), 0 8px 24px rgba(79,70,229,0.07);
+  --shadow-lg: 0 4px 6px rgba(0,0,0,0.05), 0 20px 40px rgba(79,70,229,0.13);
+  --radius: 14px;
+  --nav-h: 66px;
+  --sidebar-w: 230px;
+}
+[data-theme="dark"] {
+  --bg:      #0D0F1A;
+  --bg-card: #161827;
+  --bg-nav:  rgba(13,15,26,0.92);
+  --border:  #1E2235;
+  --text-1:  #F1F5F9;
+  --text-2:  #94A3B8;
+  --text-3:  #475569;
+  --shadow:    0 1px 3px rgba(0,0,0,0.3), 0 8px 24px rgba(79,70,229,0.15);
+  --shadow-lg: 0 4px 6px rgba(0,0,0,0.3), 0 20px 40px rgba(79,70,229,0.22);
+}
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter',sans-serif;
+  background:var(--bg); color:var(--text-1);
+  min-height:100vh; transition:background .3s, color .3s;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  height:var(--nav-h);
+  background:var(--bg-nav);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center;
+  padding:0 24px; gap:14px;
+}
+.logo-wrap { display:flex; align-items:center; gap:11px; text-decoration:none; }
+.logo-icon {
+  width:38px; height:38px; border-radius:11px;
+  background:linear-gradient(135deg,#4F46E5,#7C3AED,#06B6D4);
+  display:flex; align-items:center; justify-content:center;
+  animation:logoSpin 6s ease-in-out infinite;
+  position:relative; overflow:hidden;
+  box-shadow:0 4px 12px rgba(79,70,229,0.38);
+}
+.logo-icon::before {
+  content:''; position:absolute; inset:-50%;
+  background:conic-gradient(from 0deg,transparent 0%,rgba(255,255,255,0.25) 30%,transparent 60%);
+  animation:logoSheen 3s linear infinite;
+}
+.logo-icon span { font-family:'Syne',sans-serif; font-weight:800; font-size:13px; color:#fff; position:relative; z-index:1; }
+.logo-text { font-family:'Syne',sans-serif; font-weight:800; font-size:19px;
+  background:linear-gradient(135deg,var(--brand-1),var(--brand-2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.logo-badge { font-size:10px; font-weight:700; color:var(--brand-1);
+  background:rgba(79,70,229,0.1); border:1px solid rgba(79,70,229,0.2);
+  border-radius:6px; padding:2px 7px; letter-spacing:.5px; }
+@keyframes logoSpin { 0%,100%{transform:rotate(0)scale(1)} 25%{transform:rotate(3deg)scale(1.03)} 75%{transform:rotate(-3deg)scale(1.03)} }
+@keyframes logoSheen { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+.nav-right { margin-left:auto; display:flex; align-items:center; gap:10px; }
+.nav-user {
+  display:flex; align-items:center; gap:9px;
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:999px; padding:6px 14px 6px 6px;
+  font-size:13px; font-weight:600;
+}
+.avatar {
+  width:28px; height:28px; border-radius:50%;
+  background:linear-gradient(135deg,var(--brand-1),var(--brand-3));
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:800; color:#fff;
+  font-family:'Syne',sans-serif;
+}
+.theme-btn {
+  width:36px; height:36px; border-radius:9px;
+  border:1px solid var(--border); background:var(--bg-card);
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  font-size:15px; transition:background .2s;
+}
+.theme-btn:hover { background:var(--border); }
+.back-link {
+  font-size:12px; font-weight:600; color:var(--text-2);
+  text-decoration:none; padding:7px 12px; border-radius:8px;
+  border:1px solid var(--border); transition:background .2s,color .2s;
+}
+.back-link:hover { color:var(--brand-1); background:rgba(79,70,229,0.07); }
+
+/* ── LAYOUT ── */
+.app-layout {
+  display:flex; padding-top:var(--nav-h); min-height:100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width:var(--sidebar-w); flex-shrink:0;
+  background:var(--bg-card); border-right:1px solid var(--border);
+  position:fixed; top:var(--nav-h); bottom:0; left:0;
+  padding:24px 12px; display:flex; flex-direction:column; gap:4px;
+  overflow-y:auto; transition:transform .3s;
+  z-index:50;
+}
+.sidebar-label {
+  font-size:10px; font-weight:700; color:var(--text-3);
+  text-transform:uppercase; letter-spacing:1px;
+  padding:12px 12px 6px;
+}
+.nav-item {
+  display:flex; align-items:center; gap:11px;
+  padding:11px 14px; border-radius:10px;
+  font-size:14px; font-weight:500; color:var(--text-2);
+  cursor:pointer; transition:background .18s, color .18s;
+  border:none; background:transparent; width:100%; text-align:left;
+}
+.nav-item .icon { font-size:18px; width:22px; text-align:center; }
+.nav-item:hover { background:rgba(79,70,229,0.07); color:var(--brand-1); }
+.nav-item.active {
+  background:rgba(79,70,229,0.12); color:var(--brand-1); font-weight:700;
+}
+
+/* ── MAIN PANEL ── */
+.main-panel {
+  flex:1; margin-left:var(--sidebar-w);
+  padding:32px 28px; max-width:calc(100% - var(--sidebar-w));
+}
+.page-view { display:none; }
+.page-view.active { display:block; }
+
+/* Section headings */
+.pg-title { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; margin-bottom:4px; }
+.pg-sub   { font-size:14px; color:var(--text-2); margin-bottom:28px; }
+
+/* ── BALANCE CARD ── */
+.balance-card {
+  background:linear-gradient(135deg,var(--brand-1) 0%,var(--brand-2) 60%,#2563EB 100%);
+  border-radius:20px; padding:32px;
+  color:#fff; position:relative; overflow:hidden;
+  box-shadow:0 8px 32px rgba(79,70,229,0.38);
+  margin-bottom:24px;
+}
+.balance-card::before {
+  content:''; position:absolute; top:-60px; right:-60px;
+  width:200px; height:200px; border-radius:50%;
+  background:rgba(255,255,255,0.07);
+}
+.balance-card::after {
+  content:''; position:absolute; bottom:-40px; left:40px;
+  width:140px; height:140px; border-radius:50%;
+  background:rgba(255,255,255,0.05);
+}
+.balance-label { font-size:13px; opacity:.75; font-weight:500; margin-bottom:8px; }
+.balance-amount {
+  font-family:'Syne',sans-serif; font-size:clamp(32px,5vw,48px);
+  font-weight:800; letter-spacing:-1px; margin-bottom:20px;
+  position:relative; z-index:1;
+}
+.balance-row { display:flex; gap:32px; flex-wrap:wrap; }
+.balance-sub { font-size:13px; opacity:.8; }
+.balance-sub strong { display:block; font-size:16px; font-weight:700; opacity:1; margin-top:2px; }
+
+/* Quick action buttons */
+.quick-actions { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:14px; margin-bottom:28px; }
+.qa-btn {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:20px 14px;
+  display:flex; flex-direction:column; align-items:center; gap:9px;
+  cursor:pointer; transition:transform .2s, box-shadow .2s;
+  box-shadow:var(--shadow); font-size:13px; font-weight:600;
+  color:var(--text-1);
+}
+.qa-btn:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); color:var(--brand-1); }
+.qa-btn .qa-icon { font-size:26px; }
+
+/* ── STAT CARDS ── */
+.stats-row { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:16px; margin-bottom:28px; }
+.stat-card {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:20px;
+  box-shadow:var(--shadow);
+}
+.stat-card .s-label { font-size:12px; color:var(--text-3); font-weight:500; margin-bottom:6px; }
+.stat-card .s-val   { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; }
+.stat-card .s-sub   { font-size:12px; color:var(--text-3); margin-top:4px; }
+
+/* ── TRANSACTION LIST ── */
+.tx-list { display:flex; flex-direction:column; gap:10px; }
+.tx-item {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:16px 20px;
+  display:flex; align-items:center; gap:16px;
+  box-shadow:var(--shadow); transition:transform .18s;
+}
+.tx-item:hover { transform:translateX(4px); }
+.tx-dot {
+  width:42px; height:42px; border-radius:12px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; font-size:20px;
+}
+.tx-dot.dep  { background:rgba(16,185,129,0.12); }
+.tx-dot.wit  { background:rgba(239,68,68,0.1); }
+.tx-dot.inc  { background:rgba(79,70,229,0.1); }
+.tx-info { flex:1; }
+.tx-info .tx-name { font-weight:600; font-size:14px; margin-bottom:3px; }
+.tx-info .tx-date { font-size:12px; color:var(--text-3); }
+.tx-amt { font-family:'Syne',sans-serif; font-size:16px; font-weight:800; }
+.tx-amt.pos { color:var(--success); }
+.tx-amt.neg { color:var(--danger); }
+.tx-badge {
+  font-size:10px; font-weight:700; border-radius:6px;
+  padding:3px 8px; letter-spacing:.4px;
+}
+.tx-badge.dep { background:rgba(16,185,129,0.1); color:var(--success); }
+.tx-badge.wit { background:rgba(239,68,68,0.1);  color:var(--danger); }
+.tx-badge.inc { background:rgba(79,70,229,0.1);  color:var(--brand-1); }
+
+.empty-state {
+  text-align:center; color:var(--text-3); font-size:14px;
+  padding:40px 20px; border:1px dashed var(--border); border-radius:var(--radius);
+}
+
+/* ── FORMS ── */
+.form-card {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:32px;
+  box-shadow:var(--shadow); max-width:480px;
+}
+.form-card h2 { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; margin-bottom:6px; }
+.form-card .fc-sub { font-size:13px; color:var(--text-2); margin-bottom:24px; }
+.form-group { margin-bottom:18px; }
+.form-group label { display:block; font-size:13px; font-weight:600; color:var(--text-2); margin-bottom:6px; }
+.form-group input, .form-group select, .form-group textarea {
+  width:100%; padding:12px 14px;
+  background:var(--bg); border:1px solid var(--border);
+  border-radius:10px; font-size:15px; color:var(--text-1);
+  outline:none; transition:border .2s, box-shadow .2s;
+  font-family:'Inter',sans-serif;
+}
+.form-group input:focus, .form-group select:focus {
+  border-color:var(--brand-1);
+  box-shadow:0 0 0 3px rgba(79,70,229,0.12);
+}
+.amount-wrap { position:relative; }
+.amount-wrap .currency {
+  position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  font-size:14px; font-weight:700; color:var(--text-3);
+}
+.amount-wrap input { padding-left:54px; }
+.btn-submit {
+  background:linear-gradient(135deg,var(--brand-1),var(--brand-2));
+  color:#fff; border:none; border-radius:11px;
+  padding:14px 28px; font-size:15px; font-weight:700;
+  cursor:pointer; width:100%;
+  box-shadow:0 4px 14px rgba(79,70,229,0.32);
+  transition:transform .2s, box-shadow .2s;
+  font-family:'Inter',sans-serif;
+}
+.btn-submit:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(79,70,229,0.42); }
+.btn-submit.danger {
+  background:linear-gradient(135deg,#EF4444,#DC2626);
+  box-shadow:0 4px 14px rgba(239,68,68,0.32);
+}
+.btn-submit.danger:hover { box-shadow:0 8px 22px rgba(239,68,68,0.42); }
+.btn-submit.success {
+  background:linear-gradient(135deg,#10B981,#059669);
+  box-shadow:0 4px 14px rgba(16,185,129,0.32);
+}
+
+/* PIN screen */
+.pin-screen {
+  position:fixed; inset:0; z-index:200;
+  background:var(--bg);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:20px;
+}
+.pin-card {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:20px; padding:40px 36px;
+  box-shadow:var(--shadow-lg); width:100%; max-width:360px;
+  text-align:center;
+}
+.pin-logo { margin-bottom:20px; }
+.pin-title { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; margin-bottom:6px; }
+.pin-sub   { font-size:13px; color:var(--text-2); margin-bottom:28px; }
+.pin-dots  { display:flex; justify-content:center; gap:14px; margin-bottom:28px; }
+.pin-dot   { width:14px; height:14px; border-radius:50%; border:2px solid var(--border); transition:all .2s; }
+.pin-dot.filled { background:var(--brand-1); border-color:var(--brand-1); transform:scale(1.1); }
+.pin-grid  { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.pin-key {
+  height:60px; border-radius:12px;
+  background:var(--bg); border:1px solid var(--border);
+  font-family:'Syne',sans-serif; font-size:20px; font-weight:800;
+  cursor:pointer; transition:background .15s, transform .1s;
+  color:var(--text-1);
+}
+.pin-key:hover  { background:rgba(79,70,229,0.09); color:var(--brand-1); transform:scale(0.97); }
+.pin-key:active { transform:scale(0.93); }
+.pin-key.del    { font-size:14px; color:var(--danger); }
+.pin-key.confirm { background:linear-gradient(135deg,var(--brand-1),var(--brand-2)); color:#fff; border:none; font-size:14px; }
+.pin-error { color:var(--danger); font-size:13px; font-weight:600; margin-top:-16px; margin-bottom:16px; min-height:18px; }
+
+/* Progress bar */
+.prog-bar { height:6px; background:var(--border); border-radius:999px; overflow:hidden; margin-top:6px; }
+.prog-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,var(--brand-1),var(--brand-3)); transition:width .5s ease; }
+
+/* ── TOAST ── */
+.toast {
+  position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(60px);
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:12px; padding:13px 22px; font-size:14px; font-weight:500;
+  box-shadow:var(--shadow-lg); z-index:300; opacity:0;
+  transition:transform .3s, opacity .3s; white-space:nowrap;
+}
+.toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+/* Mobile sidebar toggle */
+.mob-menu-btn {
+  display:none; border:1px solid var(--border); background:var(--bg-card);
+  border-radius:8px; padding:6px 10px; cursor:pointer; font-size:18px;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px) {
+  .sidebar {
+    transform:translateX(-100%);
+  }
+  .sidebar.open { transform:translateX(0); }
+  .main-panel { margin-left:0; max-width:100%; padding:20px 16px; }
+  .mob-menu-btn { display:block; }
+  .balance-amount { font-size:30px; }
+}
+</style>
+</head>
+<body>
+
+<!-- PIN SCREEN -->
+<div class="pin-screen" id="pinScreen">
+  <div class="pin-card">
+    <div class="pin-logo">
+      <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#4F46E5,#7C3AED,#06B6D4);display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 4px 14px rgba(79,70,229,0.4)">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:#fff">TJ</span>
+      </div>
+    </div>
+    <div class="pin-title">Taljoe Bank</div>
+    <div class="pin-sub" id="pinSub">Enter your 4-digit PIN to continue</div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="d0"></div>
+      <div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div>
+      <div class="pin-dot" id="d3"></div>
+    </div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="pin-grid">
+      <button class="pin-key" onclick="pinPress('1')">1</button>
+      <button class="pin-key" onclick="pinPress('2')">2</button>
+      <button class="pin-key" onclick="pinPress('3')">3</button>
+      <button class="pin-key" onclick="pinPress('4')">4</button>
+      <button class="pin-key" onclick="pinPress('5')">5</button>
+      <button class="pin-key" onclick="pinPress('6')">6</button>
+      <button class="pin-key" onclick="pinPress('7')">7</button>
+      <button class="pin-key" onclick="pinPress('8')">8</button>
+      <button class="pin-key" onclick="pinPress('9')">9</button>
+      <button class="pin-key del" onclick="pinDel()">⌫ Del</button>
+      <button class="pin-key" onclick="pinPress('0')">0</button>
+      <button class="pin-key confirm" onclick="pinConfirm()">✓ OK</button>
+    </div>
+    <div style="margin-top:20px;font-size:12px;color:var(--text-3)">
+      Default PIN: <strong>1234</strong> · You can change it in Settings
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <button class="mob-menu-btn" onclick="toggleSidebar()">☰</button>
+  <a class="logo-wrap" href="taljoe-bank-link.html">
+    <div class="logo-icon"><span>TJ</span></div>
+    <span class="logo-text">Taljoe</span>
+    <span class="logo-badge">BANK</span>
+  </a>
+  <div class="nav-right">
+    <a class="back-link" href="taljoe-bank-link.html">← Portal</a>
+    <a class="back-link" href="index.html">🏠 Main site</a>
+    <div class="nav-user">
+      <div class="avatar" id="navAvatar">JT</div>
+      <span id="navName">Joel T.</span>
+    </div>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<!-- LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-label">Main</div>
+    <button class="nav-item active" id="nav-dashboard" onclick="showView('dashboard')">
+      <span class="icon">📊</span> Dashboard
+    </button>
+    <button class="nav-item" id="nav-deposit" onclick="showView('deposit')">
+      <span class="icon">💰</span> Deposit
+    </button>
+    <button class="nav-item" id="nav-withdraw" onclick="showView('withdraw')">
+      <span class="icon">📤</span> Withdraw
+    </button>
+    <button class="nav-item" id="nav-income" onclick="showView('income')">
+      <span class="icon">📈</span> Add Income
+    </button>
+
+    <div class="sidebar-label" style="margin-top:8px">History</div>
+    <button class="nav-item" id="nav-transactions" onclick="showView('transactions')">
+      <span class="icon">📋</span> Transactions
+    </button>
+    <button class="nav-item" id="nav-savings" onclick="showView('savings')">
+      <span class="icon">🏦</span> Savings Goals
+    </button>
+
+    <div class="sidebar-label" style="margin-top:8px">Account</div>
+    <button class="nav-item" id="nav-settings" onclick="showView('settings')">
+      <span class="icon">⚙️</span> Settings
+    </button>
+    <button class="nav-item" onclick="lockApp()" style="margin-top:auto;color:var(--danger)">
+      <span class="icon">🔒</span> Lock
+    </button>
+  </aside>
+
+  <!-- MAIN PANEL -->
+  <div class="main-panel">
+
+    <!-- ── DASHBOARD ── -->
+    <div class="page-view active" id="view-dashboard">
+      <div class="pg-title">Good day, <span id="greetName">Joel</span> 👋</div>
+      <div class="pg-sub" id="dashDate">Loading...</div>
+
+      <div class="balance-card">
+        <div class="balance-label">Total Balance</div>
+        <div class="balance-amount" id="balanceDisplay">UGX 0</div>
+        <div class="balance-row">
+          <div class="balance-sub">
+            Total Deposited
+            <strong id="totalDepDisplay">UGX 0</strong>
+          </div>
+          <div class="balance-sub">
+            Total Withdrawn
+            <strong id="totalWitDisplay">UGX 0</strong>
+          </div>
+          <div class="balance-sub">
+            Total Income
+            <strong id="totalIncDisplay">UGX 0</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <button class="qa-btn" onclick="showView('deposit')">
+          <span class="qa-icon">💰</span> Deposit
+        </button>
+        <button class="qa-btn" onclick="showView('withdraw')">
+          <span class="qa-icon">📤</span> Withdraw
+        </button>
+        <button class="qa-btn" onclick="showView('income')">
+          <span class="qa-icon">📈</span> Add Income
+        </button>
+        <button class="qa-btn" onclick="showView('transactions')">
+          <span class="qa-icon">📋</span> History
+        </button>
+        <button class="qa-btn" onclick="showView('savings')">
+          <span class="qa-icon">🏦</span> Goals
+        </button>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="s-label">This month deposits</div>
+          <div class="s-val" id="monthDep" style="color:var(--success)">UGX 0</div>
+          <div class="s-sub">Saved this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="s-label">This month withdrawals</div>
+          <div class="s-val" id="monthWit" style="color:var(--danger)">UGX 0</div>
+          <div class="s-sub">Spent this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="s-label">Transactions</div>
+          <div class="s-val" id="txCount">0</div>
+          <div class="s-sub">All time</div>
+        </div>
+        <div class="stat-card">
+          <div class="s-label">Net this month</div>
+          <div class="s-val" id="monthNet">UGX 0</div>
+          <div class="s-sub">Income − Expenses</div>
+        </div>
+      </div>
+
+      <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:14px">Recent Transactions</div>
+      <div class="tx-list" id="recentTxList">
+        <div class="empty-state">No transactions yet. Make your first deposit!</div>
+      </div>
+    </div>
+
+    <!-- ── DEPOSIT ── -->
+    <div class="page-view" id="view-deposit">
+      <div class="pg-title">💰 Deposit Money</div>
+      <div class="pg-sub">Add funds to your Taljoe Bank account</div>
+      <div class="form-card">
+        <h2>New Deposit</h2>
+        <div class="fc-sub">Current balance: <strong id="depBalShow">UGX 0</strong></div>
+        <div class="form-group">
+          <label>Amount (UGX)</label>
+          <div class="amount-wrap">
+            <span class="currency">UGX</span>
+            <input type="number" id="depAmount" placeholder="e.g. 50000" min="1"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Source / Description</label>
+          <input type="text" id="depNote" placeholder="e.g. Weekly allowance, Part-time job"/>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="depCat">
+            <option value="Allowance">Allowance</option>
+            <option value="Savings">Savings transfer</option>
+            <option value="Freelance">Freelance income</option>
+            <option value="Gift">Gift / Support</option>
+            <option value="Salary">Salary</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <button class="btn-submit success" onclick="doDeposit()">✅ Confirm Deposit</button>
+      </div>
+    </div>
+
+    <!-- ── WITHDRAW ── -->
+    <div class="page-view" id="view-withdraw">
+      <div class="pg-title">📤 Withdraw Money</div>
+      <div class="pg-sub">Take out funds from your account</div>
+      <div class="form-card">
+        <h2>New Withdrawal</h2>
+        <div class="fc-sub">Available balance: <strong id="witBalShow">UGX 0</strong></div>
+        <div class="form-group">
+          <label>Amount (UGX)</label>
+          <div class="amount-wrap">
+            <span class="currency">UGX</span>
+            <input type="number" id="witAmount" placeholder="e.g. 20000" min="1"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Reason / Description</label>
+          <input type="text" id="witNote" placeholder="e.g. Transport, Food, Tuition"/>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="witCat">
+            <option value="Food">Food & Drinks</option>
+            <option value="Transport">Transport</option>
+            <option value="Tuition">Tuition / Fees</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Health">Health</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <button class="btn-submit danger" onclick="doWithdraw()">📤 Confirm Withdrawal</button>
+      </div>
+    </div>
+
+    <!-- ── ADD INCOME ── -->
+    <div class="page-view" id="view-income">
+      <div class="pg-title">📈 Add Income Source</div>
+      <div class="pg-sub">Log earnings from any source</div>
+      <div class="form-card">
+        <h2>Record Income</h2>
+        <div class="fc-sub">Track all your income streams in one place</div>
+        <div class="form-group">
+          <label>Amount (UGX)</label>
+          <div class="amount-wrap">
+            <span class="currency">UGX</span>
+            <input type="number" id="incAmount" placeholder="e.g. 100000" min="1"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Income Source</label>
+          <input type="text" id="incNote" placeholder="e.g. Tutoring, Design work, Rent collection"/>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="incCat">
+            <option value="Freelance">Freelance</option>
+            <option value="Tutoring">Tutoring</option>
+            <option value="Business">Small business</option>
+            <option value="Allowance">Family allowance</option>
+            <option value="Scholarship">Scholarship / Grant</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Add to balance?</label>
+          <select id="incToBalance">
+            <option value="yes">Yes – add to my account balance</option>
+            <option value="no">No – record only (external account)</option>
+          </select>
+        </div>
+        <button class="btn-submit" onclick="doIncome()">📈 Record Income</button>
+      </div>
+    </div>
+
+    <!-- ── TRANSACTIONS ── -->
+    <div class="page-view" id="view-transactions">
+      <div class="pg-title">📋 All Transactions</div>
+      <div class="pg-sub">Your complete financial history</div>
+      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+        <select id="txFilter" onchange="renderAllTx()" style="padding:9px 14px;border-radius:9px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-1);font-size:13px;font-family:'Inter',sans-serif">
+          <option value="all">All types</option>
+          <option value="dep">Deposits only</option>
+          <option value="wit">Withdrawals only</option>
+          <option value="inc">Income only</option>
+        </select>
+        <button onclick="clearAllTx()" style="padding:9px 14px;border-radius:9px;border:1px solid var(--border);background:var(--bg-card);color:var(--danger);font-size:13px;cursor:pointer;font-family:'Inter',sans-serif">🗑 Clear all</button>
+      </div>
+      <div class="tx-list" id="allTxList">
+        <div class="empty-state">No transactions yet.</div>
+      </div>
+    </div>
+
+    <!-- ── SAVINGS GOALS ── -->
+    <div class="page-view" id="view-savings">
+      <div class="pg-title">🏦 Savings Goals</div>
+      <div class="pg-sub">Set targets and track your progress</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;flex-wrap:wrap">
+        <div class="form-card">
+          <h2>New Goal</h2>
+          <div class="fc-sub">Set a savings target to work toward</div>
+          <div class="form-group">
+            <label>Goal Name</label>
+            <input type="text" id="goalName" placeholder="e.g. New laptop, Tuition fees"/>
+          </div>
+          <div class="form-group">
+            <label>Target Amount (UGX)</label>
+            <div class="amount-wrap">
+              <span class="currency">UGX</span>
+              <input type="number" id="goalTarget" placeholder="e.g. 500000"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Current saved toward this</label>
+            <div class="amount-wrap">
+              <span class="currency">UGX</span>
+              <input type="number" id="goalSaved" placeholder="e.g. 50000"/>
+            </div>
+          </div>
+          <button class="btn-submit" onclick="addGoal()">🎯 Add Goal</button>
+        </div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:14px">Your Goals</div>
+          <div id="goalsList">
+            <div class="empty-state">No goals yet. Set your first savings target!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SETTINGS ── -->
+    <div class="page-view" id="view-settings">
+      <div class="pg-title">⚙️ Settings</div>
+      <div class="pg-sub">Manage your Taljoe Bank account</div>
+      <div style="display:flex;flex-direction:column;gap:20px;max-width:480px">
+
+        <div class="form-card">
+          <h2>Account Name</h2>
+          <div class="fc-sub">Change how your name appears in the app</div>
+          <div class="form-group">
+            <label>Display Name</label>
+            <input type="text" id="settingName" placeholder="e.g. Joel Talemwa"/>
+          </div>
+          <button class="btn-submit" onclick="saveName()">Save Name</button>
+        </div>
+
+        <div class="form-card">
+          <h2>Change PIN</h2>
+          <div class="fc-sub">Update your 4-digit security PIN</div>
+          <div class="form-group">
+            <label>Current PIN</label>
+            <input type="password" id="curPin" maxlength="4" placeholder="••••"/>
+          </div>
+          <div class="form-group">
+            <label>New PIN</label>
+            <input type="password" id="newPin" maxlength="4" placeholder="••••"/>
+          </div>
+          <div class="form-group">
+            <label>Confirm New PIN</label>
+            <input type="password" id="conPin" maxlength="4" placeholder="••••"/>
+          </div>
+          <button class="btn-submit" onclick="changePin()">🔐 Update PIN</button>
+        </div>
+
+        <div class="form-card">
+          <h2 style="color:var(--danger)">⚠️ Reset Account</h2>
+          <div class="fc-sub">This will delete all transactions and reset your balance to zero. Cannot be undone.</div>
+          <button class="btn-submit danger" onclick="resetAccount()">Reset Everything</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /main-panel -->
+</div><!-- /app-layout -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── STATE ────────────────────────────────────────────────
+let state = {
+  balance: 0,
+  totalDeposited: 0,
+  totalWithdrawn: 0,
+  totalIncome: 0,
+  transactions: [],
+  goals: [],
+  pin: '1234',
+  name: 'Joel',
+  pinSetup: false
+};
+
+// Load from localStorage if available
+try {
+  const saved = localStorage.getItem('taljoe_bank');
+  if (saved) state = JSON.parse(saved);
+} catch(e) {}
+
+function save() {
+  try { localStorage.setItem('taljoe_bank', JSON.stringify(state)); } catch(e) {}
+}
+
+// ── PIN LOGIC ────────────────────────────────────────────
+let pinEntry = '';
+let pinMode  = 'login'; // 'login' | 'setup'
+
+function pinPress(d) {
+  if (pinEntry.length >= 4) return;
+  pinEntry += d;
+  updatePinDots();
+}
+function pinDel() {
+  pinEntry = pinEntry.slice(0, -1);
+  updatePinDots();
+}
+function updatePinDots() {
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('d'+i).classList.toggle('filled', i < pinEntry.length);
+  }
+}
+function pinConfirm() {
+  document.getElementById('pinError').textContent = '';
+  if (pinEntry.length < 4) {
+    document.getElementById('pinError').textContent = 'Please enter all 4 digits.';
+    return;
+  }
+  if (pinEntry === state.pin) {
+    document.getElementById('pinScreen').style.display = 'none';
+    refreshAll();
+  } else {
+    document.getElementById('pinError').textContent = 'Incorrect PIN. Try again.';
+    pinEntry = '';
+    updatePinDots();
+  }
+}
+function lockApp() {
+  pinEntry = '';
+  updatePinDots();
+  document.getElementById('pinError').textContent = '';
+  document.getElementById('pinScreen').style.display = 'flex';
+}
+
+// ── NAVIGATION ───────────────────────────────────────────
+const views = ['dashboard','deposit','withdraw','income','transactions','savings','settings'];
+function showView(name) {
+  views.forEach(v => {
+    document.getElementById('view-'+v).classList.toggle('active', v===name);
+    const n = document.getElementById('nav-'+v);
+    if (n) n.classList.toggle('active', v===name);
+  });
+  if (name==='deposit')  document.getElementById('depBalShow').textContent = fmtUGX(state.balance);
+  if (name==='withdraw') document.getElementById('witBalShow').textContent = fmtUGX(state.balance);
+  closeSidebar();
+}
+
+// ── SIDEBAR MOBILE ───────────────────────────────────────
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+// ── THEME ────────────────────────────────────────────────
+const themeBtn = document.getElementById('themeBtn');
+let dark = window.matchMedia('(prefers-color-scheme:dark)').matches;
+applyTheme();
+themeBtn.addEventListener('click', () => { dark=!dark; applyTheme(); });
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', dark?'dark':'light');
+  themeBtn.textContent = dark ? '☀️' : '🌙';
+}
+
+// ── DEPOSIT ──────────────────────────────────────────────
+function doDeposit() {
+  const amt  = parseFloat(document.getElementById('depAmount').value) || 0;
+  const note = document.getElementById('depNote').value.trim() || 'Deposit';
+  const cat  = document.getElementById('depCat').value;
+  if (amt <= 0) { showToast('⚠️ Enter a valid amount.'); return; }
+
+  state.balance        += amt;
+  state.totalDeposited += amt;
+  state.transactions.unshift({ type:'dep', amt, note, cat, date: now() });
+  save(); refreshAll();
+  document.getElementById('depAmount').value = '';
+  document.getElementById('depNote').value   = '';
+  showToast(`✅ UGX ${amt.toLocaleString()} deposited!`);
+  showView('dashboard');
+}
+
+// ── WITHDRAW ─────────────────────────────────────────────
+function doWithdraw() {
+  const amt  = parseFloat(document.getElementById('witAmount').value) || 0;
+  const note = document.getElementById('witNote').value.trim() || 'Withdrawal';
+  const cat  = document.getElementById('witCat').value;
+  if (amt <= 0) { showToast('⚠️ Enter a valid amount.'); return; }
+  if (amt > state.balance) { showToast('❌ Insufficient balance.'); return; }
+
+  state.balance        -= amt;
+  state.totalWithdrawn += amt;
+  state.transactions.unshift({ type:'wit', amt, note, cat, date: now() });
+  save(); refreshAll();
+  document.getElementById('witAmount').value = '';
+  document.getElementById('witNote').value   = '';
+  showToast(`📤 UGX ${amt.toLocaleString()} withdrawn.`);
+  showView('dashboard');
+}
+
+// ── INCOME ───────────────────────────────────────────────
+function doIncome() {
+  const amt      = parseFloat(document.getElementById('incAmount').value) || 0;
+  const note     = document.getElementById('incNote').value.trim() || 'Income';
+  const cat      = document.getElementById('incCat').value;
+  const toBalance= document.getElementById('incToBalance').value === 'yes';
+  if (amt <= 0) { showToast('⚠️ Enter a valid amount.'); return; }
+
+  state.totalIncome += amt;
+  if (toBalance) state.balance += amt;
+  state.transactions.unshift({ type:'inc', amt, note, cat, date: now(), toBalance });
+  save(); refreshAll();
+  document.getElementById('incAmount').value = '';
+  document.getElementById('incNote').value   = '';
+  showToast(`📈 UGX ${amt.toLocaleString()} income recorded${toBalance?' and added to balance':''}.`);
+  showView('dashboard');
+}
+
+// ── SAVINGS GOALS ────────────────────────────────────────
+function addGoal() {
+  const name   = document.getElementById('goalName').value.trim();
+  const target = parseFloat(document.getElementById('goalTarget').value) || 0;
+  const saved  = parseFloat(document.getElementById('goalSaved').value) || 0;
+  if (!name || target <= 0) { showToast('⚠️ Enter a goal name and target.'); return; }
+
+  state.goals.push({ name, target, saved, id: Date.now() });
+  save(); renderGoals();
+  document.getElementById('goalName').value   = '';
+  document.getElementById('goalTarget').value = '';
+  document.getElementById('goalSaved').value  = '';
+  showToast('🎯 Goal added!');
+}
+
+function renderGoals() {
+  const el = document.getElementById('goalsList');
+  if (!state.goals.length) {
+    el.innerHTML = '<div class="empty-state">No goals yet. Set your first savings target!</div>';
+    return;
+  }
+  el.innerHTML = state.goals.map((g,i) => {
+    const pct = Math.min(100, Math.round((g.saved/g.target)*100));
+    return `
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:15px">${g.name}</div>
+          <button onclick="removeGoal(${i})" style="border:none;background:transparent;color:var(--danger);font-size:13px;cursor:pointer">✕ Remove</button>
+        </div>
+        <div style="font-size:13px;color:var(--text-2);margin-bottom:8px">
+          Saved: <strong style="color:var(--success)">${fmtUGX(g.saved)}</strong> of ${fmtUGX(g.target)}
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
+        <div style="font-size:12px;color:var(--text-3);margin-top:6px">${pct}% complete · ${fmtUGX(g.target-g.saved)} remaining</div>
+      </div>`;
+  }).join('');
+}
+
+function removeGoal(i) {
+  state.goals.splice(i, 1);
+  save(); renderGoals();
+}
+
+// ── TRANSACTIONS ─────────────────────────────────────────
+function renderAllTx() {
+  const filter = document.getElementById('txFilter').value;
+  const list   = filter === 'all' ? state.transactions : state.transactions.filter(t=>t.type===filter);
+  renderTxList('allTxList', list, true);
+}
+
+function renderTxList(elId, list, showAll) {
+  const el = document.getElementById(elId);
+  const items = showAll ? list : list.slice(0,5);
+  if (!items.length) {
+    el.innerHTML = '<div class="empty-state">No transactions yet. Make your first deposit!</div>';
+    return;
+  }
+  el.innerHTML = items.map(t => {
+    const icon  = t.type==='dep' ? '💰' : t.type==='wit' ? '📤' : '📈';
+    const color = t.type==='wit' ? 'neg' : 'pos';
+    const sign  = t.type==='wit' ? '−' : '+';
+    return `
+      <div class="tx-item">
+        <div class="tx-dot ${t.type}">${icon}</div>
+        <div class="tx-info">
+          <div class="tx-name">${t.note}</div>
+          <div class="tx-date">${t.cat} · ${t.date}</div>
+        </div>
+        <span class="tx-badge ${t.type}">${t.type==='dep'?'DEPOSIT':t.type==='wit'?'WITHDRAWAL':'INCOME'}</span>
+        <div class="tx-amt ${color}">${sign} ${fmtUGX(t.amt)}</div>
+      </div>`;
+  }).join('');
+}
+
+function clearAllTx() {
+  if (!confirm('Clear ALL transactions? This cannot be undone.')) return;
+  state.transactions = [];
+  state.balance = 0; state.totalDeposited = 0;
+  state.totalWithdrawn = 0; state.totalIncome = 0;
+  save(); refreshAll();
+  showToast('🗑 All transactions cleared.');
+}
+
+// ── SETTINGS ─────────────────────────────────────────────
+function saveName() {
+  const n = document.getElementById('settingName').value.trim();
+  if (!n) { showToast('⚠️ Enter a name.'); return; }
+  state.name = n;
+  save(); refreshAll();
+  showToast('✅ Name updated!');
+}
+function changePin() {
+  const cur = document.getElementById('curPin').value;
+  const nw  = document.getElementById('newPin').value;
+  const con = document.getElementById('conPin').value;
+  if (cur !== state.pin) { showToast('❌ Current PIN is wrong.'); return; }
+  if (nw.length !== 4)   { showToast('⚠️ New PIN must be 4 digits.'); return; }
+  if (nw !== con)        { showToast('⚠️ PINs do not match.'); return; }
+  state.pin = nw; save();
+  document.getElementById('curPin').value = '';
+  document.getElementById('newPin').value = '';
+  document.getElementById('conPin').value = '';
+  showToast('🔐 PIN updated successfully!');
+}
+function resetAccount() {
+  if (!confirm('Reset EVERYTHING? This will wipe all data.')) return;
+  state = { balance:0, totalDeposited:0, totalWithdrawn:0, totalIncome:0, transactions:[], goals:[], pin:'1234', name:'Joel' };
+  save(); refreshAll(); showView('dashboard');
+  showToast('Account reset.');
+}
+
+// ── REFRESH ALL ──────────────────────────────────────────
+function refreshAll() {
+  // Name
+  document.getElementById('greetName').textContent = state.name.split(' ')[0];
+  document.getElementById('navName').textContent   = state.name.split(' ')[0] + ' T.';
+  document.getElementById('navAvatar').textContent = state.name.slice(0,2).toUpperCase();
+  document.getElementById('settingName').value     = state.name;
+
+  // Balance
+  document.getElementById('balanceDisplay').textContent  = fmtUGX(state.balance);
+  document.getElementById('totalDepDisplay').textContent = fmtUGX(state.totalDeposited);
+  document.getElementById('totalWitDisplay').textContent = fmtUGX(state.totalWithdrawn);
+  document.getElementById('totalIncDisplay').textContent = fmtUGX(state.totalIncome);
+  document.getElementById('depBalShow').textContent      = fmtUGX(state.balance);
+  document.getElementById('witBalShow').textContent      = fmtUGX(state.balance);
+
+  // Month stats
+  const thisMonth = new Date().toISOString().slice(0,7);
+  const mTx = state.transactions.filter(t => t.date.startsWith(thisMonth.replace('-','/')));
+  // use a different approach
+  const mn = new Date();
+  const mStr = `${String(mn.getMonth()+1).padStart(2,'0')}/${mn.getFullYear()}`;
+  const mDep = state.transactions.filter(t=>t.type==='dep' && t.date.includes(mStr)).reduce((a,b)=>a+b.amt,0);
+  const mWit = state.transactions.filter(t=>t.type==='wit' && t.date.includes(mStr)).reduce((a,b)=>a+b.amt,0);
+  const mInc = state.transactions.filter(t=>t.type==='inc' && t.date.includes(mStr)).reduce((a,b)=>a+b.amt,0);
+
+  document.getElementById('monthDep').textContent = fmtUGX(mDep);
+  document.getElementById('monthWit').textContent = fmtUGX(mWit);
+  document.getElementById('txCount').textContent  = state.transactions.length;
+  const net = mDep + mInc - mWit;
+  const netEl = document.getElementById('monthNet');
+  netEl.textContent = (net>=0?'+':'−') + ' ' + fmtUGX(Math.abs(net));
+  netEl.style.color = net >= 0 ? 'var(--success)' : 'var(--danger)';
+
+  // Date
+  document.getElementById('dashDate').textContent =
+    new Date().toLocaleDateString('en-UG',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  // Transaction lists
+  renderTxList('recentTxList', state.transactions, false);
+  renderAllTx();
+  renderGoals();
+}
+
+// ── HELPERS ──────────────────────────────────────────────
+function fmtUGX(n) {
+  const abs = Math.abs(Math.round(n));
+  if (abs >= 1000000) return 'UGX ' + (abs/1000000).toFixed(2) + 'M';
+  if (abs >= 1000)    return 'UGX ' + abs.toLocaleString();
+  return 'UGX ' + abs;
+}
+function now() {
+  const d = new Date();
+  return `${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3200);
+}
+
+// ── INIT ─────────────────────────────────────────────────
+refreshAll();
+</script>
+</body>
+</html>

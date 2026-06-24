@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Taljoe Bank – Secure Access</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --brand-1: #4F46E5; --brand-2: #7C3AED; --brand-3: #06B6D4;
+  --success: #10B981; --danger: #EF4444;
+  --bg: #F8F9FF; --bg-card: #FFFFFF; --border: #E5E7EB;
+  --text-1: #0F172A; --text-2: #475569; --text-3: #94A3B8;
+  --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 8px 24px rgba(79,70,229,0.08);
+  --shadow-lg: 0 4px 6px rgba(0,0,0,0.05), 0 20px 40px rgba(79,70,229,0.14);
+  --radius: 16px;
+}
+[data-theme="dark"] {
+  --bg: #0D0F1A; --bg-card: #161827; --border: #1E2235;
+  --text-1: #F1F5F9; --text-2: #94A3B8; --text-3: #475569;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 8px 24px rgba(79,70,229,0.15);
+  --shadow-lg: 0 4px 6px rgba(0,0,0,0.3), 0 20px 40px rgba(79,70,229,0.22);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-1); min-height: 100vh; display: flex; flex-direction: column; transition: background .3s, color .3s; }
+
+/* TOPBAR */
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 18px 32px; border-bottom: 1px solid var(--border); background: var(--bg-card); }
+.logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-icon { width: 40px; height: 40px; border-radius: 11px; background: linear-gradient(135deg,#4F46E5,#7C3AED,#06B6D4); display: flex; align-items: center; justify-content: center; animation: logoSpin 6s ease-in-out infinite; position: relative; overflow: hidden; box-shadow: 0 4px 14px rgba(79,70,229,0.4); }
+.logo-icon::before { content:''; position:absolute; inset:-50%; background:conic-gradient(from 0deg,transparent 0%,rgba(255,255,255,0.25) 30%,transparent 60%); animation:logoSheen 3s linear infinite; }
+.logo-icon span { font-family:'Syne',sans-serif; font-weight:800; font-size:14px; color:#fff; position:relative; z-index:1; }
+.logo-text { font-family:'Syne',sans-serif; font-weight:800; font-size:20px; background:linear-gradient(135deg,var(--brand-1),var(--brand-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.logo-badge { font-size:11px; font-weight:700; color:var(--brand-1); background:rgba(79,70,229,0.1); border:1px solid rgba(79,70,229,0.2); border-radius:6px; padding:3px 8px; }
+@keyframes logoSpin { 0%,100%{transform:rotate(0)scale(1)} 25%{transform:rotate(3deg)scale(1.03)} 75%{transform:rotate(-3deg)scale(1.03)} }
+@keyframes logoSheen { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+.topbar-right { display:flex; align-items:center; gap:12px; }
+.theme-btn { width:36px; height:36px; border-radius:9px; border:1px solid var(--border); background:var(--bg); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px; transition:background .2s; }
+.back-link { font-size:13px; font-weight:600; color:var(--text-2); text-decoration:none; padding:8px 14px; border-radius:9px; border:1px solid var(--border); transition:background .2s,color .2s; }
+.back-link:hover { background:var(--bg-card); color:var(--brand-1); }
+
+/* MAIN */
+main { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 20px; }
+.sec-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25); color:var(--success); border-radius:999px; padding:6px 16px; font-size:12px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; margin-bottom:28px; }
+h1 { font-family:'Syne',sans-serif; font-size:clamp(28px,5vw,48px); font-weight:800; letter-spacing:-1px; line-height:1.1; text-align:center; margin-bottom:14px; }
+.grad { background:linear-gradient(135deg,var(--brand-1),var(--brand-3)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.subtitle { text-align:center; color:var(--text-2); font-size:16px; line-height:1.7; max-width:500px; margin-bottom:48px; }
+
+/* CARDS ROW */
+.cards-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; width:100%; max-width:860px; margin-bottom:40px; }
+.entry-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow); text-decoration:none; color:var(--text-1); display:flex; flex-direction:column; gap:12px; transition:transform .25s,box-shadow .25s; position:relative; overflow:hidden; }
+.entry-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--brand-1),var(--brand-3)); transform:scaleX(0); transform-origin:left; transition:transform .3s; }
+.entry-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+.entry-card:hover::before { transform:scaleX(1); }
+.card-icon-lg { width:50px; height:50px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:24px; }
+.entry-card h2 { font-family:'Syne',sans-serif; font-size:17px; font-weight:800; }
+.entry-card p { font-size:13px; color:var(--text-2); line-height:1.6; }
+.card-arrow { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:var(--brand-1); margin-top:auto; }
+
+/* CTA BUTTON */
+.cta-btn { display:inline-flex; align-items:center; gap:10px; background:linear-gradient(135deg,var(--brand-1),var(--brand-2)); color:#fff; border:none; border-radius:14px; padding:16px 36px; font-size:16px; font-weight:700; cursor:pointer; text-decoration:none; font-family:'Inter',sans-serif; box-shadow:0 4px 20px rgba(79,70,229,0.38); transition:transform .2s,box-shadow .2s; margin-bottom:16px; }
+.cta-btn:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(79,70,229,0.48); }
+
+/* TRUST STRIP */
+.trust-strip { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-top:32px; }
+.trust-item { display:flex; align-items:center; gap:7px; font-size:12px; color:var(--text-3); font-weight:500; }
+
+/* ── PIN SETUP PANEL ── */
+.pin-setup-panel {
+  width:100%; max-width:860px; margin-top:40px;
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:36px;
+  box-shadow:var(--shadow);
+}
+.pin-setup-panel h2 { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; margin-bottom:6px; }
+.pin-setup-panel .ps-sub { font-size:13px; color:var(--text-2); margin-bottom:28px; }
+
+.pin-tabs { display:flex; gap:8px; margin-bottom:28px; }
+.pin-tab {
+  flex:1; padding:11px; border-radius:10px; font-size:14px; font-weight:700;
+  border:1px solid var(--border); background:var(--bg); color:var(--text-2);
+  cursor:pointer; transition:all .2s; font-family:'Inter',sans-serif;
+}
+.pin-tab.active { background:linear-gradient(135deg,var(--brand-1),var(--brand-2)); color:#fff; border-color:transparent; }
+
+.pin-form { display:none; }
+.pin-form.active { display:block; }
+
+.form-group { margin-bottom:18px; }
+.form-group label { display:block; font-size:13px; font-weight:600; color:var(--text-2); margin-bottom:6px; }
+.form-group input {
+  width:100%; padding:12px 14px; background:var(--bg); border:1px solid var(--border);
+  border-radius:10px; font-size:16px; color:var(--text-1); outline:none;
+  transition:border .2s,box-shadow .2s; font-family:'Inter',sans-serif;
+  letter-spacing:6px; text-align:center;
+}
+.form-group input:focus { border-color:var(--brand-1); box-shadow:0 0 0 3px rgba(79,70,229,0.12); }
+
+.pin-dots-row { display:flex; justify-content:center; gap:14px; margin-bottom:20px; }
+.pin-dot-s { width:16px; height:16px; border-radius:50%; border:2px solid var(--border); transition:all .2s; }
+.pin-dot-s.filled { background:var(--brand-1); border-color:var(--brand-1); transform:scale(1.1); }
+
+.pin-keypad { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; max-width:280px; margin:0 auto 20px; }
+.pin-key-s {
+  height:56px; border-radius:11px; background:var(--bg); border:1px solid var(--border);
+  font-family:'Syne',sans-serif; font-size:20px; font-weight:800; cursor:pointer;
+  color:var(--text-1); transition:background .15s,transform .1s;
+}
+.pin-key-s:hover  { background:rgba(79,70,229,0.09); color:var(--brand-1); }
+.pin-key-s:active { transform:scale(0.94); }
+.pin-key-s.del    { font-size:13px; color:var(--danger); font-weight:700; }
+.pin-key-s.confirm { background:linear-gradient(135deg,var(--brand-1),var(--brand-2)); color:#fff; border:none; font-size:13px; font-weight:700; }
+
+.btn-submit {
+  width:100%; background:linear-gradient(135deg,var(--brand-1),var(--brand-2)); color:#fff;
+  border:none; border-radius:11px; padding:14px; font-size:15px; font-weight:700;
+  cursor:pointer; box-shadow:0 4px 14px rgba(79,70,229,0.3); transition:transform .2s,box-shadow .2s;
+  font-family:'Inter',sans-serif; margin-top:8px;
+}
+.btn-submit:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(79,70,229,0.42); }
+.btn-submit.danger { background:linear-gradient(135deg,#EF4444,#DC2626); box-shadow:0 4px 14px rgba(239,68,68,0.3); }
+
+.status-msg { font-size:13px; font-weight:600; text-align:center; min-height:18px; margin-top:12px; }
+.status-msg.ok  { color:var(--success); }
+.status-msg.err { color:var(--danger); }
+
+/* PIN STATUS BADGE */
+.pin-status-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  border-radius:999px; padding:7px 16px; font-size:13px; font-weight:700;
+  margin-bottom:20px;
+}
+.pin-status-badge.set   { background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25); color:var(--success); }
+.pin-status-badge.unset { background:rgba(245,158,11,0.1);  border:1px solid rgba(245,158,11,0.25);  color:#D97706; }
+
+footer { text-align:center; padding:20px; font-size:12px; color:var(--text-3); border-top:1px solid var(--border); }
+
+@media(max-width:600px) {
+  .topbar { padding:14px 16px; }
+  h1 { font-size:26px; }
+  .pin-setup-panel { padding:24px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="logo-wrap" href="taljoe.html">
+    <div class="logo-icon"><span>TJ</span></div>
+    <span class="logo-text">Taljoe</span>
+    <span class="logo-badge">BANK</span>
+  </a>
+  <div class="topbar-right">
+    <a class="back-link" href="index.html">← Back to Taljoe</a>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+  <div class="sec-badge">🔒 256-bit Encrypted · Secure Access</div>
+
+  <h1>Your <span class="grad">Taljoe Bank</span><br>account awaits.</h1>
+  <p class="subtitle">Deposit savings, withdraw funds, and manage all your income streams — securely and simply, built for Ugandan students.</p>
+
+  <!-- Feature cards -->
+  <div class="cards-row">
+    <div class="entry-card">
+      <div class="card-icon-lg" style="background:rgba(79,70,229,0.1)">💰</div>
+      <h2>Deposit & Save</h2>
+      <p>Add money to your savings account anytime. Watch your balance grow with every deposit.</p>
+      <span class="card-arrow">Deposit funds →</span>
+    </div>
+    <div class="entry-card">
+      <div class="card-icon-lg" style="background:rgba(6,182,212,0.1)">📤</div>
+      <h2>Withdraw Anytime</h2>
+      <p>Access your funds when you need them. Instant withdrawals with full transaction history.</p>
+      <span class="card-arrow">Withdraw funds →</span>
+    </div>
+    <div class="entry-card">
+      <div class="card-icon-lg" style="background:rgba(16,185,129,0.1)">📈</div>
+      <h2>Track Income</h2>
+      <p>Log income from all sources — allowance, freelance, side hustles — in one place.</p>
+      <span class="card-arrow">View dashboard →</span>
+    </div>
+  </div>
+
+  <!-- Enter bank CTA -->
+  <a class="cta-btn" href="taljoe-bank.html">Enter Taljoe Bank</a>
+  <div style="font-size:13px;color:var(--text-3);text-align:center">Set or change your PIN below before entering.</div>
+
+  <!-- Trust -->
+  <div class="trust-strip">
+    <div class="trust-item"><span>🔒</span> End-to-end encrypted</div>
+    <div class="trust-item"><span>🇺🇬</span> Built for Uganda</div>
+    <div class="trust-item"><span>⚡</span> Instant transactions</div>
+    <div class="trust-item"><span>🆓</span> Always free</div>
+    <div class="trust-item"><span>📱</span> All devices</div>
+  </div>
+
+  <!-- ── PIN SETUP PANEL ── -->
+  <div class="pin-setup-panel">
+    <h2>🔐 PIN Management</h2>
+    <p class="ps-sub">Set up or change your 4-digit security PIN here before entering the bank. Your PIN is saved securely on this device.</p>
+
+    <!-- Current PIN status -->
+    <div class="pin-status-badge" id="pinStatusBadge">
+      ⚠ No PIN set yet — default is 1234
+    </div>
+
+    <!-- Tabs -->
+    <div class="pin-tabs">
+      <button class="pin-tab active" onclick="switchTab('set')">Set New PIN</button>
+      <button class="pin-tab"        onclick="switchTab('change')">Change PIN</button>
+      <button class="pin-tab"        onclick="switchTab('reset')">Reset to Default</button>
+    </div>
+
+    <!-- TAB: Set New PIN -->
+    <div class="pin-form active" id="tab-set">
+      <p style="font-size:13px;color:var(--text-2);margin-bottom:20px">Enter a new 4-digit PIN using the keypad below. You will use this to log in to Taljoe Bank.</p>
+      <div class="pin-dots-row" id="setDots">
+        <div class="pin-dot-s" id="sd0"></div>
+        <div class="pin-dot-s" id="sd1"></div>
+        <div class="pin-dot-s" id="sd2"></div>
+        <div class="pin-dot-s" id="sd3"></div>
+      </div>
+      <div class="pin-keypad">
+        <button class="pin-key-s" onclick="kp('set','1')">1</button>
+        <button class="pin-key-s" onclick="kp('set','2')">2</button>
+        <button class="pin-key-s" onclick="kp('set','3')">3</button>
+        <button class="pin-key-s" onclick="kp('set','4')">4</button>
+        <button class="pin-key-s" onclick="kp('set','5')">5</button>
+        <button class="pin-key-s" onclick="kp('set','6')">6</button>
+        <button class="pin-key-s" onclick="kp('set','7')">7</button>
+        <button class="pin-key-s" onclick="kp('set','8')">8</button>
+        <button class="pin-key-s" onclick="kp('set','9')">9</button>
+        <button class="pin-key-s del" onclick="kd('set')">⌫ Del</button>
+        <button class="pin-key-s" onclick="kp('set','0')">0</button>
+        <button class="pin-key-s confirm" onclick="confirmSet()">✓ OK</button>
+      </div>
+
+      <!-- Confirm PIN -->
+      <p style="font-size:13px;color:var(--text-2);margin-bottom:16px;text-align:center">Confirm your PIN:</p>
+      <div class="pin-dots-row" id="confirmDots">
+        <div class="pin-dot-s" id="cd0"></div>
+        <div class="pin-dot-s" id="cd1"></div>
+        <div class="pin-dot-s" id="cd2"></div>
+        <div class="pin-dot-s" id="cd3"></div>
+      </div>
+      <div class="pin-keypad">
+        <button class="pin-key-s" onclick="kp('confirm','1')">1</button>
+        <button class="pin-key-s" onclick="kp('confirm','2')">2</button>
+        <button class="pin-key-s" onclick="kp('confirm','3')">3</button>
+        <button class="pin-key-s" onclick="kp('confirm','4')">4</button>
+        <button class="pin-key-s" onclick="kp('confirm','5')">5</button>
+        <button class="pin-key-s" onclick="kp('confirm','6')">6</button>
+        <button class="pin-key-s" onclick="kp('confirm','7')">7</button>
+        <button class="pin-key-s" onclick="kp('confirm','8')">8</button>
+        <button class="pin-key-s" onclick="kp('confirm','9')">9</button>
+        <button class="pin-key-s del" onclick="kd('confirm')">⌫ Del</button>
+        <button class="pin-key-s" onclick="kp('confirm','0')">0</button>
+        <button class="pin-key-s confirm" onclick="saveNewPin()">✓ Set PIN</button>
+      </div>
+      <div class="status-msg" id="setMsg"></div>
+    </div>
+
+    <!-- TAB: Change PIN -->
+    <div class="pin-form" id="tab-change">
+      <p style="font-size:13px;color:var(--text-2);margin-bottom:20px">Enter your current PIN, then set a new one.</p>
+      <div class="form-group">
+        <label>Current PIN</label>
+        <input type="password" id="curPinField" maxlength="4" placeholder="••••"/>
+      </div>
+      <div class="form-group">
+        <label>New PIN</label>
+        <input type="password" id="newPinField" maxlength="4" placeholder="••••"/>
+      </div>
+      <div class="form-group">
+        <label>Confirm New PIN</label>
+        <input type="password" id="conPinField" maxlength="4" placeholder="••••"/>
+      </div>
+      <button class="btn-submit" onclick="changePin()">🔐 Update PIN</button>
+      <div class="status-msg" id="changeMsg"></div>
+    </div>
+
+    <!-- TAB: Reset -->
+    <div class="pin-form" id="tab-reset">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:20px;line-height:1.7">
+        This will reset your PIN back to the default <strong>1234</strong>. Use this only if you have forgotten your current PIN.<br><br>
+        Note: this does NOT affect your bank balance or transaction history.
+      </p>
+      <button class="btn-submit danger" onclick="resetPin()">⚠️ Reset PIN to 1234</button>
+      <div class="status-msg" id="resetMsg"></div>
+    </div>
+
+  </div><!-- /pin-setup-panel -->
+
+</main>
+
+<footer>© 2026 Taljoe Studios. All rights reserved.</footer>
+
+<script>
+// ── THEME ────────────────────────────────────────────────
+const themeBtn = document.getElementById('themeBtn');
+let dark = window.matchMedia('(prefers-color-scheme:dark)').matches;
+applyTheme();
+themeBtn.addEventListener('click', () => { dark=!dark; applyTheme(); });
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', dark?'dark':'light');
+  themeBtn.textContent = dark ? '☀️' : '🌙';
+}
+
+// ── PIN STORAGE (shared with taljoe-bank.html) ───────────
+function getStoredPin() {
+  try {
+    const s = localStorage.getItem('taljoe_bank');
+    if (s) return JSON.parse(s).pin || '1234';
+  } catch(e) {}
+  return '1234';
+}
+function savePin(pin) {
+  try {
+    let s = {};
+    const raw = localStorage.getItem('taljoe_bank');
+    if (raw) s = JSON.parse(raw);
+    s.pin = pin;
+    localStorage.setItem('taljoe_bank', JSON.stringify(s));
+  } catch(e) {}
+}
+
+// ── PIN STATUS BADGE ─────────────────────────────────────
+function refreshBadge() {
+  const badge = document.getElementById('pinStatusBadge');
+  const pin   = getStoredPin();
+  if (pin === '1234') {
+    badge.className = 'pin-status-badge unset';
+    badge.textContent = '⚠ Using default PIN (1234) — please set a custom PIN';
+  } else {
+    badge.className = 'pin-status-badge set';
+    badge.textContent = '✅ Custom PIN is set and active';
+  }
+}
+refreshBadge();
+
+// ── TABS ─────────────────────────────────────────────────
+function switchTab(name) {
+  ['set','change','reset'].forEach(t => {
+    document.getElementById('tab-'+t).classList.toggle('active', t===name);
+  });
+  document.querySelectorAll('.pin-tab').forEach((btn,i) => {
+    btn.classList.toggle('active', ['set','change','reset'][i]===name);
+  });
+  clearMsgs();
+}
+function clearMsgs() {
+  ['setMsg','changeMsg','resetMsg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.textContent=''; el.className='status-msg'; }
+  });
+}
+
+// ── KEYPAD LOGIC ─────────────────────────────────────────
+const entries = { set:'', confirm:'' };
+
+function kp(field, digit) {
+  if (entries[field].length >= 4) return;
+  entries[field] += digit;
+  updateDots(field);
+}
+function kd(field) {
+  entries[field] = entries[field].slice(0,-1);
+  updateDots(field);
+}
+function updateDots(field) {
+  const prefix = field === 'set' ? 's' : 'c';
+  for (let i=0; i<4; i++) {
+    document.getElementById(prefix+'d'+i).classList.toggle('filled', i < entries[field].length);
+  }
+}
+
+function confirmSet() {
+  if (entries['set'].length < 4) {
+    showMsg('setMsg', '⚠ Enter all 4 digits first.', 'err'); return;
+  }
+  showMsg('setMsg', 'PIN entered. Now confirm it below ↓', 'ok');
+}
+
+function saveNewPin() {
+  const p1 = entries['set'];
+  const p2 = entries['confirm'];
+  if (p1.length < 4) { showMsg('setMsg', '⚠ Enter your new PIN first (top keypad).', 'err'); return; }
+  if (p2.length < 4) { showMsg('setMsg', '⚠ Confirm your PIN (bottom keypad).', 'err'); return; }
+  if (p1 !== p2)     { showMsg('setMsg', '❌ PINs do not match. Try again.', 'err'); entries['confirm']=''; updateDots('confirm'); return; }
+  savePin(p1);
+  entries['set']=''; entries['confirm']='';
+  updateDots('set'); updateDots('confirm');
+  showMsg('setMsg', '✅ PIN set successfully! You can now enter the bank.', 'ok');
+  refreshBadge();
+}
+
+// ── CHANGE PIN ───────────────────────────────────────────
+function changePin() {
+  const cur = document.getElementById('curPinField').value.trim();
+  const nw  = document.getElementById('newPinField').value.trim();
+  const con = document.getElementById('conPinField').value.trim();
+  if (cur !== getStoredPin()) { showMsg('changeMsg','❌ Current PIN is incorrect.','err'); return; }
+  if (nw.length !== 4 || !/^\d{4}$/.test(nw)) { showMsg('changeMsg','⚠ New PIN must be exactly 4 digits.','err'); return; }
+  if (nw !== con) { showMsg('changeMsg','❌ New PINs do not match.','err'); return; }
+  savePin(nw);
+  document.getElementById('curPinField').value='';
+  document.getElementById('newPinField').value='';
+  document.getElementById('conPinField').value='';
+  showMsg('changeMsg','✅ PIN changed successfully!','ok');
+  refreshBadge();
+}
+
+// ── RESET PIN ────────────────────────────────────────────
+function resetPin() {
+  if (!confirm('Reset your PIN to 1234? This cannot be undone.')) return;
+  savePin('1234');
+  showMsg('resetMsg','✅ PIN reset to 1234. Please set a new PIN soon.','ok');
+  refreshBadge();
+}
+
+// ── HELPERS ──────────────────────────────────────────────
+function showMsg(id, text, type) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.className = 'status-msg ' + type;
+}
+</script>
+</body>
+</html>
