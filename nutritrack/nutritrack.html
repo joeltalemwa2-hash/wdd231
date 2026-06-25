@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NutriTrack Africa — AI-Powered Nutrition for East Africa</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  :root{--lime:#A8E063;--green:#56C358;--teal:#0BC4A0;--dark:#0C1A0E;--nav:68px;--r:18px;}
+  [data-theme="dark"]{--bg:#080F09;--bg2:#0E1A10;--bg3:#152018;--surface:rgba(255,255,255,0.05);--border:rgba(168,224,99,0.15);--text:#E4F5E6;--muted:#5A8A62;--card:rgba(14,26,16,0.9);}
+  [data-theme="light"]{--bg:#F2FFF3;--bg2:#E4FFE6;--bg3:#CCF5CF;--surface:rgba(0,0,0,0.04);--border:rgba(86,195,88,0.2);--text:#080F09;--muted:#3A6A3C;--card:rgba(255,255,255,0.97);}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+  a{text-decoration:none;color:inherit;}
+  .grad{background:linear-gradient(135deg,#A8E063,#0BC4A0);}
+  .grad-t{background:linear-gradient(135deg,#A8E063,#56C358,#0BC4A0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav);background:rgba(8,15,9,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;}
+  [data-theme="light"] nav{background:rgba(242,255,243,0.92);}
+  .nav-in{width:min(1100px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .logo{font-size:1.3rem;font-weight:800;display:flex;align-items:center;gap:10px;}
+  .logo-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#A8E063,#0BC4A0);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+  .nav-links{display:flex;gap:24px;}
+  .nav-links a{font-size:0.875rem;font-weight:500;color:var(--muted);transition:color .2s;}
+  .nav-links a:hover{color:var(--lime);}
+  .nav-r{display:flex;gap:10px;align-items:center;}
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:50px;font-weight:700;font-size:0.875rem;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}
+  .btn-lime{background:linear-gradient(135deg,#A8E063,#56C358);color:#080F09;box-shadow:0 4px 18px rgba(168,224,99,0.35);}
+  .btn-lime:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(168,224,99,0.5);}
+  .btn-out{background:var(--surface);border:1px solid var(--border);color:var(--text);}
+  .btn-out:hover{border-color:var(--lime);color:var(--lime);}
+  .tbtn{width:36px;height:36px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.95rem;}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;padding-top:var(--nav);position:relative;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 65% 45%,rgba(168,224,99,0.1) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 20% 70%,rgba(11,196,160,0.08) 0%,transparent 55%);pointer-events:none;}
+  .hero-in{width:min(1100px,92vw);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:50px;background:rgba(168,224,99,0.1);border:1px solid rgba(168,224,99,0.25);font-size:0.78rem;font-weight:600;color:var(--lime);margin-bottom:22px;}
+  .ai-badge{display:inline-flex;align-items:center;gap:4px;font-size:0.65rem;font-weight:700;background:linear-gradient(135deg,#A8E063,#0BC4A0);color:#080F09;padding:3px 8px;border-radius:50px;margin-left:6px;}
+  h1{font-size:clamp(2rem,4.5vw,3.6rem);font-weight:800;line-height:1.1;margin-bottom:20px;}
+  .hero-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:440px;margin-bottom:32px;}
+  .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px;}
+  .trust-row{display:flex;gap:20px;flex-wrap:wrap;}
+  .trust-item{display:flex;align-items:center;gap:6px;font-size:0.82rem;color:var(--muted);}
+  .ti-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);}
+
+  /* PHONE */
+  .phone-wrap{display:flex;justify-content:center;position:relative;}
+  .phone{width:270px;height:540px;border-radius:40px;background:var(--bg2);border:6px solid var(--bg3);box-shadow:0 40px 100px rgba(0,0,0,0.4);overflow:hidden;}
+  .ph-screen{background:linear-gradient(180deg,#0E1A10,#080F09);height:100%;padding:20px 18px;display:flex;flex-direction:column;gap:12px;}
+  .ph-top{display:flex;justify-content:space-between;align-items:center;}
+  .ph-greeting{font-size:0.78rem;color:var(--muted);}
+  .ph-name{font-size:1rem;font-weight:700;}
+  .ph-ring-wrap{display:flex;justify-content:center;padding:8px 0;}
+  .ph-ring{width:110px;height:110px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;}
+  .ph-ring svg{position:absolute;inset:0;transform:rotate(-90deg);}
+  .ph-ring-center{text-align:center;position:relative;z-index:1;}
+  .ph-ring-val{font-size:1.4rem;font-weight:800;color:var(--lime);}
+  .ph-ring-label{font-size:0.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+  .ph-macros{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+  .ph-macro{background:var(--bg3);border-radius:10px;padding:8px;text-align:center;}
+  .ph-m-val{font-size:0.82rem;font-weight:700;}
+  .ph-m-label{font-size:0.6rem;color:var(--muted);}
+  .ph-m-bar{height:4px;border-radius:50px;margin-top:4px;background:var(--bg2);}
+  .ph-m-fill{height:100%;border-radius:50px;}
+  .ph-sec{font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+  .ph-meal{display:flex;align-items:center;gap:8px;padding:8px;background:var(--bg3);border-radius:10px;}
+  .ph-meal-icon{font-size:1.1rem;}
+  .ph-meal-name{font-size:0.75rem;font-weight:600;}
+  .ph-meal-cal{font-size:0.65rem;color:var(--muted);}
+  .ph-meal-kcal{margin-left:auto;font-size:0.72rem;font-weight:700;color:var(--lime);}
+  .ph-ai{background:linear-gradient(135deg,rgba(168,224,99,0.15),rgba(11,196,160,0.1));border:1px solid rgba(168,224,99,0.2);border-radius:12px;padding:10px;}
+  .ph-ai-label{font-size:0.6rem;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;}
+  .ph-ai-text{font-size:0.72rem;color:var(--text);line-height:1.5;}
+
+  /* SECTIONS */
+  .section{padding:88px 0;}
+  .cont{width:min(1100px,92vw);margin:0 auto;}
+  .sec-label{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--lime);margin-bottom:10px;}
+  .sec-title{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.2;margin-bottom:16px;}
+  .sec-sub{font-size:1rem;color:var(--muted);line-height:1.75;max-width:520px;}
+
+  /* FOOD DATABASE */
+  .foods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:48px;}
+  .food-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center;transition:all .25s;cursor:pointer;}
+  .food-card:hover{transform:translateY(-4px);border-color:rgba(168,224,99,0.35);box-shadow:0 12px 36px rgba(168,224,99,0.08);}
+  .food-emoji{font-size:2.2rem;margin-bottom:10px;}
+  .food-name{font-weight:700;font-size:0.9rem;margin-bottom:6px;}
+  .food-macros{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+  .food-macro{font-size:0.68rem;font-weight:600;padding:2px 8px;border-radius:50px;background:var(--surface);color:var(--muted);}
+  .food-kcal{font-size:0.82rem;font-weight:700;color:var(--lime);margin-top:8px;}
+
+  /* FEATURES */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;}
+  .feat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:26px;transition:all .25s;}
+  .feat-card:hover{transform:translateY(-4px);border-color:rgba(168,224,99,0.3);box-shadow:0 12px 40px rgba(168,224,99,0.07);}
+  .f-icon{width:52px;height:52px;border-radius:16px;background:rgba(168,224,99,0.1);border:1px solid rgba(168,224,99,0.15);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:16px;}
+  .f-title{font-weight:700;margin-bottom:8px;}
+  .f-desc{font-size:0.875rem;color:var(--muted);line-height:1.65;}
+  .f-ai-tag{display:inline-flex;align-items:center;gap:4px;font-size:0.68rem;font-weight:700;background:linear-gradient(135deg,rgba(168,224,99,0.15),rgba(11,196,160,0.1));color:var(--lime);padding:3px 8px;border-radius:50px;margin-top:12px;border:1px solid rgba(168,224,99,0.2);}
+
+  /* AI SECTION */
+  .ai-section-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:52px;}
+  .ai-visual{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:16px;}
+  .av-header{font-weight:700;display:flex;align-items:center;gap:8px;}
+  .av-ai-dot{width:8px;height:8px;border-radius:50%;background:var(--lime);animation:pulse2 2s infinite;}
+  @keyframes pulse2{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+  .chat-bubble{padding:12px 16px;border-radius:14px;font-size:0.875rem;line-height:1.6;max-width:85%;}
+  .chat-ai{background:rgba(168,224,99,0.1);border:1px solid rgba(168,224,99,0.15);border-bottom-left-radius:4px;}
+  .chat-user{background:var(--surface);border:1px solid var(--border);border-bottom-right-radius:4px;align-self:flex-end;}
+  .chat-wrap{display:flex;flex-direction:column;gap:10px;}
+  .chat-label{font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;}
+  .scan-demo{background:var(--bg3);border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;}
+  .scan-icon{font-size:2.4rem;}
+  .scan-result-title{font-weight:700;margin-bottom:4px;}
+  .scan-result-desc{font-size:0.8rem;color:var(--muted);}
+  .scan-macros{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap;}
+  .sm{font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:50px;background:var(--surface);}
+  .ai-points{display:flex;flex-direction:column;gap:18px;}
+  .ai-pt{display:flex;align-items:flex-start;gap:14px;}
+  .ai-pt-icon{width:44px;height:44px;border-radius:14px;background:rgba(168,224,99,0.1);border:1px solid rgba(168,224,99,0.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+  .ai-pt-title{font-weight:700;margin-bottom:4px;}
+  .ai-pt-desc{font-size:0.875rem;color:var(--muted);line-height:1.65;}
+
+  /* STATS */
+  .stats-band{background:linear-gradient(135deg,#152018,#0E2018);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:60px 0;}
+  .stats-grid{width:min(1100px,92vw);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center;}
+  .s-num{font-size:2.4rem;font-weight:800;background:linear-gradient(135deg,#A8E063,#0BC4A0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .s-label{font-size:0.85rem;color:var(--muted);margin-top:4px;}
+
+  /* TESTIMONIALS */
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;}
+  .test-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:26px;}
+  .test-stars{color:var(--lime);font-size:0.85rem;margin-bottom:12px;}
+  .test-q{font-size:0.875rem;color:var(--muted);line-height:1.75;margin-bottom:16px;font-style:italic;}
+  .test-author{display:flex;align-items:center;gap:10px;}
+  .test-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#A8E063,#0BC4A0);display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:700;color:#080F09;}
+  .test-name{font-weight:700;font-size:0.88rem;}
+  .test-role{font-size:0.72rem;color:var(--muted);}
+
+  /* PRICING */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;}
+  .price-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:30px;transition:all .25s;}
+  .price-card.featured{border-color:var(--lime);box-shadow:0 0 0 1px rgba(168,224,99,0.5),0 20px 60px rgba(168,224,99,0.1);}
+  .price-badge{display:inline-block;background:linear-gradient(135deg,#A8E063,#0BC4A0);color:#080F09;font-size:0.68rem;font-weight:800;padding:4px 10px;border-radius:50px;margin-bottom:12px;}
+  .price-tier{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .price-amt{font-size:2.2rem;font-weight:800;margin-bottom:4px;}
+  .price-period{font-size:0.83rem;color:var(--muted);margin-bottom:20px;}
+  .pf{display:flex;align-items:center;gap:8px;font-size:0.875rem;margin-bottom:10px;}
+  .pf-y{color:var(--lime);}
+  .pf-n{color:var(--muted);}
+
+  /* CTA */
+  .cta-box{background:linear-gradient(135deg,#1A3A1C,#0E2018);border:1px solid var(--border);border-radius:28px;padding:64px;text-align:center;position:relative;overflow:hidden;}
+  .cta-glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(168,224,99,0.08) 0%,transparent 70%);pointer-events:none;}
+  .cta-box h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;margin-bottom:14px;position:relative;}
+  .cta-box p{color:var(--muted);font-size:1rem;margin-bottom:32px;position:relative;}
+  .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;}
+
+  footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 0 24px;}
+  .foot-in{width:min(1100px,92vw);margin:0 auto;}
+  .foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;margin-bottom:28px;}
+  .foot-copy{font-size:0.83rem;color:var(--muted);border-top:1px solid var(--border);padding-top:20px;text-align:center;}
+
+  @media(max-width:900px){
+    .nav-links{display:none;}
+    .hero-in{grid-template-columns:1fr;text-align:center;}
+    .hero-sub,.trust-row{margin:0 auto;justify-content:center;}
+    .hero-btns{justify-content:center;}
+    .phone-wrap{order:-1;}
+    .feat-grid{grid-template-columns:1fr 1fr;}
+    .ai-section-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .test-grid{grid-template-columns:1fr;}
+    .price-grid{grid-template-columns:1fr;}
+    .cta-box{padding:40px 24px;}
+  }
+  @media(max-width:600px){
+    .feat-grid{grid-template-columns:1fr;}
+    .foods-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-in">
+    <div class="logo"><div class="logo-icon">🥗</div>NutriTrack</div>
+    <div class="nav-links">
+      <a href="#foods">Food Database</a>
+      <a href="#features">Features</a>
+      <a href="#ai">AI Engine</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="nav-r">
+      <div class="tbtn" onclick="toggleTheme()" id="tbtn">☀️</div>
+      <a href="#" class="btn btn-out">Log In</a>
+      <a href="#" class="btn btn-lime">Track Free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-in">
+    <div>
+      <div class="pill">🌍 Built for East African foods <span class="ai-badge">✨ AI</span></div>
+      <h1>Know What Your<br/><span class="grad-t">African Food</span><br/>Does For You</h1>
+      <p class="hero-sub">NutriTrack Africa is the first nutrition tracker calibrated for East African cuisine. Log matoke, posho, groundnut stew, rolex, and hundreds more local foods — and get AI-powered health insights.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn btn-lime">Start Tracking Free</a>
+        <a href="#features" class="btn btn-out">Explore Features</a>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item"><span class="ti-dot"></span> 5,000+ local foods</div>
+        <div class="trust-item"><span class="ti-dot"></span> AI-powered insights</div>
+        <div class="trust-item"><span class="ti-dot"></span> Works offline</div>
+      </div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="ph-screen">
+          <div class="ph-top">
+            <div style="font-size:0.7rem;color:var(--muted)">Thursday · June 27</div>
+            <div style="font-size:0.7rem">🔔</div>
+          </div>
+          <div><div class="ph-greeting">Good morning 🌱</div><div class="ph-name">Amara</div></div>
+          <div class="ph-ring-wrap">
+            <div class="ph-ring">
+              <svg width="110" height="110" viewBox="0 0 110 110">
+                <circle cx="55" cy="55" r="48" fill="none" stroke="rgba(168,224,99,0.12)" stroke-width="8"/>
+                <circle cx="55" cy="55" r="48" fill="none" stroke="url(#rg)" stroke-width="8" stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="90"/>
+                <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#A8E063"/><stop offset="100%" stop-color="#0BC4A0"/></linearGradient></defs>
+              </svg>
+              <div class="ph-ring-center">
+                <div class="ph-ring-val">1,420</div>
+                <div class="ph-ring-label">of 2,000 kcal</div>
+              </div>
+            </div>
+          </div>
+          <div class="ph-macros">
+            <div class="ph-macro"><div class="ph-m-val" style="color:#A8E063">62g</div><div class="ph-m-label">Protein</div><div class="ph-m-bar"><div class="ph-m-fill" style="width:72%;background:#A8E063"></div></div></div>
+            <div class="ph-macro"><div class="ph-m-val" style="color:#56C358">180g</div><div class="ph-m-label">Carbs</div><div class="ph-m-bar"><div class="ph-m-fill" style="width:60%;background:#56C358"></div></div></div>
+            <div class="ph-macro"><div class="ph-m-val" style="color:#0BC4A0">48g</div><div class="ph-m-label">Fat</div><div class="ph-m-bar"><div class="ph-m-fill" style="width:85%;background:#0BC4A0"></div></div></div>
+          </div>
+          <div class="ph-sec">Today's Meals</div>
+          <div class="ph-meal"><div class="ph-meal-icon">🍌</div><div><div class="ph-meal-name">Matoke & Groundnut Stew</div><div class="ph-meal-cal">Lunch</div></div><div class="ph-meal-kcal">620 kcal</div></div>
+          <div class="ph-meal"><div class="ph-meal-icon">🥚</div><div><div class="ph-meal-name">Rolex (Egg + Chapati)</div><div class="ph-meal-cal">Breakfast</div></div><div class="ph-meal-kcal">480 kcal</div></div>
+          <div class="ph-ai">
+            <div class="ph-ai-label">✨ AI Insight</div>
+            <div class="ph-ai-text">You're 320 kcal below your goal. Add a small serving of simsim paste for healthy fats and protein. 💪</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOD DATABASE -->
+<section class="section" id="foods" style="background:var(--bg2)">
+  <div class="cont">
+    <p class="sec-label">Food Database</p>
+    <h2 class="sec-title">5,000+ East African<br/><span class="grad-t">foods, fully tracked</span></h2>
+    <p class="sec-sub">The most comprehensive nutritional database of East African cuisine ever built. From street food to home cooking.</p>
+    <div class="foods-grid">
+      <div class="food-card"><div class="food-emoji">🍌</div><div class="food-name">Matoke</div><div class="food-macros"><span class="food-macro">Carbs: 32g</span><span class="food-macro">Protein: 1.5g</span></div><div class="food-kcal">130 kcal / 100g</div></div>
+      <div class="food-card"><div class="food-emoji">🫓</div><div class="food-name">Chapati</div><div class="food-macros"><span class="food-macro">Carbs: 38g</span><span class="food-macro">Fat: 8g</span></div><div class="food-kcal">230 kcal / piece</div></div>
+      <div class="food-card"><div class="food-emoji">🍲</div><div class="food-name">Groundnut Stew</div><div class="food-macros"><span class="food-macro">Protein: 14g</span><span class="food-macro">Fat: 18g</span></div><div class="food-kcal">285 kcal / bowl</div></div>
+      <div class="food-card"><div class="food-emoji">🌽</div><div class="food-name">Posho (Ugali)</div><div class="food-macros"><span class="food-macro">Carbs: 44g</span><span class="food-macro">Protein: 2g</span></div><div class="food-kcal">175 kcal / cup</div></div>
+      <div class="food-card"><div class="food-emoji">🥗</div><div class="food-name">Nakati (Greens)</div><div class="food-macros"><span class="food-macro">Fiber: 3g</span><span class="food-macro">Iron: 4mg</span></div><div class="food-kcal">35 kcal / 100g</div></div>
+      <div class="food-card"><div class="food-emoji">🥩</div><div class="food-name">Muchomo (Roast)</div><div class="food-macros"><span class="food-macro">Protein: 28g</span><span class="food-macro">Fat: 12g</span></div><div class="food-kcal">224 kcal / 100g</div></div>
+      <div class="food-card"><div class="food-emoji">🫘</div><div class="food-name">Kidney Beans</div><div class="food-macros"><span class="food-macro">Protein: 9g</span><span class="food-macro">Carbs: 22g</span></div><div class="food-kcal">127 kcal / 100g</div></div>
+      <div class="food-card"><div class="food-emoji">🥚</div><div class="food-name">Rolex</div><div class="food-macros"><span class="food-macro">Protein: 14g</span><span class="food-macro">Carbs: 38g</span></div><div class="food-kcal">480 kcal / piece</div></div>
+      <div class="food-card"><div class="food-emoji">🍚</div><div class="food-name">Rice & Beans</div><div class="food-macros"><span class="food-macro">Protein: 12g</span><span class="food-macro">Carbs: 58g</span></div><div class="food-kcal">310 kcal / plate</div></div>
+      <div class="food-card"><div class="food-emoji">🥜</div><div class="food-name">Simsim Paste</div><div class="food-macros"><span class="food-macro">Fat: 18g</span><span class="food-macro">Protein: 7g</span></div><div class="food-kcal">200 kcal / tbsp</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="cont">
+    <p class="sec-label">Features</p>
+    <h2 class="sec-title">Everything you need<br/><span class="grad-t">to eat smarter</span></h2>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="f-icon">📷</div><div class="f-title">Food Photo Recognition</div><p class="f-desc">Snap a photo of your plate and our AI identifies local dishes and estimates nutritional content instantly.</p><div class="f-ai-tag">✨ AI Powered</div></div>
+      <div class="feat-card"><div class="f-icon">🎯</div><div class="f-title">Personalized Goals</div><p class="f-desc">Set calorie, weight, or health goals. NutriTrack adjusts your daily targets as you progress.</p></div>
+      <div class="feat-card"><div class="f-icon">📊</div><div class="f-title">Detailed Analytics</div><p class="f-desc">Weekly and monthly breakdowns of your macros, micronutrients, and eating patterns with trend charts.</p></div>
+      <div class="feat-card"><div class="f-icon">💊</div><div class="f-title">Micronutrient Tracking</div><p class="f-desc">Iron, zinc, Vitamin A, folate — nutrients often missing in East African diets are tracked and flagged.</p></div>
+      <div class="feat-card"><div class="f-icon">🤖</div><div class="f-title">AI Meal Suggestions</div><p class="f-desc">Receive daily meal ideas made from local ingredients that fit your calorie goals and nutritional needs.</p><div class="f-ai-tag">✨ AI Powered</div></div>
+      <div class="feat-card"><div class="f-icon">👨‍⚕️</div><div class="f-title">Dietitian Connect</div><p class="f-desc">Share your nutrition reports directly with a registered dietitian for professional guidance.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section class="section" id="ai" style="background:var(--bg2)">
+  <div class="cont">
+    <p class="sec-label">AI Engine</p>
+    <h2 class="sec-title">AI that understands<br/><span class="grad-t">African nutrition</span></h2>
+    <div class="ai-section-grid">
+      <div class="ai-points">
+        <div class="ai-pt"><div class="ai-pt-icon">🧠</div><div><div class="ai-pt-title">Trained on African Food Data</div><p class="ai-pt-desc">Our AI model was trained on a dataset of 5,000+ East African foods — not just Western supermarket items. It actually knows what matoke is.</p></div></div>
+        <div class="ai-pt"><div class="ai-pt-icon">📷</div><div><div class="ai-pt-title">Photo Meal Scanning</div><p class="ai-pt-desc">Take a photo of your food and our Vision AI identifies the dish, estimates portion size, and logs the nutritional breakdown automatically.</p></div></div>
+        <div class="ai-pt"><div class="ai-pt-icon">💬</div><div><div class="ai-pt-title">Nutritional AI Assistant</div><p class="ai-pt-desc">Ask NutriAI anything — "Is matoke good for weight loss?" or "What local foods are high in iron?" — and get accurate, Africa-relevant answers.</p></div></div>
+        <div class="ai-pt"><div class="ai-pt-icon">📈</div><div><div class="ai-pt-title">Predictive Health Insights</div><p class="ai-pt-desc">Based on your eating patterns, the AI flags potential deficiencies, recommends local food swaps, and adapts to your evolving health goals.</p></div></div>
+      </div>
+      <div class="ai-visual">
+        <div class="av-header"><div class="av-ai-dot"></div> NutriAI Assistant</div>
+        <div class="chat-wrap">
+          <div><div class="chat-label">You</div><div class="chat-bubble chat-user">Is groundnut stew a good protein source?</div></div>
+          <div><div class="chat-label">NutriAI</div><div class="chat-bubble chat-ai">Yes! Groundnut stew is an excellent plant-based protein source for East Africa. One bowl provides ~14g of protein and healthy fats from the groundnuts. Pair it with matoke for a complete amino acid profile. 💚</div></div>
+          <div><div class="chat-label">You</div><div class="chat-bubble chat-user">What local foods are high in iron?</div></div>
+          <div><div class="chat-bubble chat-ai">Great question! Top local iron sources include: 🥬 Nakati (greens), 🫘 Kidney beans, 🥩 Muchomo (goat), 🐠 Mukene (silver fish), and 🌿 Simsim paste. Add a squeeze of lemon to boost absorption!</div></div>
+        </div>
+        <div class="scan-demo">
+          <div class="scan-icon">📷</div>
+          <div>
+            <div class="scan-result-title">Scan Result: Rolex</div>
+            <div class="scan-result-desc">Egg wrap with chapati + vegetables</div>
+            <div class="scan-macros">
+              <span class="sm">480 kcal</span><span class="sm">P: 14g</span><span class="sm">C: 38g</span><span class="sm">F: 22g</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats-grid">
+    <div><div class="s-num">5,000+</div><div class="s-label">Local Foods in Database</div></div>
+    <div><div class="s-num">8,000+</div><div class="s-label">Active Users</div></div>
+    <div><div class="s-num">94%</div><div class="s-label">Food Scan Accuracy</div></div>
+    <div><div class="s-num">4.8★</div><div class="s-label">App Store Rating</div></div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="reviews">
+  <div class="cont">
+    <p class="sec-label">User Stories</p>
+    <h2 class="sec-title">Real results from<br/><span class="grad-t">real Ugandans</span></h2>
+    <div class="test-grid">
+      <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-q">"I've tried 4 nutrition apps — none of them had matoke or posho. NutriTrack Africa is the first one I've actually stuck with for more than a week. Down 6kg in 2 months!"</p><div class="test-author"><div class="test-av">BM</div><div><div class="test-name">Betty Muwonge</div><div class="test-role">Fitness enthusiast, Kampala</div></div></div></div>
+      <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-q">"As a dietitian, I recommend NutriTrack to all my Ugandan clients. The African food database is unmatched. The AI insights are surprisingly accurate and very practical."</p><div class="test-author"><div class="test-av">DN</div><div><div class="test-name">Dr. Nantume Doreen</div><div class="test-role">Registered Dietitian, Mulago</div></div></div></div>
+      <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-q">"I was diagnosed with iron deficiency. NutriTrack helped me see exactly which foods to eat more of from my local market. My levels are back to normal now."</p><div class="test-author"><div class="test-av">RO</div><div><div class="test-name">Ruth Ongom</div><div class="test-role">Teacher, Gulu</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing" style="background:var(--bg2)">
+  <div class="cont">
+    <p class="sec-label">Pricing</p>
+    <h2 class="sec-title">Start free.<br/><span class="grad-t">Upgrade anytime.</span></h2>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-tier">Free</div>
+        <div class="price-amt">UGX 0</div>
+        <div class="price-period">Forever free</div>
+        <div class="pf"><span class="pf-y">✓</span> 500 food database entries</div>
+        <div class="pf"><span class="pf-y">✓</span> Daily calorie tracking</div>
+        <div class="pf"><span class="pf-y">✓</span> Basic macro breakdown</div>
+        <div class="pf"><span class="pf-n">✗</span> AI food scanning</div>
+        <div class="pf"><span class="pf-n">✗</span> Full 5,000+ food database</div>
+        <div class="pf"><span class="pf-n">✗</span> NutriAI assistant</div>
+        <a href="#" class="btn btn-out" style="width:100%;justify-content:center;margin-top:20px">Download Free</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-tier">Premium</div>
+        <div class="price-amt">UGX 12,000<span style="font-size:0.9rem;font-weight:400">/mo</span></div>
+        <div class="price-period">Billed monthly</div>
+        <div class="pf"><span class="pf-y">✓</span> Full 5,000+ food database</div>
+        <div class="pf"><span class="pf-y">✓</span> AI food photo scanning</div>
+        <div class="pf"><span class="pf-y">✓</span> NutriAI chat assistant</div>
+        <div class="pf"><span class="pf-y">✓</span> Micronutrient tracking</div>
+        <div class="pf"><span class="pf-y">✓</span> Weekly health reports</div>
+        <div class="pf"><span class="pf-y">✓</span> Offline access</div>
+        <a href="#" class="btn btn-lime" style="width:100%;justify-content:center;margin-top:20px">Start Premium</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Family</div>
+        <div class="price-amt">UGX 28,000<span style="font-size:0.9rem;font-weight:400">/mo</span></div>
+        <div class="price-period">Up to 5 family members</div>
+        <div class="pf"><span class="pf-y">✓</span> Everything in Premium</div>
+        <div class="pf"><span class="pf-y">✓</span> 5 individual profiles</div>
+        <div class="pf"><span class="pf-y">✓</span> Family meal planner</div>
+        <div class="pf"><span class="pf-y">✓</span> Children's nutrition tracking</div>
+        <div class="pf"><span class="pf-y">✓</span> Shared grocery list</div>
+        <div class="pf"><span class="pf-y">✓</span> Priority support</div>
+        <a href="#" class="btn btn-out" style="width:100%;justify-content:center;margin-top:20px">Get Family Plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:80px 0;">
+  <div class="cont">
+    <div class="cta-box">
+      <div class="cta-glow"></div>
+      <h2>Start eating smarter<br/><span class="grad-t">today — for free</span></h2>
+      <p>Join 8,000+ East Africans already tracking their nutrition with local food data and AI insights.</p>
+      <div class="cta-btns">
+        <a href="#" class="btn btn-lime">🍎 Download on App Store</a>
+        <a href="#" class="btn btn-out">▶️ Get on Google Play</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <div class="foot-row">
+      <div class="logo"><div class="logo-icon">🥗</div>NutriTrack Africa</div>
+      <div style="font-size:0.85rem;color:var(--muted)">A product by <strong style="color:var(--text)">TALJOE Studios</strong></div>
+      <div style="display:flex;gap:16px;font-size:0.85rem;color:var(--muted)"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">For Dietitians</a><a href="#">Contact</a></div>
+    </div>
+    <div class="foot-copy">© 2024 NutriTrack Africa. Built with 💚 by TALJOE Studios, Kampala, Uganda.</div>
+  </div>
+</footer>
+<script>function toggleTheme(){const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.getElementById('tbtn').textContent=d?'🌙':'☀️';}</script>
+</body>
+</html>
