@@ -332,21 +332,103 @@ nav {
 }
 .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
 
-/* Mobile sidebar toggle */
+/* Mobile sidebar toggle — matches index.html pill style */
 .mob-menu-btn {
-  display:none; border:1px solid var(--border); background:var(--bg-card);
-  border-radius:8px; padding:6px 10px; cursor:pointer; font-size:18px;
+  display: none;
+  align-items: center; gap: 10px;
+  background: #111845;
+  color: #fff;
+  border: none; border-radius: 999px;
+  padding: 10px 20px 10px 16px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 15px;
+  cursor: pointer; transition: background .2s;
+  flex-shrink: 0;
 }
+.mob-menu-btn:hover { background: #1a2460; }
+.mob-menu-btn .burger {
+  display: flex; flex-direction: column; gap: 4px; width: 20px;
+}
+.mob-menu-btn .burger span {
+  display: block; height: 2px; background: #fff; border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+}
+.mob-menu-btn.open .burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.mob-menu-btn.open .burger span:nth-child(2) { opacity: 0; }
+.mob-menu-btn.open .burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Sidebar overlay for mobile */
+.sidebar-overlay {
+  display: none; position: fixed; inset: 0; z-index: 49;
+  background: rgba(0,0,0,0.4); backdrop-filter: blur(2px);
+}
+.sidebar-overlay.show { display: block; }
 
 /* ── RESPONSIVE ── */
 @media(max-width:768px) {
+  /* Nav: hide back links, show pill burger */
+  .back-link { display: none; }
+  .nav-user span { display: none; }
+  .mob-menu-btn { display: flex; }
+
+  /* Sidebar slides in as drawer over content */
   .sidebar {
-    transform:translateX(-100%);
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-lg);
+    z-index: 50;
+    top: var(--nav-h);
   }
-  .sidebar.open { transform:translateX(0); }
-  .main-panel { margin-left:0; max-width:100%; padding:20px 16px; }
-  .mob-menu-btn { display:block; }
-  .balance-amount { font-size:30px; }
+  .sidebar.open { transform: translateX(0); }
+
+  /* Main panel takes full width */
+  .main-panel { margin-left: 0; max-width: 100%; padding: 16px 14px; }
+
+  /* Balance card compact */
+  .balance-card { padding: 22px 18px; border-radius: 16px; }
+  .balance-amount { font-size: 28px; }
+  .balance-row { gap: 16px; }
+  .balance-sub strong { font-size: 14px; }
+
+  /* Quick actions: 3 per row on mobile */
+  .quick-actions { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .qa-btn { padding: 14px 8px; font-size: 11px; gap: 6px; }
+  .qa-btn .qa-icon { font-size: 20px; }
+
+  /* Stats: 2 per row */
+  .stats-row { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-card { padding: 14px; }
+  .stat-card .s-val { font-size: 18px; }
+
+  /* Transactions: hide badge on very small screens */
+  .tx-badge { display: none; }
+  .tx-item { padding: 12px 14px; gap: 12px; }
+  .tx-dot { width: 36px; height: 36px; font-size: 16px; }
+
+  /* Form cards full width */
+  .form-card { max-width: 100%; padding: 20px 16px; }
+
+  /* Savings goals: stack on mobile */
+  #view-savings > div { grid-template-columns: 1fr !important; }
+
+  /* Settings: full width */
+  #view-settings > div { max-width: 100% !important; }
+
+  /* Page title smaller */
+  .pg-title { font-size: 20px; }
+
+  /* PIN card padding */
+  .pin-card { padding: 28px 20px; }
+  .pin-key  { height: 52px; font-size: 18px; }
+}
+
+@media(max-width:400px) {
+  .quick-actions { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .balance-amount { font-size: 24px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
 </head>
@@ -391,7 +473,12 @@ nav {
 
 <!-- NAV -->
 <nav>
-  <button class="mob-menu-btn" onclick="toggleSidebar()">☰</button>
+  <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleSidebar()">
+    <div class="burger">
+      <span></span><span></span><span></span>
+    </div>
+    Menu
+  </button>
   <a class="logo-wrap" href="taljoe-bank-link.html">
     <div class="logo-icon"><span>TJ</span></div>
     <span class="logo-text">Taljoe</span>
@@ -407,6 +494,9 @@ nav {
     <button class="theme-btn" id="themeBtn">🌙</button>
   </div>
 </nav>
+
+<!-- Sidebar overlay (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
 <!-- LAYOUT -->
 <div class="app-layout">
@@ -433,6 +523,11 @@ nav {
     </button>
     <button class="nav-item" id="nav-savings" onclick="showView('savings')">
       <span class="icon">🏦</span> Savings Goals
+    </button>
+
+    <div class="sidebar-label" style="margin-top:8px">Invest</div>
+    <button class="nav-item" id="nav-invest" onclick="showView('invest')">
+      <span class="icon">📈</span> T-SACCO
     </button>
 
     <div class="sidebar-label" style="margin-top:8px">Account</div>
@@ -486,6 +581,9 @@ nav {
         </button>
         <button class="qa-btn" onclick="showView('savings')">
           <span class="qa-icon">🏦</span> Goals
+        </button>
+        <button class="qa-btn" onclick="showView('invest')">
+          <span class="qa-icon">📈</span> Invest
         </button>
       </div>
 
@@ -680,6 +778,101 @@ nav {
       </div>
     </div>
 
+    <!-- ── INVEST / SACCO ── -->
+    <div class="page-view" id="view-invest">
+      <div class="pg-title">📈 Invest / SACCO</div>
+      <div class="pg-sub">Grow your savings through student-friendly investment options</div>
+
+      <!-- SACCO contribution form -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;margin-bottom:32px">
+
+        <div class="form-card" style="max-width:100%">
+          <h2>🏦 SACCO Contribution</h2>
+          <div class="fc-sub">Record your monthly SACCO savings deposit</div>
+          <div class="form-group">
+            <label>SACCO Name</label>
+            <input type="text" id="saccoName" placeholder="e.g. Campus Students SACCO"/>
+          </div>
+          <div class="form-group">
+            <label>Monthly Contribution (UGX)</label>
+            <div class="amount-wrap">
+              <span class="currency">UGX</span>
+              <input type="number" id="saccoAmt" placeholder="e.g. 10000" min="1000"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Expected Annual Return (%)</label>
+            <input type="number" id="saccoRate" placeholder="e.g. 14" min="1" max="30" value="14"/>
+          </div>
+          <div class="form-group">
+            <label>Duration (months)</label>
+            <input type="number" id="saccoMonths" placeholder="e.g. 12" min="1" value="12"/>
+          </div>
+          <div class="form-group">
+            <label>Deduct from bank balance?</label>
+            <select id="saccoDeduct">
+              <option value="yes">Yes — deduct from my balance now</option>
+              <option value="no">No — record only</option>
+            </select>
+          </div>
+          <button class="btn-submit" style="background:linear-gradient(135deg,#10B981,#059669);box-shadow:0 4px 14px rgba(16,185,129,0.3)" onclick="doSACCO()">💳 Save SACCO Contribution</button>
+        </div>
+
+        <!-- SACCO projection panel -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="background:linear-gradient(135deg,#10B981,#059669);border-radius:16px;padding:24px;color:#fff;box-shadow:0 8px 24px rgba(16,185,129,0.3)">
+            <div style="font-size:12px;opacity:.8;font-weight:500;margin-bottom:6px">Projected SACCO Value</div>
+            <div style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;margin-bottom:4px" id="saccoProjected">UGX 0</div>
+            <div style="font-size:12px;opacity:.75" id="saccoProjectedSub">Enter details to see projection</div>
+          </div>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)">
+            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:15px;margin-bottom:14px">📊 SACCO Benefits</div>
+            <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;color:var(--text-2)">
+              <div style="display:flex;gap:10px;align-items:flex-start"><span>✅</span><span>Earn annual dividends on your savings</span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><span>✅</span><span>Access affordable loans (3× your savings)</span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><span>✅</span><span>Low risk — funds pooled and managed collectively</span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><span>✅</span><span>No minimum beyond monthly contribution</span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><span>⚠️</span><span>Funds locked until withdrawal period — plan ahead</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SACCO records -->
+      <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:14px">📋 SACCO Contribution Records</div>
+      <div class="tx-list" id="saccoList">
+        <div class="empty-state">No SACCO contributions yet. Add your first one above!</div>
+      </div>
+
+      <!-- Other investment options info strip -->
+      <div style="margin-top:32px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)">
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:15px;margin-bottom:16px">💡 Other Student Investment Options</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+          <div style="padding:16px;background:rgba(79,70,229,0.06);border:1px solid rgba(79,70,229,0.15);border-radius:12px">
+            <div style="font-size:20px;margin-bottom:6px">📱</div>
+            <div style="font-weight:700;font-size:13px;margin-bottom:4px">MoMo Save</div>
+            <div style="font-size:12px;color:var(--text-2)">From UGX 1,000 · ~10% p.a. · Low risk</div>
+          </div>
+          <div style="padding:16px;background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.15);border-radius:12px">
+            <div style="font-size:20px;margin-bottom:6px">🏛️</div>
+            <div style="font-weight:700;font-size:13px;margin-bottom:4px">T-Bills</div>
+            <div style="font-size:12px;color:var(--text-2)">From UGX 100k · ~15% p.a. · Very safe</div>
+          </div>
+          <div style="padding:16px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);border-radius:12px">
+            <div style="font-size:20px;margin-bottom:6px">📦</div>
+            <div style="font-weight:700;font-size:13px;margin-bottom:4px">Unit Trusts</div>
+            <div style="font-size:12px;color:var(--text-2)">From UGX 50k · ~16% p.a. · Medium risk</div>
+          </div>
+          <div style="padding:16px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);border-radius:12px">
+            <div style="font-size:20px;margin-bottom:6px">💼</div>
+            <div style="font-weight:700;font-size:13px;margin-bottom:4px">Micro Business</div>
+            <div style="font-size:12px;color:var(--text-2)">From UGX 20k · 20–200% · Your effort!</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;font-size:12px;color:var(--text-3)">Visit the <strong style="color:var(--brand-1)">Invest</strong> page on the main Taljoe site for a full breakdown with a returns calculator.</div>
+      </div>
+    </div>
+
     <!-- ── SETTINGS ── -->
     <div class="page-view" id="view-settings">
       <div class="pg-title">⚙️ Settings</div>
@@ -793,7 +986,7 @@ function lockApp() {
 }
 
 // ── NAVIGATION ───────────────────────────────────────────
-const views = ['dashboard','deposit','withdraw','income','transactions','savings','settings'];
+const views = ['dashboard','deposit','withdraw','income','transactions','savings','invest','settings'];
 function showView(name) {
   views.forEach(v => {
     document.getElementById('view-'+v).classList.toggle('active', v===name);
@@ -807,10 +1000,15 @@ function showView(name) {
 
 // ── SIDEBAR MOBILE ───────────────────────────────────────
 function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
+  const open = document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('show', open);
+  document.getElementById('mobMenuBtn').classList.toggle('open', open);
 }
 function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+  const btn = document.getElementById('mobMenuBtn');
+  if (btn) btn.classList.remove('open');
 }
 
 // ── THEME ────────────────────────────────────────────────
@@ -1029,6 +1227,7 @@ function refreshAll() {
   renderTxList('recentTxList', state.transactions, false);
   renderAllTx();
   renderGoals();
+  renderSACCO();
 }
 
 // ── HELPERS ──────────────────────────────────────────────
@@ -1049,6 +1248,73 @@ function showToast(msg) {
   t.textContent = msg; t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(()=>t.classList.remove('show'), 3200);
+}
+
+// ── SACCO ────────────────────────────────────────────────
+function doSACCO() {
+  const name    = document.getElementById('saccoName').value.trim() || 'SACCO';
+  const amt     = parseFloat(document.getElementById('saccoAmt').value) || 0;
+  const rate    = parseFloat(document.getElementById('saccoRate').value) || 14;
+  const months  = parseInt(document.getElementById('saccoMonths').value) || 12;
+  const deduct  = document.getElementById('saccoDeduct').value === 'yes';
+  if (amt <= 0) { showToast('⚠️ Enter a contribution amount.'); return; }
+  if (deduct && amt > state.balance) { showToast('❌ Insufficient balance for this contribution.'); return; }
+
+  // Compound projection
+  const r   = rate / 100 / 12;
+  const fv  = r > 0 ? amt * ((Math.pow(1+r, months) - 1) / r) : amt * months;
+  const interest = fv - (amt * months);
+
+  const entry = {
+    name, amt, rate, months, fv: Math.round(fv), interest: Math.round(interest),
+    date: now(), deducted: deduct
+  };
+  if (!state.saccoRecords) state.saccoRecords = [];
+  state.saccoRecords.unshift(entry);
+  if (deduct) { state.balance -= amt; state.totalWithdrawn += amt;
+    state.transactions.unshift({ type:'wit', amt, note:`SACCO – ${name}`, cat:'Investment', date: now() });
+  }
+  save(); refreshAll();
+  showToast(`✅ SACCO contribution recorded! Projected: ${fmtUGX(Math.round(fv))}`);
+}
+
+function renderSACCO() {
+  const el = document.getElementById('saccoList');
+  if (!state.saccoRecords || !state.saccoRecords.length) {
+    el.innerHTML = '<div class="empty-state">No SACCO contributions yet. Add your first one above!</div>';
+    return;
+  }
+  el.innerHTML = state.saccoRecords.map((s,i) => `
+    <div class="tx-item">
+      <div class="tx-dot inc">🏦</div>
+      <div class="tx-info">
+        <div class="tx-name">${s.name}</div>
+        <div class="tx-date">${s.months} months · ${s.rate}% p.a. · ${s.date}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:12px;color:var(--text-3)">Contribution</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;color:var(--brand-1)">${fmtUGX(s.amt)}/mo</div>
+        <div style="font-size:11px;color:var(--success)">→ ${fmtUGX(s.fv)} projected</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Live SACCO projection as user types
+['saccoAmt','saccoRate','saccoMonths'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', updateSaccoProjection);
+});
+function updateSaccoProjection() {
+  const amt    = parseFloat(document.getElementById('saccoAmt').value)    || 0;
+  const rate   = parseFloat(document.getElementById('saccoRate').value)   || 0;
+  const months = parseInt(document.getElementById('saccoMonths').value)   || 0;
+  if (!amt || !rate || !months) return;
+  const r  = rate / 100 / 12;
+  const fv = r > 0 ? amt * ((Math.pow(1+r, months) - 1) / r) : amt * months;
+  document.getElementById('saccoProjected').textContent    = fmtUGX(Math.round(fv));
+  document.getElementById('saccoProjectedSub').textContent =
+    `After ${months} months at ${rate}% p.a. · Interest: ${fmtUGX(Math.round(fv - amt*months))}`;
 }
 
 // ── INIT ─────────────────────────────────────────────────
