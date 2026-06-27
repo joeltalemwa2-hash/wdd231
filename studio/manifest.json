@@ -1,0 +1,102 @@
+{
+  "name": "TALJOE Studios",
+  "short_name": "TALJOE",
+  "description": "Uganda's Innovation Studio — Building Software That Moves the World",
+  "start_url": "/wdd231/studio/",
+  "scope": "/wdd231/studio/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#6c63ff",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "icons/screenshot-wide.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "TALJOE Studios Homepage"
+    },
+    {
+      "src": "icons/screenshot-narrow.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "TALJOE Studios Mobile"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Our Projects",
+      "short_name": "Projects",
+      "description": "View TALJOE Studios portfolio",
+      "url": "/wdd231/studio/#projects",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with TALJOE Studios",
+      "url": "/wdd231/studio/#contact",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Join the Team",
+      "short_name": "Join Us",
+      "description": "Career opportunities at TALJOE Studios",
+      "url": "/wdd231/studio/#join",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    }
+  ]
+}

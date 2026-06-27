@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline — TALJOE Studios</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131f;
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --text: #e8e8f0;
+      --muted: #888899;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .container { max-width: 480px; }
+
+    .logo {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; font-weight: 900; color: #fff;
+      margin: 0 auto 2rem;
+      letter-spacing: -1px;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .signal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent2);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    .dot:nth-child(2) { animation-delay: 0.3s; background: var(--accent); }
+    .dot:nth-child(3) { animation-delay: 0.6s; background: var(--muted); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), #9b93ff);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(108, 99, 255, 0.35);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(108, 99, 255, 0.5); }
+
+    .contact {
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .contact p { font-size: 0.875rem; margin-bottom: 0.25rem; }
+    .contact a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">TJ</div>
+
+    <div class="signal">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <h1>You're Offline</h1>
+    <p>
+      It looks like you've lost your internet connection. TALJOE Studios needs a connection to load the latest content. Please check your network and try again.
+    </p>
+
+    <button class="btn" onclick="window.location.reload()">
+      Try Again →
+    </button>
+
+    <div class="contact">
+      <p>Need to reach us urgently?</p>
+      <p>📞 <a href="tel:+256748915656">+256 748 915 656</a></p>
+      <p>✉️ <a href="mailto:joeltalemwa2@gmail.com">joeltalemwa2@gmail.com</a></p>
+    </div>
+  </div>
+</body>
+</html>

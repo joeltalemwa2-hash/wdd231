@@ -4,6 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TALJOE Studios</title>
+  <!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json" />
+
+<!-- Theme color (matches your purple accent) -->
+<meta name="theme-color" content="#6c63ff" />
+
+<!-- iOS / Safari PWA support -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="TALJOE" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+<!-- Windows tile -->
+<meta name="msapplication-TileImage" content="icons/icon-144.png" />
+<meta name="msapplication-TileColor" content="#6c63ff" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     /* ─── TOKENS ─────────────────────────────────────────── */
@@ -1074,7 +1089,8 @@
         <button class="filter-btn" onclick="filterProjects('health', this)">Health</button>
       </div>
 
-              <div class="card project-card" data-cat="fintech web">
+      <div class="projects-grid" id="projects-grid">
+      <div class="card project-card" data-cat="fintech web">
           <div class="project-img" style="background:linear-gradient(135deg,rgba(233,30,140,0.25),rgba(123,47,190,0.25))">📊</div>
           <div class="project-tags">
             <span class="tag">Fintech</span>
@@ -1085,11 +1101,10 @@
           <p class="project-desc">A SACCO (savings cooperative) management system for tracking member deposits, loans, and dividends. Serves 12 cooperatives and over 3,000 members.</p>
           <div class="project-footer">
             <span class="project-year">2026</span>
-            <span class="project-link"><a href="https://joeltalemwa2-hash.github.io/wdd231/taljoe/taljoe-bank.html"> Visit project →</a></span>
+            <span class="project-link"><a href="https://joeltalemwa2-hash.github.io/wdd231/taljoe/taljoe-bank.html" target="_blank" class="project-link"> Visit project →</a></span>
           </div>
         </div>
 
-      <div class="projects-grid" id="projects-grid">
         <div class="card project-card" data-cat="fintech mobile">
           <div class="project-img" style="background:linear-gradient(135deg,rgba(123,47,190,0.3),rgba(233,30,140,0.3))">💳</div>
           <div class="project-tags">
@@ -1715,5 +1730,6 @@ document.addEventListener('click', function(e) {
   }
 });
 </script>
+<script src="pwa-register.js" defer></script>
 </body>
 </html>
