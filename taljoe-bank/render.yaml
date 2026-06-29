@@ -1,0 +1,21 @@
+# ============================================================
+# Taljoe Bank — Render.com Deploy Config
+# Commit this file and Render will auto-detect it.
+# Docs: https://render.com/docs/render-yaml
+# ============================================================
+
+services:
+  - type: web
+    name: taljoe-bank
+    env: node
+    region: oregon          # change to: frankfurt, singapore, ohio
+    plan: free              # upgrade to starter ($7/mo) for always-on
+    buildCommand: npm ci --omit=dev
+    startCommand: node server/index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+    autoDeploy: true        # redeploy on every push to main

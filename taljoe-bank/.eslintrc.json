@@ -1,0 +1,38 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2022": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "script"
+  },
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-undef": "error",
+    "no-console": "off",
+    "eqeqeq": "error",
+    "semi": ["error", "always"],
+    "quotes": ["warn", "single"]
+  },
+  "globals": {
+    "DB": "readonly",
+    "switchTab": "readonly",
+    "doDeposit": "readonly",
+    "doWithdraw": "readonly",
+    "doIncome": "readonly",
+    "addGoal": "readonly",
+    "topUpGoal": "readonly",
+    "delGoal": "readonly",
+    "addSacco": "readonly",
+    "updateSaccoProjection": "readonly",
+    "renderHistory": "readonly",
+    "deleteTx": "readonly",
+    "clearAll": "readonly",
+    "saveName": "readonly",
+    "changePin": "readonly",
+    "resetAll": "readonly",
+    "showToast": "readonly"
+  }
+}

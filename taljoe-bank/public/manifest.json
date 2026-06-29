@@ -1,0 +1,42 @@
+{
+  "name": "Taljoe Bank",
+  "short_name": "TJ Bank",
+  "description": "Personal finance manager — deposits, withdrawals, savings goals & investments.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0B1426",
+  "theme_color": "#00C896",
+  "lang": "en-UG",
+  "categories": ["finance", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Deposit",
+      "short_name": "Deposit",
+      "description": "Add funds quickly",
+      "url": "/?tab=deposit",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your balance",
+      "url": "/",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#00C896"/>
+  <meta name="description" content="Taljoe Bank — Personal finance manager for Uganda"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="TJ Bank"/>
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Taljoe Bank"/>
+  <meta property="og:description" content="Personal finance manager — track deposits, withdrawals, savings goals & investments."/>
+  <meta property="og:type"        content="website"/>
+  <meta property="og:image"       content="icons/icon-512.png"/>
+  <!-- PWA -->
+  <link rel="manifest"         href="manifest.json"/>
+  <link rel="apple-touch-icon" href="icons/icon-192.png"/>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css"/>
+  <style>
+    #auth-screen {
+      position:fixed;inset:0;background:var(--bg);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      z-index:998;padding:24px;overflow-y:auto;
+    }
+    .auth-logo {
+      width:64px;height:64px;
+      background:linear-gradient(135deg,var(--accent),#00876A);
+      border-radius:18px;margin-bottom:12px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:24px;font-weight:900;color:#fff;
+      box-shadow:0 0 0 8px rgba(0,200,150,0.12);
+    }
+    .auth-title    {font-size:22px;font-weight:800;margin-bottom:4px;}
+    .auth-subtitle {font-size:13px;color:var(--muted);margin-bottom:24px;}
+    .auth-card {
+      width:100%;max-width:380px;
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:16px;padding:24px;
+    }
+    .auth-tabs {
+      display:flex;margin-bottom:24px;
+      background:var(--surface2);border-radius:10px;padding:4px;
+    }
+    .auth-tab-btn {
+      flex:1;padding:9px;border-radius:8px;font-size:14px;
+      font-weight:600;cursor:pointer;border:none;
+      background:none;color:var(--muted);transition:all 0.2s;
+    }
+    .auth-tab-btn.active{background:var(--accent);color:#0B1426;}
+    .auth-error{font-size:12px;color:var(--red);min-height:16px;margin-bottom:10px;}
+    .auth-footer{font-size:12px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.6;}
+    #polling-overlay {
+      position:fixed;inset:0;background:rgba(11,20,38,0.85);
+      backdrop-filter:blur(6px);
+      display:none;align-items:center;justify-content:center;z-index:300;
+    }
+    .polling-card {
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:20px;padding:32px 24px;text-align:center;max-width:320px;width:90%;
+    }
+    .poll-dots{display:flex;gap:8px;justify-content:center;}
+    .poll-dots span {
+      width:10px;height:10px;border-radius:50%;
+      background:var(--accent);animation:pulse-dot 1.2s infinite;
+    }
+    .poll-dots span:nth-child(2){animation-delay:0.2s;}
+    .poll-dots span:nth-child(3){animation-delay:0.4s;}
+    @keyframes pulse-dot{0%,80%,100%{opacity:0.3;transform:scale(0.8)}40%{opacity:1;transform:scale(1)}}
+    #kyc-notice {
+      margin:0 20px 16px;
+      background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.3);
+      border-radius:10px;padding:12px 16px;
+      font-size:13px;color:var(--gold);display:none;
+    }
+    #kyc-notice a{color:var(--gold);font-weight:700;text-decoration:underline;cursor:pointer;}
+    #recipient-name{font-size:13px;margin-top:6px;min-height:18px;font-weight:600;}
+    .info-row {
+      display:flex;justify-content:space-between;align-items:center;
+      padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;
+    }
+    .info-row:last-child{border-bottom:none;}
+    .info-row-label{color:var(--muted);font-size:13px;}
+    .info-row-val{font-weight:600;font-family:var(--font-mono);font-size:13px;}
+  </style>
+  <title>Taljoe Bank</title>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     PIN LOCK SCREEN
+═══════════════════════════════════════════════════════ -->
+<div id="pin-screen" role="dialog" aria-modal="true" aria-label="Enter PIN to unlock">
+  <div class="pin-logo" aria-hidden="true">TBa</div>
+  <div>
+    <div class="pin-title">Taljoe Bank</div>
+    <div class="pin-subtitle">Enter your 4-digit PIN to continue</div>
+  </div>
+  <div class="pin-dots" aria-label="PIN entry progress" role="status">
+    <div class="pin-dot" id="dot-0"></div>
+    <div class="pin-dot" id="dot-1"></div>
+    <div class="pin-dot" id="dot-2"></div>
+    <div class="pin-dot" id="dot-3"></div>
+  </div>
+  <div class="pin-grid" role="group" aria-label="PIN keypad">
+    <button class="pin-key" data-k="1" aria-label="1">1</button>
+    <button class="pin-key" data-k="2" aria-label="2">2</button>
+    <button class="pin-key" data-k="3" aria-label="3">3</button>
+    <button class="pin-key" data-k="4" aria-label="4">4</button>
+    <button class="pin-key" data-k="5" aria-label="5">5</button>
+    <button class="pin-key" data-k="6" aria-label="6">6</button>
+    <button class="pin-key" data-k="7" aria-label="7">7</button>
+    <button class="pin-key" data-k="8" aria-label="8">8</button>
+    <button class="pin-key" data-k="9" aria-label="9">9</button>
+    <button class="pin-key del" data-k="del" aria-label="Delete">⌫</button>
+    <button class="pin-key" data-k="0" aria-label="0">0</button>
+    <button class="pin-key ok"  data-k="ok"  aria-label="Confirm">✓</button>
+  </div>
+  <div class="pin-error" id="pin-error" role="alert"></div>
+  <div class="pin-hint">Default PIN: <span>1234</span> · Change in Settings</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     APP SHELL
+═══════════════════════════════════════════════════════ -->
+<div id="app" style="display:none">
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-logo">
+      <div class="header-logo-mark" aria-hidden="true">TBa</div>
+      Taljoe Bank
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle theme">🌙</button>
+      <button class="icon-btn" id="lock-btn"     title="Lock app"               aria-label="Lock app">🔒</button>,
+      <button class="icon-btn" id="logout-btn"   aria-label="Logout">&#128682;</button>
+    </div>
+  </header>
+
+  <!-- Tab Content -->
+  <main role="main">
+
+    <!-- ─── DASHBOARD ──────────────────────────────────── -->
+    <section id="tab-dashboard" class="tab active" aria-label="Dashboard">
+
+      <div class="dash-hero">
+        <div class="dash-greeting">Good day 👋</div>
+        <div class="dash-name" id="dash-name">Joel T.</div>
+        <div class="dash-balance-label">Total Balance</div>
+        <div class="dash-balance">
+          <span class="currency">UGX</span><span id="dash-balance">0</span>
+        </div>
+        <div class="dash-stat-row">
+          <div class="dash-stat">
+            <div class="dash-stat-label">Deposited</div>
+            <div class="dash-stat-val green" id="dash-deposited">0</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">Withdrawn</div>
+            <div class="dash-stat-val red" id="dash-withdrawn">0</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">Income</div>
+            <div class="dash-stat-val" id="dash-income">0</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">Net Month</div>
+            <div class="dash-stat-val" id="dash-net">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <button class="qa-btn dep"  onclick="switchTab('deposit')"  aria-label="Deposit"><div class="qa-icon">💰</div>Deposit</button>
+        <button class="qa-btn with" onclick="switchTab('withdraw')" aria-label="Withdraw"><div class="qa-icon">📤</div>Withdraw</button>
+        <button class="qa-btn inc"  onclick="switchTab('income')"   aria-label="Income"><div class="qa-icon">📈</div>Income</button>
+        <button class="qa-btn goal" onclick="switchTab('goals')"    aria-label="Goals"><div class="qa-icon">🎯</div>Goals</button>
+      </div>
+
+      <div class="section-title">This Month</div>
+      <div class="month-cards">
+        <div class="month-card">
+          <div class="month-card-label">💰 Deposits</div>
+          <div class="month-card-val" id="month-deps">UGX 0</div>
+          <div class="month-card-sub">Saved this month</div>
+        </div>
+        <div class="month-card">
+          <div class="month-card-label">📤 Withdrawals</div>
+          <div class="month-card-val" id="month-withs">UGX 0</div>
+          <div class="month-card-sub">Spent this month</div>
+        </div>
+      </div>
+
+      <div class="section-title">Recent Transactions</div>
+      <div class="txn-list" id="recent-txns"></div>
+    </section>
+
+    <!-- ─── DEPOSIT ────────────────────────────────────── -->
+    <section id="tab-deposit" class="tab" aria-label="Deposit">
+      <div class="panel">
+        <div class="panel-card">
+          <div class="panel-title">💰 Deposit Money</div>
+          <div class="panel-sub">Add funds to your Taljoe Bank account</div>
+          <p class="balance-hint">Current balance: <span id="dep-balance">UGX 0</span></p>
+          <div class="field">
+            <label for="dep-amount">Amount (UGX)</label>
+            <div class="input-wrap has-prefix">
+              <span class="input-prefix">UGX</span>
+              <input type="number" id="dep-amount" placeholder="0" min="0" inputmode="decimal"/>
+            </div>
+          </div>
+          <div class="field">
+            <label for="dep-desc">Source / Description</label>
+            <input type="text" id="dep-desc" placeholder="e.g. Monthly allowance"/>
+          </div>
+          <div class="field">
+            <label for="dep-cat">Category</label>
+            <select id="dep-cat">
+              <option value="Allowance">Allowance</option>
+              <option value="Savings transfer">Savings transfer</option>
+              <option value="Freelance income">Freelance income</option>
+              <option value="Gift / Support">Gift / Support</option>
+              <option value="Salary">Salary</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="doDeposit()">✅ Confirm Deposit</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── WITHDRAW ───────────────────────────────────── -->
+    <section id="tab-withdraw" class="tab" aria-label="Withdraw">
+      <div class="panel">
+        <div class="panel-card">
+          <div class="panel-title">📤 Withdraw Money</div>
+          <div class="panel-sub">Take out funds from your account</div>
+          <p class="balance-hint">Available balance: <span id="with-balance">UGX 0</span></p>
+          <div class="field">
+            <label for="with-amount">Amount (UGX)</label>
+            <div class="input-wrap has-prefix">
+              <span class="input-prefix">UGX</span>
+              <input type="number" id="with-amount" placeholder="0" min="0" inputmode="decimal"/>
+            </div>
+          </div>
+          <div class="field">
+            <label for="with-desc">Reason / Description</label>
+            <input type="text" id="with-desc" placeholder="e.g. Lunch & transport"/>
+          </div>
+          <div class="field">
+            <label for="with-cat">Category</label>
+            <select id="with-cat">
+              <option value="Food & Drinks">Food &amp; Drinks</option>
+              <option value="Transport">Transport</option>
+              <option value="Tuition / Fees">Tuition / Fees</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Health">Health</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="doWithdraw()">📤 Confirm Withdrawal</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── INCOME ─────────────────────────────────────── -->
+    <section id="tab-income" class="tab" aria-label="Add Income">
+      <div class="panel">
+        <div class="panel-card">
+          <div class="panel-title">📈 Add Income</div>
+          <div class="panel-sub">Log earnings from any source</div>
+          <div class="field">
+            <label for="inc-amount">Amount (UGX)</label>
+            <div class="input-wrap has-prefix">
+              <span class="input-prefix">UGX</span>
+              <input type="number" id="inc-amount" placeholder="0" min="0" inputmode="decimal"/>
+            </div>
+          </div>
+          <div class="field">
+            <label for="inc-source">Income Source</label>
+            <input type="text" id="inc-source" placeholder="e.g. Tutoring client"/>
+          </div>
+          <div class="field">
+            <label for="inc-cat">Category</label>
+            <select id="inc-cat">
+              <option value="Freelance">Freelance</option>
+              <option value="Tutoring">Tutoring</option>
+              <option value="Small business">Small business</option>
+              <option value="Family allowance">Family allowance</option>
+              <option value="Scholarship / Grant">Scholarship / Grant</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Add to balance?</label>
+            <div class="radio-group">
+              <label class="radio-opt">
+                <input type="radio" name="inc-add" value="yes" checked/>
+                <span class="radio-label">Yes – add to my account balance</span>
+              </label>
+              <label class="radio-opt">
+                <input type="radio" name="inc-add" value="no"/>
+                <span class="radio-label">No – record only (external account)</span>
+              </label>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="doIncome()">📈 Record Income</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── HISTORY ────────────────────────────────────── -->
+    <section id="tab-history" class="tab" aria-label="Transaction History">
+      <div class="filter-row" role="group" aria-label="Filter transactions">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="deposit">Deposits</button>
+        <button class="filter-chip" data-filter="withdrawal">Withdrawals</button>
+        <button class="filter-chip" data-filter="income">Income</button>
+      </div>
+      <div class="panel" style="padding-top:0">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+          <button class="btn btn-danger" style="width:auto;padding:8px 16px;font-size:13px" onclick="clearAll()">🗑 Clear All</button>
+        </div>
+        <div id="history-list"></div>
+      </div>
+    </section>
+
+    <!-- ─── GOALS ──────────────────────────────────────── -->
+    <section id="tab-goals" class="tab" aria-label="Savings Goals">
+      <div class="panel">
+        <div class="panel-card">
+          <div class="panel-title">🎯 New Savings Goal</div>
+          <div class="panel-sub">Set a target and track your progress</div>
+          <div class="field">
+            <label for="goal-name">Goal Name</label>
+            <input type="text" id="goal-name" placeholder="e.g. New laptop"/>
+          </div>
+          <div class="field">
+            <label for="goal-target">Target Amount (UGX)</label>
+            <div class="input-wrap has-prefix">
+              <span class="input-prefix">UGX</span>
+              <input type="number" id="goal-target" placeholder="0" min="0"/>
+            </div>
+          </div>
+          <div class="field">
+            <label for="goal-saved">Already saved toward this</label>
+            <div class="input-wrap has-prefix">
+              <span class="input-prefix">UGX</span>
+              <input type="number" id="goal-saved" placeholder="0" min="0"/>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="addGoal()">🎯 Add Goal</button>
+        </div>
+        <div class="section-title" style="padding:0 0 12px">Your Goals</div>
+        <div id="goals-list"></div>
+      </div>
+    </section>
+
+    <!-- ─── INVEST / T-SACCO ────────────────────────────── -->
+    <section id="tab-invest" class="tab" aria-label="Invest">
+      <div class="panel">
+        <div class="sacco-proj">
+          <div class="sacco-proj-label">Projected SACCO Value</div>
+          <div class="sacco-proj-val">UGX <span id="sacco-proj">0</span></div>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-title">🏦 T-SACCO Contribution</div>
+          <div class="panel-sub">Record your monthly SACCO savings</div>
+          <div class="field">
+            <label for="sacco-name">SACCO Name</label>
+            <input type="text" id="sacco-name" placeholder="e.g. Campus SACCO"/>
+          </div>
+          <div class="field">
+            <label for="sacco-amount">Monthly Contribution (UGX)</label>
+            <div class="input-wrap has-prefix">
+              <span class="input-prefix">UGX</span>
+              <input type="number" id="sacco-amount" placeholder="0" oninput="updateSaccoProjection()"/>
+            </div>
+          </div>
+          <div class="field">
+            <label for="sacco-return">Expected Annual Return (%)</label>
+            <input type="number" id="sacco-return" placeholder="15" value="15" oninput="updateSaccoProjection()"/>
+          </div>
+          <div class="field">
+            <label for="sacco-months">Duration (months)</label>
+            <input type="number" id="sacco-months" placeholder="12" value="12" oninput="updateSaccoProjection()"/>
+          </div>
+          <div class="field">
+            <label>Deduct from balance?</label>
+            <div class="radio-group">
+              <label class="radio-opt"><input type="radio" name="sacco-deduct" value="yes"/><span class="radio-label">Yes — deduct from my balance now</span></label>
+              <label class="radio-opt"><input type="radio" name="sacco-deduct" value="no" checked/><span class="radio-label">No — record only</span></label>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="addSacco()">💳 Save Contribution</button>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-title">📊 SACCO Benefits</div>
+          <ul class="benefits-list mt-16">
+            <li>Earn annual dividends on your savings</li>
+            <li>Access affordable loans (3× your savings)</li>
+            <li>Low risk — funds pooled collectively</li>
+            <li>No minimum beyond monthly contribution</li>
+            <li>Funds locked until withdrawal period — plan ahead</li>
+          </ul>
+        </div>
+
+        <div class="section-title" style="padding:0 0 12px">Contribution History</div>
+        <div id="sacco-list"></div>
+
+        <div class="panel-card" style="margin-top:16px">
+          <div class="panel-title" style="font-size:15px;margin-bottom:12px">💡 Other Investment Options</div>
+          <div style="display:grid;gap:10px">
+            <div class="invest-option"><span class="invest-option-icon">📱</span><div><div class="invest-option-title">MoMo Save</div><div class="invest-option-sub">From UGX 1,000 · ~10% p.a. · Low risk</div></div></div>
+            <div class="invest-option"><span class="invest-option-icon">🏛️</span><div><div class="invest-option-title">Treasury Bills</div><div class="invest-option-sub">From UGX 100k · ~15% p.a. · Very safe</div></div></div>
+            <div class="invest-option"><span class="invest-option-icon">📦</span><div><div class="invest-option-title">Unit Trusts</div><div class="invest-option-sub">From UGX 50k · ~16% p.a. · Medium risk</div></div></div>
+            <div class="invest-option"><span class="invest-option-icon">💼</span><div><div class="invest-option-title">Micro Business</div><div class="invest-option-sub">From UGX 20k · 20–200% · Your effort!</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SETTINGS ───────────────────────────────────── -->
+    <section id="tab-settings" class="tab" aria-label="Settings">
+      <div class="settings-section" style="padding-top:20px">
+
+        <div class="section-title" style="padding:0 0 12px">Account</div>
+        <div class="settings-group">
+          <div class="settings-row">
+            <span class="settings-row-icon">👤</span>
+            <div class="settings-row-info">
+              <div class="settings-row-label">Display Name</div>
+              <div class="settings-row-sub" id="set-name-display">Joel T.</div>
+            </div>
+          </div>
+          <div style="padding:16px;border-top:1px solid var(--border)">
+            <div class="field mb-0">
+              <label for="set-name">New name</label>
+              <input type="text" id="set-name" placeholder="Your name"/>
+            </div>
+            <button class="btn btn-ghost" style="margin-top:12px" onclick="saveName()">Save Name</button>
+          </div>
+        </div>
+
+        <div class="section-title" style="padding:0 0 12px">Security</div>
+        <div class="settings-group">
+          <div style="padding:16px">
+            <div class="panel-title" style="font-size:15px;margin-bottom:16px">🔐 Change PIN</div>
+            <div class="field">
+              <label for="pin-current">Current PIN</label>
+              <input type="password" id="pin-current" placeholder="••••" maxlength="4" inputmode="numeric"/>
+            </div>
+            <div class="field">
+              <label for="pin-new">New PIN</label>
+              <input type="password" id="pin-new" placeholder="••••" maxlength="4" inputmode="numeric"/>
+            </div>
+            <div class="field">
+              <label for="pin-confirm">Confirm New PIN</label>
+              <input type="password" id="pin-confirm" placeholder="••••" maxlength="4" inputmode="numeric"/>
+            </div>
+            <button class="btn btn-primary" onclick="changePin()">🔐 Update PIN</button>
+          </div>
+        </div>
+
+        <div class="section-title" style="padding:0 0 12px">Appearance</div>
+        <div class="settings-group">
+          <div class="settings-row">
+            <span class="settings-row-icon">🌙</span>
+            <div class="settings-row-info">
+              <div class="settings-row-label">Dark Mode</div>
+              <div class="settings-row-sub">Current: <span id="theme-label">Dark</span></div>
+            </div>
+            <div class="toggle on" id="theme-toggle-setting" role="switch" aria-checked="true" tabindex="0"></div>
+          </div>
+        </div>
+
+        <div class="section-title" style="padding:0 0 12px">Danger Zone</div>
+        <div class="settings-group">
+          <div style="padding:16px">
+            <p class="panel-sub" style="margin-bottom:16px">This will delete all transactions and reset your balance to zero. This cannot be undone.</p>
+            <button class="btn btn-danger" onclick="resetAll()">⚠️ Reset Everything</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- /main -->
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav" role="navigation" aria-label="Main navigation">
+    <button class="nav-item active" data-tab="dashboard"><span class="nav-icon" aria-hidden="true">📊</span>Dashboard</button>
+    <button class="nav-item" data-tab="history"><span class="nav-icon" aria-hidden="true">📋</span>History</button>
+    <button class="nav-item" data-tab="goals"><span class="nav-icon" aria-hidden="true">🏦</span>Goals</button>
+    <button class="nav-item" data-tab="invest"><span class="nav-icon" aria-hidden="true">📈</span>Invest</button>
+    <button class="nav-item" data-tab="settings"><span class="nav-icon" aria-hidden="true">⚙️</span>Settings</button>
+  </nav>
+
+</div><!-- /app -->
+
+<!-- Toast notification -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- PWA Install Banner -->
+<div id="install-banner" role="complementary" aria-label="Install app">
+  <span style="font-size:28px" aria-hidden="true">📲</span>
+  <div class="install-text">
+    Install Taljoe Bank
+    <span>Add to your home screen for offline access</span>
+  </div>
+  <button class="install-btn" id="install-btn">Install</button>
+  <button class="install-close" id="install-dismiss" aria-label="Dismiss install banner">✕</button>
+</div>
+
+<!-- Scripts (order matters: db.js must load before app.js) -->
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
