@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account — MarketHub UG</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#E8A020"/><path d="M8 10h3l4 10 4-7 4 7 4-10h3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="18" cy="27" r="3" fill="#fff"/></svg></div>
+      <div class="logo-text"><span class="logo-name">MarketHub</span><span class="logo-country">UG</span></div>
+    </a>
+    <nav class="nav-main" id="navMain">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link">Shop</a>
+      <a href="vendors.html" class="nav-link">Vendors</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="btn-icon cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-count" id="cartCount">0</span></a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero" style="padding:36px 20px">
+  <h1>My Account</h1>
+</section>
+
+<div class="account-layout" id="orders">
+  <aside class="account-sidebar">
+    <div class="account-avatar">👤</div>
+    <div class="account-name">Guest User</div>
+    <div class="account-email">Not signed in</div>
+    <nav class="account-menu">
+      <a href="#orders" class="active">📦 My Orders</a>
+      <a href="#wishlist">❤️ Wishlist</a>
+      <a href="#profile">👤 Profile</a>
+      <a href="#addresses">📍 Addresses</a>
+      <a href="#notifications">🔔 Notifications</a>
+      <a href="sell.html">🏪 Sell on MarketHub</a>
+    </nav>
+  </aside>
+  <div class="account-panel">
+    <h2>My Orders</h2>
+    <div id="ordersList"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/data.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  const sampleOrders = [
+    { ref:"MH-A7X2Q9P", date:"25 Jun 2026", items:"Handwoven Kente Bag × 1", total:85000, status:"delivered" },
+    { ref:"MH-B3K9R2M", date:"20 Jun 2026", items:"Raw Honey 500g × 2, Coffee 250g × 1", total:92000, status:"delivered" },
+    { ref:"MH-C4L1T8N", date:"27 Jun 2026", items:"Ankara Wrap Dress × 1", total:95000, status:"transit" },
+  ];
+
+  try {
+    const lastOrder = JSON.parse(localStorage.getItem("mh_last_order") || "null");
+    if(lastOrder) {
+      sampleOrders.unshift({ ref: lastOrder.ref, date: new Date().toLocaleDateString("en-UG",{day:"numeric",month:"short",year:"numeric"}), items:"Recent order", total: lastOrder.total, status:"pending" });
+    }
+  } catch(e){}
+
+  const statusLabels = { delivered:"✓ Delivered", transit:"🚚 In Transit", pending:"⏳ Processing" };
+  const statusClass = { delivered:"status-delivered", transit:"status-transit", pending:"status-pending" };
+
+  document.getElementById("ordersList").innerHTML = sampleOrders.map(o => `
+    <div class="order-row">
+      <div>
+        <div class="order-id">${o.ref}</div>
+        <div class="order-date">${o.date} · ${o.items}</div>
+        <div style="font-weight:600;margin-top:4px">${formatPrice(o.total)}</div>
+      </div>
+      <span class="order-status ${statusClass[o.status]}">${statusLabels[o.status]}</span>
+    </div>
+  `).join("");
+
+  updateCartUI();
+</script>
+</body>
+</html>

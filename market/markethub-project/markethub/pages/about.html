@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — MarketHub UG</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#E8A020"/><path d="M8 10h3l4 10 4-7 4 7 4-10h3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="18" cy="27" r="3" fill="#fff"/></svg></div>
+      <div class="logo-text"><span class="logo-name">MarketHub</span><span class="logo-country">UG</span></div>
+    </a>
+    <nav class="nav-main" id="navMain">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link">Shop</a>
+      <a href="vendors.html" class="nav-link">Vendors</a>
+      <a href="sell.html" class="nav-link">Sell</a>
+      <a href="about.html" class="nav-link active">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="btn-icon cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-count" id="cartCount">0</span></a>
+      <a href="account.html" class="btn-secondary">My Account</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>About MarketHub UG</h1>
+  <p>Connecting Uganda's buyers and sellers since 2019.</p>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <h2 style="font-family:var(--font-display);font-size:2rem;font-weight:700;margin-bottom:16px">Our Mission</h2>
+        <p style="color:#555;line-height:1.8;margin-bottom:14px">MarketHub UG was born in Masaka with a simple belief: Ugandan artisans, farmers, and entrepreneurs deserve a world-class platform to reach buyers everywhere in the country.</p>
+        <p style="color:#555;line-height:1.8;margin-bottom:14px">Today we connect over 380 verified vendors with 18,000+ happy customers, offering everything from handwoven crafts to specialty coffee — all with the trust and convenience of pay-on-delivery.</p>
+        <p style="color:#555;line-height:1.8">Built by TALJOE Studios, Masaka. Proudly Ugandan. 🇺🇬</p>
+      </div>
+      <div style="background:var(--gold-light);border-radius:var(--radius);padding:40px;text-align:center">
+        <div style="font-size:4rem;margin-bottom:16px">🇺🇬</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div style="background:#fff;border-radius:10px;padding:16px"><strong style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold-dark)">4,200+</strong><p style="font-size:0.82rem;color:#777;margin-top:4px">Products</p></div>
+          <div style="background:#fff;border-radius:10px;padding:16px"><strong style="font-family:var(--font-display);font-size:1.5rem;color:var(--green)">380+</strong><p style="font-size:0.82rem;color:#777;margin-top:4px">Vendors</p></div>
+          <div style="background:#fff;border-radius:10px;padding:16px"><strong style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold-dark)">18K+</strong><p style="font-size:0.82rem;color:#777;margin-top:4px">Customers</p></div>
+          <div style="background:#fff;border-radius:10px;padding:16px"><strong style="font-family:var(--font-display);font-size:1.5rem;color:var(--green)">2019</strong><p style="font-size:0.82rem;color:#777;margin-top:4px">Founded</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section" style="padding-top:0" id="faq">
+  <div class="container" style="max-width:720px">
+    <h2 style="font-family:var(--font-display);font-size:1.8rem;font-weight:700;margin-bottom:32px;text-align:center">Frequently Asked Questions</h2>
+    <div id="faqList"></div>
+  </div>
+</div>
+
+<!-- Contact -->
+<div class="section" style="padding-top:0;padding-bottom:56px" id="contact">
+  <div class="container" style="max-width:600px">
+    <h2 style="font-family:var(--font-display);font-size:1.8rem;font-weight:700;margin-bottom:24px;text-align:center">Contact Us</h2>
+    <div class="checkout-card">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Full name" id="cName" />
+      </div>
+      <div class="form-group">
+        <label>Email or Phone</label>
+        <input type="text" placeholder="email or +256 7XX…" id="cContact" />
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select id="cSubject">
+          <option>General Enquiry</option>
+          <option>Order Issue</option>
+          <option>Vendor Support</option>
+          <option>Return / Refund</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="cMsg" rows="4" placeholder="How can we help you?"></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%;padding:13px" onclick="submitContact()">Send Message</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/data.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  const faqs = [
+    { q:"How does Pay on Delivery work?", a:"You don't pay anything until your order arrives at your door. Once delivered, you pay the rider using your chosen method — MTN MoMo, Airtel Money, card, or cash. Zero risk to you." },
+    { q:"What areas do you deliver to?", a:"We offer same-day delivery in Kampala and Wakiso. Nationwide delivery to all other districts takes 1–3 business days. Delivery fees are calculated at checkout." },
+    { q:"How do I track my order?", a:"You receive an order reference number after placing your order. You can view your order status in My Account → My Orders. Our rider will also call you before arrival." },
+    { q:"What is the return policy?", a:"You have 7 days from delivery to return items that are damaged, incorrect, or not as described. Contact our support team with your order reference and photos of the issue." },
+    { q:"How do I become a vendor?", a:"Fill in the vendor registration form on our Sell page. Our team will contact you within 24 hours to verify your business and set up your shop. It's completely free to start." },
+    { q:"When do vendors receive payouts?", a:"Vendor earnings are paid out every Monday via MTN MoMo, Airtel Money, or bank transfer for the previous week's confirmed deliveries." },
+    { q:"Is my payment information safe?", a:"All card transactions are processed via encrypted POS machines. We never store your card details. Mobile money payments are made directly between you and the rider's registered number." },
+  ];
+
+  document.getElementById("faqList").innerHTML = faqs.map((f,i) => `
+    <div class="faq-item" onclick="toggleFaq(${i})">
+      <div class="faq-q">${f.q} <span id="faqIcon${i}">+</span></div>
+      <div class="faq-a" id="faqA${i}">${f.a}</div>
+    </div>
+  `).join("");
+
+  function toggleFaq(i) {
+    const ans = document.getElementById("faqA"+i);
+    const icon = document.getElementById("faqIcon"+i);
+    ans.classList.toggle("open");
+    icon.textContent = ans.classList.contains("open") ? "−" : "+";
+  }
+
+  function submitContact() {
+    const name = document.getElementById("cName")?.value?.trim();
+    const contact = document.getElementById("cContact")?.value?.trim();
+    const msg = document.getElementById("cMsg")?.value?.trim();
+    if(!name||!contact||!msg){ showToast("Please fill all fields","error"); return; }
+    showToast("✓ Message sent! We'll reply within 24 hours.","success");
+    document.getElementById("cName").value="";
+    document.getElementById("cContact").value="";
+    document.getElementById("cMsg").value="";
+  }
+
+  updateCartUI();
+</script>
+</body>
+</html>

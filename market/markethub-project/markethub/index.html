@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarketHub UG — Uganda's Online Marketplace</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36" height="36" rx="10" fill="#E8A020"/>
+          <path d="M8 10h3l4 10 4-7 4 7 4-10h3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="18" cy="27" r="3" fill="#fff"/>
+          <path d="M12 27h12" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">MarketHub</span>
+        <span class="logo-country">UG</span>
+      </div>
+    </a>
+
+    <nav class="nav-main" id="navMain">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="pages/products.html" class="nav-link">Shop</a>
+      <a href="pages/vendors.html" class="nav-link">Vendors</a>
+      <a href="pages/sell.html" class="nav-link">Sell</a>
+      <a href="pages/about.html" class="nav-link">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn-icon" id="searchToggle" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <a href="pages/cart.html" class="btn-icon cart-btn" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </a>
+      <a href="pages/account.html" class="btn-secondary">My Account</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-bar" id="searchBar">
+    <div class="search-inner">
+      <select class="search-cat">
+        <option>All Categories</option>
+        <option>Fashion</option>
+        <option>Food & Groceries</option>
+        <option>Home & Living</option>
+        <option>Beauty</option>
+        <option>Electronics</option>
+        <option>Art & Crafts</option>
+        <option>Health</option>
+      </select>
+      <input type="text" id="searchInput" placeholder="Search products, vendors…" autocomplete="off" />
+      <button class="btn-primary" onclick="doSearch()">Search</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-content">
+    <div class="hero-badge">🇺🇬 Uganda's #1 Online Marketplace</div>
+    <h1 class="hero-title">Shop Local.<br><em>Support Ugandan</em><br>Artisans.</h1>
+    <p class="hero-sub">Discover thousands of unique products from verified Ugandan vendors. Handcrafts, fashion, electronics, food & more — delivered to your door.</p>
+    <div class="hero-cta">
+      <a href="pages/products.html" class="btn-primary btn-lg">Shop Now</a>
+      <a href="pages/sell.html" class="btn-outline btn-lg">Become a Vendor</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>4,200+</strong><span>Products Listed</span></div>
+      <div class="stat"><strong>380+</strong><span>Verified Vendors</span></div>
+      <div class="stat"><strong>18K+</strong><span>Happy Customers</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="product-float p1">
+      <span class="pf-emoji">👜</span>
+      <div><strong>Kente Bag</strong><em>UGX 85,000</em></div>
+    </div>
+    <div class="product-float p2">
+      <span class="pf-emoji">🍯</span>
+      <div><strong>Raw Honey</strong><em>UGX 35,000</em></div>
+    </div>
+    <div class="product-float p3">
+      <span class="pf-emoji">🪵</span>
+      <div><strong>Side Table</strong><em>UGX 290,000</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section categories-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Browse Categories</h2>
+    </div>
+    <div class="categories-grid">
+      <a href="pages/products.html?cat=fashion" class="cat-card">
+        <span class="cat-icon">👗</span>
+        <strong>Fashion</strong>
+        <em>820+ items</em>
+      </a>
+      <a href="pages/products.html?cat=home" class="cat-card">
+        <span class="cat-icon">🏠</span>
+        <strong>Home & Living</strong>
+        <em>410+ items</em>
+      </a>
+      <a href="pages/products.html?cat=food" class="cat-card">
+        <span class="cat-icon">🍎</span>
+        <strong>Food & Groceries</strong>
+        <em>340+ items</em>
+      </a>
+      <a href="pages/products.html?cat=beauty" class="cat-card">
+        <span class="cat-icon">💄</span>
+        <strong>Beauty</strong>
+        <em>290+ items</em>
+      </a>
+      <a href="pages/products.html?cat=electronics" class="cat-card">
+        <span class="cat-icon">📱</span>
+        <strong>Electronics</strong>
+        <em>180+ items</em>
+      </a>
+      <a href="pages/products.html?cat=art" class="cat-card">
+        <span class="cat-icon">🎨</span>
+        <strong>Art & Crafts</strong>
+        <em>510+ items</em>
+      </a>
+      <a href="pages/products.html?cat=health" class="cat-card">
+        <span class="cat-icon">🌿</span>
+        <strong>Health</strong>
+        <em>225+ items</em>
+      </a>
+      <a href="pages/products.html?cat=sports" class="cat-card">
+        <span class="cat-icon">⚽</span>
+        <strong>Sports</strong>
+        <em>145+ items</em>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="section" id="featured">
+  <div class="container">
+    <div class="section-head">
+      <h2>Featured Products</h2>
+      <a href="pages/products.html" class="view-all">View All →</a>
+    </div>
+    <div class="products-grid" id="featuredGrid">
+      <!-- injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- VENDOR CTA BANNER -->
+<section class="vendor-banner">
+  <div class="container vendor-banner-inner">
+    <div>
+      <h2>Start Selling on MarketHub Today</h2>
+      <p>Join 380+ vendors already growing their business online. Free shop setup. Mobile money payouts. Zero monthly fees.</p>
+    </div>
+    <div class="vendor-banner-cta">
+      <a href="pages/sell.html" class="btn-primary btn-lg">Open Your Shop</a>
+      <a href="pages/about.html" class="btn-ghost btn-lg">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED VENDORS -->
+<section class="section" id="vendors">
+  <div class="container">
+    <div class="section-head">
+      <h2>Featured Vendors</h2>
+      <a href="pages/vendors.html" class="view-all">Browse All →</a>
+    </div>
+    <div class="vendors-grid">
+      <a href="pages/vendors.html#africraftug" class="vendor-card">
+        <div class="vendor-avatar">👜</div>
+        <div class="vendor-info">
+          <strong>AfriCraft UG</strong>
+          <span>Handmade Fashion & Accessories</span>
+          <div class="vendor-meta"><b>124</b> products &nbsp;|&nbsp; ★ 4.9</div>
+        </div>
+        <span class="vendor-badge">✓ Verified</span>
+      </a>
+      <a href="pages/vendors.html#naturesbest" class="vendor-card">
+        <div class="vendor-avatar">🌿</div>
+        <div class="vendor-info">
+          <strong>Nature's Best</strong>
+          <span>Organic Foods & Honey</span>
+          <div class="vendor-meta"><b>48</b> products &nbsp;|&nbsp; ★ 4.8</div>
+        </div>
+        <span class="vendor-badge">✓ Verified</span>
+      </a>
+      <a href="pages/vendors.html#woodcraftkla" class="vendor-card">
+        <div class="vendor-avatar">🪵</div>
+        <div class="vendor-info">
+          <strong>Woodcraft KLA</strong>
+          <span>Furniture & Home Décor</span>
+          <div class="vendor-meta"><b>67</b> products &nbsp;|&nbsp; ★ 4.9</div>
+        </div>
+        <span class="vendor-badge">✓ Verified</span>
+      </a>
+      <a href="pages/vendors.html#mtelgon" class="vendor-card">
+        <div class="vendor-avatar">☕</div>
+        <div class="vendor-info">
+          <strong>Mount Elgon Farms</strong>
+          <span>Specialty Coffee & Tea</span>
+          <div class="vendor-meta"><b>29</b> products &nbsp;|&nbsp; ★ 5.0</div>
+        </div>
+        <span class="vendor-badge">✓ Verified</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-section">
+  <div class="container">
+    <div class="section-head center">
+      <h2>How MarketHub Works</h2>
+      <p>Simple. Fast. Trusted.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-icon">🔍</div>
+        <h3>Browse & Discover</h3>
+        <p>Explore thousands of products from verified local vendors across Uganda.</p>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-step">
+        <div class="how-icon">🛒</div>
+        <h3>Add to Cart</h3>
+        <p>Select items, choose quantities, and review your cart anytime.</p>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-step">
+        <div class="how-icon">💳</div>
+        <h3>Pay on Delivery</h3>
+        <p>Pay when your order arrives — via Mobile Money, card, or cash. Zero risk.</p>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-step">
+        <div class="how-icon">🚚</div>
+        <h3>Fast Delivery</h3>
+        <p>Same-day in Kampala. Nationwide shipping within 3 days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container newsletter-inner">
+    <div>
+      <h2>Get the Best Deals First</h2>
+      <p>Subscribe and be first to know about flash sales, new vendors, and exclusive offers.</p>
+    </div>
+    <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+      <input type="email" placeholder="Your email address" required />
+      <button type="submit" class="btn-primary">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">
+          <svg width="32" height="32" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#E8A020"/><path d="M8 10h3l4 10 4-7 4 7 4-10h3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="18" cy="27" r="3" fill="#fff"/></svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">MarketHub</span>
+          <span class="logo-country">UG</span>
+        </div>
+      </a>
+      <p>Uganda's premier online marketplace connecting buyers with local vendors. Supporting Ugandan businesses, one sale at a time.</p>
+      <div class="payment-badges">
+        <span class="pay-badge mtn">MTN MoMo</span>
+        <span class="pay-badge airtel">Airtel Money</span>
+        <span class="pay-badge visa">VISA</span>
+        <span class="pay-badge mc">Mastercard</span>
+        <span class="pay-badge cash">Cash</span>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="pages/products.html">All Products</a>
+        <a href="pages/products.html?filter=trending">Trending</a>
+        <a href="pages/products.html?filter=sale">Flash Sales</a>
+        <a href="pages/products.html?filter=new">New Arrivals</a>
+      </div>
+      <div class="footer-col">
+        <h4>Vendors</h4>
+        <a href="pages/sell.html">Sell on MarketHub</a>
+        <a href="pages/account.html">Vendor Dashboard</a>
+        <a href="pages/about.html">Shipping Guide</a>
+        <a href="pages/about.html#faq">Vendor FAQs</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="pages/about.html#help">Help Center</a>
+        <a href="pages/about.html#returns">Returns Policy</a>
+        <a href="pages/account.html#orders">Track Order</a>
+        <a href="pages/about.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 MarketHub UG. Built by TALJOE Studios, Masaka.</p>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sell on MarketHub UG</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#E8A020"/><path d="M8 10h3l4 10 4-7 4 7 4-10h3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="18" cy="27" r="3" fill="#fff"/></svg></div>
+      <div class="logo-text"><span class="logo-name">MarketHub</span><span class="logo-country">UG</span></div>
+    </a>
+    <nav class="nav-main" id="navMain">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link">Shop</a>
+      <a href="vendors.html" class="nav-link">Vendors</a>
+      <a href="sell.html" class="nav-link active">Sell</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="btn-icon cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-count" id="cartCount">0</span></a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>Sell on MarketHub UG</h1>
+  <p>Reach 18,000+ buyers across Uganda. Free to start. Zero monthly fees.</p>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="sell-features">
+      <div class="sell-feat">
+        <div class="feat-icon">🆓</div>
+        <h3>Free to Start</h3>
+        <p>No setup fees, no monthly charges. We only earn a small commission when you make a sale.</p>
+      </div>
+      <div class="sell-feat">
+        <div class="feat-icon">📱</div>
+        <h3>Mobile Money Payouts</h3>
+        <p>Receive your earnings directly to your MTN MoMo or Airtel Money account every week.</p>
+      </div>
+      <div class="sell-feat">
+        <div class="feat-icon">🚚</div>
+        <h3>Delivery Handled</h3>
+        <p>We manage last-mile delivery across Uganda. You focus on making great products.</p>
+      </div>
+      <div class="sell-feat">
+        <div class="feat-icon">📊</div>
+        <h3>Sales Dashboard</h3>
+        <p>Track orders, earnings, and customer reviews in real time from your vendor dashboard.</p>
+      </div>
+      <div class="sell-feat">
+        <div class="feat-icon">🔒</div>
+        <h3>Buyer Protection</h3>
+        <p>Our dispute resolution team handles any issues, so you never deal with chargebacks alone.</p>
+      </div>
+      <div class="sell-feat">
+        <div class="feat-icon">🎓</div>
+        <h3>Vendor Training</h3>
+        <p>Free workshops on photography, pricing, and marketing to help grow your shop faster.</p>
+      </div>
+    </div>
+
+    <!-- Vendor Registration Form -->
+    <div style="max-width:640px;margin:0 auto">
+      <div class="checkout-card">
+        <h3>🏪 Open Your Shop</h3>
+        <p style="color:#777;margin-bottom:24px;font-size:0.9rem">Fill in your details and our vendor team will contact you within 24 hours to complete your setup.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Business Name *</label>
+            <input type="text" id="bizName" placeholder="e.g. Kampala Crafts" required />
+          </div>
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" id="ownerName" placeholder="Full name" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="bizPhone" placeholder="+256 7XX XXX XXX" required />
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="bizEmail" placeholder="you@example.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>What do you sell? *</label>
+          <select id="bizCat">
+            <option value="">Select a category…</option>
+            <option>Fashion & Accessories</option>
+            <option>Food & Groceries</option>
+            <option>Home & Living</option>
+            <option>Beauty & Skincare</option>
+            <option>Art & Crafts</option>
+            <option>Electronics</option>
+            <option>Health & Wellness</option>
+            <option>Books & Stationery</option>
+            <option>Sports & Outdoors</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>District / Location *</label>
+          <select id="bizDistrict">
+            <option value="">Select district…</option>
+            <option>Kampala</option><option>Wakiso</option><option>Mukono</option>
+            <option>Jinja</option><option>Masaka</option><option>Mbarara</option>
+            <option>Gulu</option><option>Mbale</option><option>Entebbe</option>
+            <option>Fort Portal</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about your business</label>
+          <textarea id="bizDesc" rows="3" placeholder="What makes your products special? How long have you been in business?"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Preferred Payout Method</label>
+          <select id="bizPayout">
+            <option>MTN Mobile Money</option>
+            <option>Airtel Money</option>
+            <option>Bank Transfer</option>
+          </select>
+        </div>
+        <button class="btn-primary btn-lg" style="width:100%;margin-top:8px" onclick="submitVendorForm()">Submit Application →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/data.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  function submitVendorForm() {
+    const biz = document.getElementById("bizName")?.value?.trim();
+    const owner = document.getElementById("ownerName")?.value?.trim();
+    const phone = document.getElementById("bizPhone")?.value?.trim();
+    const email = document.getElementById("bizEmail")?.value?.trim();
+    const cat = document.getElementById("bizCat")?.value;
+    const district = document.getElementById("bizDistrict")?.value;
+    if(!biz||!owner||!phone||!email||!cat||!district){ showToast("Please fill all required fields","error"); return; }
+    showToast("🎉 Application received! We'll contact you within 24 hours.","success");
+    document.querySelectorAll("input,select,textarea").forEach(el => el.value="");
+  }
+  updateCartUI();
+</script>
+</body>
+</html>

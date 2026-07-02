@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vendors — MarketHub UG</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#E8A020"/><path d="M8 10h3l4 10 4-7 4 7 4-10h3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="18" cy="27" r="3" fill="#fff"/></svg></div>
+      <div class="logo-text"><span class="logo-name">MarketHub</span><span class="logo-country">UG</span></div>
+    </a>
+    <nav class="nav-main" id="navMain">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link">Shop</a>
+      <a href="vendors.html" class="nav-link active">Vendors</a>
+      <a href="sell.html" class="nav-link">Sell</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="btn-icon cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-count" id="cartCount">0</span></a>
+      <a href="account.html" class="btn-secondary">My Account</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>Our Vendors</h1>
+  <p>380+ verified Ugandan businesses, crafters, and farmers selling on MarketHub.</p>
+</section>
+
+<div class="section">
+  <div class="container">
+    <div class="vendors-grid vendors-page" id="vendorsGrid"></div>
+  </div>
+</div>
+
+<section class="vendor-banner">
+  <div class="container vendor-banner-inner">
+    <div>
+      <h2>Want to Sell on MarketHub?</h2>
+      <p>Join our growing community of vendors. Free setup, mobile money payouts, zero monthly fees.</p>
+    </div>
+    <a href="sell.html" class="btn-primary btn-lg">Open Your Shop</a>
+  </div>
+</section>
+
+<div class="toast" id="toast"></div>
+<script src="../js/data.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  document.getElementById("vendorsGrid").innerHTML = VENDORS.map(v => `
+    <div class="vendor-card" id="${v.id}" style="flex-direction:column;text-align:center;padding:28px 20px">
+      <div class="vendor-avatar" style="width:72px;height:72px;font-size:2.4rem;margin:0 auto 14px">${v.emoji}</div>
+      <strong style="font-family:var(--font-display);font-size:1.05rem">${v.name}</strong>
+      <span style="font-size:0.82rem;color:#777;margin:4px 0 8px">${v.cat}</span>
+      <p style="font-size:0.83rem;color:#555;margin-bottom:12px">${v.desc}</p>
+      <div style="display:flex;gap:16px;justify-content:center;font-size:0.8rem;color:#777;margin-bottom:14px">
+        <span><b>${v.products}</b> products</span>
+        <span>★ ${v.rating}</span>
+        <span>📍 ${v.location}</span>
+      </div>
+      <span class="vendor-badge" style="position:static;display:inline-block;margin-bottom:14px">✓ Verified</span>
+      <a href="products.html?vendor=${v.id}" class="btn-secondary" style="font-size:0.85rem">View Products</a>
+    </div>
+  `).join("");
+
+  updateCartUI();
+</script>
+</body>
+</html>

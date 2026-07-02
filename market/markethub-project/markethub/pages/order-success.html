@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmed — MarketHub UG</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#E8A020"/><path d="M8 10h3l4 10 4-7 4 7 4-10h3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="18" cy="27" r="3" fill="#fff"/></svg></div>
+      <div class="logo-text"><span class="logo-name">MarketHub</span><span class="logo-country">UG</span></div>
+    </a>
+  </div>
+</header>
+
+<div class="success-page">
+  <div class="success-icon">🎉</div>
+  <h1>Order Placed!</h1>
+  <p>Thank you for shopping on MarketHub UG. Your order has been confirmed and is being prepared for delivery.</p>
+
+  <div class="order-ref">
+    <div style="font-size:0.82rem;color:#777;margin-bottom:6px">Your Order Reference</div>
+    <strong id="orderRef">MH-XXXXXXX</strong>
+    <div style="font-size:0.8rem;color:#777;margin-top:6px">Save this number to track your order</div>
+  </div>
+
+  <div class="tracking-steps">
+    <h4 style="margin-bottom:8px;font-size:0.9rem">What happens next</h4>
+    <div class="tracking-step">
+      <div class="ts-dot done"></div>
+      <div><strong style="font-size:0.88rem">Order Confirmed</strong><div style="font-size:0.8rem;color:#777">Right now</div></div>
+    </div>
+    <div class="tracking-step">
+      <div class="ts-dot active"></div>
+      <div><strong style="font-size:0.88rem">Vendor Preparing</strong><div style="font-size:0.8rem;color:#777">Within 1–2 hours</div></div>
+    </div>
+    <div class="tracking-step">
+      <div class="ts-dot"></div>
+      <div><strong style="font-size:0.88rem">Out for Delivery</strong><div style="font-size:0.8rem;color:#777">Same day in Kampala / 1–3 days elsewhere</div></div>
+    </div>
+    <div class="tracking-step">
+      <div class="ts-dot"></div>
+      <div><strong style="font-size:0.88rem">Delivered — Pay Now</strong><div id="paymentReminder" style="font-size:0.8rem;color:#777"></div></div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a href="../index.html" class="btn-primary btn-lg">Continue Shopping</a>
+    <a href="account.html" class="btn-secondary btn-lg">View My Orders</a>
+  </div>
+</div>
+
+<script>
+  const ref = new URLSearchParams(location.search).get("ref") || "MH-XXXXXXX";
+  document.getElementById("orderRef").textContent = ref;
+  try {
+    const order = JSON.parse(localStorage.getItem("mh_last_order") || "{}");
+    const labels = { mtn:"Pay via MTN MoMo", airtel:"Pay via Airtel Money", card:"Swipe card on delivery", cash:"Have cash ready in UGX" };
+    const reminder = document.getElementById("paymentReminder");
+    if(order.payment && labels[order.payment]) reminder.textContent = labels[order.payment];
+  } catch(e){}
+</script>
+</body>
+</html>

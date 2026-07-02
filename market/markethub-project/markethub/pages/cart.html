@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart — MarketHub UG</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#E8A020"/><path d="M8 10h3l4 10 4-7 4 7 4-10h3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="18" cy="27" r="3" fill="#fff"/></svg></div>
+      <div class="logo-text"><span class="logo-name">MarketHub</span><span class="logo-country">UG</span></div>
+    </a>
+    <nav class="nav-main" id="navMain">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link">Shop</a>
+      <a href="vendors.html" class="nav-link">Vendors</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="btn-icon cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-count" id="cartCount">0</span></a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>Your Cart</h1>
+  <p>Review your items before checkout.</p>
+</section>
+
+<div class="cart-page">
+  <div id="cartContent"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/data.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  function renderCart() {
+    const cart = getCart();
+    const content = document.getElementById("cartContent");
+    if (!cart.length) {
+      content.innerHTML = `<div class="empty-state"><div class="empty-icon">🛒</div><h3>Your cart is empty</h3><p>Browse our products and add something you love.</p><a href="products.html" class="btn-primary btn-lg">Start Shopping</a></div>`;
+      return;
+    }
+    const subtotal = getCartTotal();
+    const delivery = subtotal > 200000 ? 0 : 10000;
+    const total = subtotal + delivery;
+
+    content.innerHTML = `
+      <div class="cart-layout">
+        <div>
+          <div class="cart-items" id="cartItems">
+            ${cart.map(item => `
+              <div class="cart-item">
+                <div class="cart-item-thumb">${item.emoji}</div>
+                <div class="cart-item-info" style="flex:1">
+                  <div class="cart-item-name">${item.name}</div>
+                  <div class="cart-item-vendor">by ${item.vendor}</div>
+                  <div class="cart-item-price">${formatPrice(item.price)}</div>
+                  <button class="cart-item-remove" onclick="removeItem(${item.id})">✕ Remove</button>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <button class="qty-btn" onclick="changeItemQty(${item.id},-1)">−</button>
+                  <span style="font-weight:700;min-width:24px;text-align:center">${item.qty}</span>
+                  <button class="qty-btn" onclick="changeItemQty(${item.id},1)">+</button>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+          <div style="margin-top:16px;display:flex;gap:12px">
+            <a href="products.html" class="btn-secondary">← Continue Shopping</a>
+            <button onclick="if(confirm('Clear cart?')){clearCart();renderCart()}" style="color:var(--red);background:none;border:none;cursor:pointer;font-size:0.85rem;text-decoration:underline">Clear Cart</button>
+          </div>
+        </div>
+        <div class="order-summary">
+          <h3>Order Summary</h3>
+          <div class="summary-row"><span>Subtotal (${cart.reduce((s,i)=>s+i.qty,0)} items)</span><span>${formatPrice(subtotal)}</span></div>
+          <div class="summary-row"><span>Delivery Fee</span><span>${delivery === 0 ? '<span style="color:var(--green)">FREE</span>' : formatPrice(delivery)}</span></div>
+          ${delivery === 0 ? '<p style="font-size:0.78rem;color:var(--green);margin-top:4px">✓ Free delivery on orders over UGX 200,000</p>' : '<p style="font-size:0.78rem;color:#777;margin-top:4px">Free delivery on orders over UGX 200,000</p>'}
+          <div class="summary-row summary-total" style="margin-top:12px"><span>Total</span><span>${formatPrice(total)}</span></div>
+          <div style="background:var(--green-light);border-radius:8px;padding:12px;margin:16px 0;font-size:0.82rem;color:var(--green)">
+            💳 Pay on delivery — cash, mobile money, or card accepted
+          </div>
+          <a href="checkout.html" class="btn-primary btn-checkout">Proceed to Checkout →</a>
+        </div>
+      </div>
+    `;
+    updateCartUI();
+  }
+
+  function removeItem(id) { removeFromCart(id); renderCart(); showToast("Item removed"); }
+  function changeItemQty(id, d) { updateCartQty(id, d); renderCart(); }
+
+  renderCart();
+</script>
+</body>
+</html>

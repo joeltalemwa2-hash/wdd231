@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — MarketHub UG</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#E8A020"/><path d="M8 10h3l4 10 4-7 4 7 4-10h3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="18" cy="27" r="3" fill="#fff"/></svg></div>
+      <div class="logo-text"><span class="logo-name">MarketHub</span><span class="logo-country">UG</span></div>
+    </a>
+    <nav class="nav-main" id="navMain">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link active">Shop</a>
+      <a href="vendors.html" class="nav-link">Vendors</a>
+      <a href="sell.html" class="nav-link">Sell</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="btn-icon cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-count" id="cartCount">0</span></a>
+      <a href="account.html" class="btn-secondary">My Account</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>Shop All Products</h1>
+  <p>Discover unique, authentic Ugandan goods from verified local vendors.</p>
+</section>
+
+<div class="products-page-layout">
+  <!-- Filters -->
+  <aside class="filters-sidebar">
+    <h3>Filter By</h3>
+    <div class="filter-group">
+      <label>Category</label>
+      <div class="filter-option"><input type="checkbox" onchange="applyFilters()" value="Fashion"> Fashion</div>
+      <div class="filter-option"><input type="checkbox" onchange="applyFilters()" value="Food"> Food & Groceries</div>
+      <div class="filter-option"><input type="checkbox" onchange="applyFilters()" value="Home & Living"> Home & Living</div>
+      <div class="filter-option"><input type="checkbox" onchange="applyFilters()" value="Beauty"> Beauty</div>
+      <div class="filter-option"><input type="checkbox" onchange="applyFilters()" value="Art & Crafts"> Art & Crafts</div>
+      <div class="filter-option"><input type="checkbox" onchange="applyFilters()" value="Health"> Health</div>
+    </div>
+    <div class="filter-group">
+      <label>Price Range</label>
+      <div class="filter-option"><input type="radio" name="price" onchange="applyFilters()" value="all" checked> All Prices</div>
+      <div class="filter-option"><input type="radio" name="price" onchange="applyFilters()" value="0-50000"> Under UGX 50,000</div>
+      <div class="filter-option"><input type="radio" name="price" onchange="applyFilters()" value="50000-150000"> UGX 50K–150K</div>
+      <div class="filter-option"><input type="radio" name="price" onchange="applyFilters()" value="150000-9999999"> Above UGX 150,000</div>
+    </div>
+    <div class="filter-group">
+      <label>Availability</label>
+      <div class="filter-option"><input type="checkbox" onchange="applyFilters()" value="sale"> On Sale</div>
+      <div class="filter-option"><input type="checkbox" onchange="applyFilters()" value="new"> New Arrivals</div>
+    </div>
+    <button class="btn-secondary" style="width:100%;margin-top:8px" onclick="clearFilters()">Clear Filters</button>
+  </aside>
+
+  <!-- Products -->
+  <main class="products-main">
+    <div class="products-toolbar">
+      <span class="products-count" id="productsCount"></span>
+      <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+        <option value="default">Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating">Top Rated</option>
+        <option value="reviews">Most Reviewed</option>
+      </select>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/data.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  function applyFilters() {
+    const cats = [...document.querySelectorAll('.filter-option input[type=checkbox][value]:not([value=sale]):not([value=new]):checked')].map(i => i.value);
+    const priceVal = document.querySelector('input[name=price]:checked')?.value || "all";
+    const onSale = document.querySelector('input[value=sale]')?.checked;
+    const isNew = document.querySelector('input[value=new]')?.checked;
+    const sort = document.getElementById("sortSelect").value;
+    const q = new URLSearchParams(location.search).get("q") || "";
+
+    let filtered = [...PRODUCTS];
+    if (q) filtered = filtered.filter(p => p.name.toLowerCase().includes(q.toLowerCase()) || p.vendor.toLowerCase().includes(q.toLowerCase()));
+    if (cats.length) filtered = filtered.filter(p => cats.includes(p.cat));
+    if (priceVal !== "all") {
+      const [min, max] = priceVal.split("-").map(Number);
+      filtered = filtered.filter(p => p.price >= min && p.price <= max);
+    }
+    if (onSale) filtered = filtered.filter(p => p.badge === "sale");
+    if (isNew) filtered = filtered.filter(p => p.badge === "new");
+
+    if (sort === "price-asc") filtered.sort((a,b) => a.price - b.price);
+    else if (sort === "price-desc") filtered.sort((a,b) => b.price - a.price);
+    else if (sort === "rating") filtered.sort((a,b) => b.rating - a.rating);
+    else if (sort === "reviews") filtered.sort((a,b) => b.reviews - a.reviews);
+
+    document.getElementById("productsGrid").innerHTML = filtered.length
+      ? filtered.map(renderProductCard).join("")
+      : `<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🔍</div><h3>No products found</h3><p>Try adjusting your filters or search term.</p></div>`;
+    document.getElementById("productsCount").textContent = `${filtered.length} product${filtered.length !== 1 ? "s" : ""} found`;
+  }
+
+  function clearFilters() {
+    document.querySelectorAll('.filter-option input').forEach(i => { if(i.type==="checkbox") i.checked=false; if(i.value==="all") i.checked=true; });
+    applyFilters();
+  }
+
+  // Check for ?cat= or ?q= params
+  const urlCat = new URLSearchParams(location.search).get("cat");
+  if (urlCat) {
+    const match = document.querySelector(`.filter-option input[value="${urlCat.charAt(0).toUpperCase()+urlCat.slice(1)}"]`);
+    if (match) match.checked = true;
+  }
+  applyFilters();
+</script>
+</body>
+</html>

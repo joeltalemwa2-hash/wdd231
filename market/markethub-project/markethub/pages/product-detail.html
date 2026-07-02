@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product — MarketHub UG</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#E8A020"/><path d="M8 10h3l4 10 4-7 4 7 4-10h3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="18" cy="27" r="3" fill="#fff"/></svg></div>
+      <div class="logo-text"><span class="logo-name">MarketHub</span><span class="logo-country">UG</span></div>
+    </a>
+    <nav class="nav-main" id="navMain">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link active">Shop</a>
+      <a href="vendors.html" class="nav-link">Vendors</a>
+      <a href="sell.html" class="nav-link">Sell</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="btn-icon cart-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-count" id="cartCount">0</span></a>
+      <a href="account.html" class="btn-secondary">My Account</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="product-detail">
+  <nav style="margin-bottom:20px;font-size:0.85rem;color:#777">
+    <a href="../index.html" style="color:#777">Home</a> /
+    <a href="products.html" style="color:#777">Shop</a> /
+    <span id="breadcrumbName">Product</span>
+  </nav>
+
+  <div class="product-detail-grid" id="productDetail"></div>
+
+  <!-- Related Products -->
+  <div>
+    <div class="section-head"><h2>You May Also Like</h2><a href="products.html" class="view-all">View All →</a></div>
+    <div class="products-grid" id="relatedGrid"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/data.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  let currentQty = 1;
+  const id = parseInt(new URLSearchParams(location.search).get("id") || "1");
+  const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
+
+  document.title = product.name + " — MarketHub UG";
+  document.getElementById("breadcrumbName").textContent = product.name;
+
+  const oldPriceHtml = product.oldPrice
+    ? `<span class="price-old">${formatPrice(product.oldPrice)}</span>`
+    : "";
+
+  document.getElementById("productDetail").innerHTML = `
+    <div class="product-detail-image">${product.emoji}</div>
+    <div class="product-detail-info">
+      <div class="product-cat">${product.cat}</div>
+      <h1>${product.name}</h1>
+      <div class="product-detail-vendor">by <a href="vendors.html#${product.vendorId}" style="color:var(--green);text-decoration:underline">${product.vendor}</a></div>
+      <div class="product-detail-rating">
+        <span style="color:var(--gold-dark);font-size:1.1rem">${renderStars(product.rating)}</span>
+        <span style="font-size:0.9rem;color:#777">${product.rating} (${product.reviews} reviews)</span>
+      </div>
+      <div class="product-detail-price">
+        <span class="price-current">${formatPrice(product.price)}</span>
+        ${oldPriceHtml}
+      </div>
+      <p style="color:var(--ink-soft);margin-bottom:20px;font-size:0.95rem;line-height:1.7">${product.desc}</p>
+      <div class="qty-control">
+        <span style="font-size:0.85rem;font-weight:600;color:#777;margin-right:4px">Qty:</span>
+        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+        <span class="qty-display" id="qtyDisplay">1</span>
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+      <div class="product-detail-actions">
+        <button class="btn-primary" onclick="addToCart(${product.id}, currentQty)" style="text-align:center;padding:14px;font-size:1rem">Add to Cart</button>
+        <a href="cart.html" class="btn-secondary" style="text-align:center;padding:13px;font-size:1rem" onclick="addToCart(${product.id}, currentQty)">Buy Now</a>
+      </div>
+      <div class="product-detail-meta">
+        <div class="meta-item">🚚 <span>Same-day delivery in Kampala</span></div>
+        <div class="meta-item">💳 <span>Pay on delivery</span></div>
+        <div class="meta-item">↩️ <span>Easy 7-day returns</span></div>
+        <div class="meta-item">✓ <span>Verified vendor</span></div>
+      </div>
+    </div>
+  `;
+
+  function changeQty(d) {
+    currentQty = Math.max(1, currentQty + d);
+    document.getElementById("qtyDisplay").textContent = currentQty;
+  }
+
+  // Related
+  const related = PRODUCTS.filter(p => p.id !== id && p.cat === product.cat).slice(0, 4);
+  document.getElementById("relatedGrid").innerHTML = related.map(renderProductCard).join("");
+
+  updateCartUI();
+</script>
+</body>
+</html>
